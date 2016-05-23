@@ -38,7 +38,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -88,11 +96,82 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account.cs">
+      <DependentUpon>MobileSellingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>MobileSellingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Delivery.cs">
+      <DependentUpon>MobileSellingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Import.cs">
+      <DependentUpon>MobileSellingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ImportDetail.cs">
+      <DependentUpon>MobileSellingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MobileSellingModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MobileSellingModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MobileSellingModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MobileSellingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MobileSellingModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MobileSellingModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>MobileSellingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderDetail.cs">
+      <DependentUpon>MobileSellingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>MobileSellingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductType.cs">
+      <DependentUpon>MobileSellingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Promotion.cs">
+      <DependentUpon>MobileSellingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Question.cs">
+      <DependentUpon>MobileSellingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Staff.cs">
+      <DependentUpon>MobileSellingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Supplier.cs">
+      <DependentUpon>MobileSellingModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
+    <EntityDeploy Include="Models\MobileSellingModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MobileSellingModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\MobileSellingModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MobileSellingModel.edmx</DependentUpon>
+      <LastGenOutput>MobileSellingModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\MobileSellingModel.edmx.diagram">
+      <DependentUpon>MobileSellingModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\MobileSellingModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MobileSellingModel.edmx</DependentUpon>
+      <LastGenOutput>MobileSellingModel.cs</LastGenOutput>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -103,7 +182,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
