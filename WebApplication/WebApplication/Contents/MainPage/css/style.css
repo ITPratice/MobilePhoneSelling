@@ -101,7 +101,7 @@ body {
 	color:#303030;
 	display:inline-block;
 }
-.cart p span{
+.cart p a span{
 	font-size:1.5em;
 	color:#E4292F;
 }

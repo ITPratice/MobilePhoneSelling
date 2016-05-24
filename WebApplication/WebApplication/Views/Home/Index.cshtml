@@ -19,7 +19,7 @@
     {
         <div class="grid_1_of_4 images_1_of_4">
             <a href="preview.html">
-                <img src="@Url.Content("~/Images/"+_item.Image)" alt="" width="200" height="280"/>
+                <img src="@Url.Content("~/Images/"+_item.Image)" alt="" width="200" height="280" />
             </a>
             @if (_item.Name.Length < 35)
             {
@@ -32,13 +32,13 @@
             <div class="price-details">
                 <div class="price-number">
                     <p>
-                        <span class="rupees">                          
+                        <span class="rupees">
                             @String.Format("{0:0,0 ₫}", @_item.Price)
                         </span>
                     </p>
                 </div>
                 <div class="add-cart">
-                    <h4><a href="preview.html">Giỏ hàng</a></h4>
+                    <h4><a href="@Url.Action("AddShoppongCart", "Cart", new { @_idProducts = _item.Id, @_strUrl = Request.Url.ToString() })">Giỏ hàng</a></h4>
                 </div>
             </div>
         </div>

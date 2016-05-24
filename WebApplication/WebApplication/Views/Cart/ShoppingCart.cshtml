@@ -1,0 +1,49 @@
+﻿@using WebApplication.Models
+@model List<ShoppingCart>
+@{
+    ViewBag.Title = "ShoppingCart";
+    Layout = "~/Views/Layout/MainLayout.cshtml";
+}
+
+<table>
+    @{
+        foreach (var _item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@Url.Content("~/Images/" + _item.Image)" width="180" height="250" />
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <span>Tên sản phẩm: </span>
+                                <span>@_item.Name</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>Giá: </span>
+                                <span>@String.Format("{0:0,0 VNĐ}", @_item.Price)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>Số lượng: </span>
+                                <span>@_item.Quantity</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>Thành tiền</span>
+                                <span>@String.Format("{0:0,0 VNĐ}", @_item.ThanhTien)</span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>            
+        }
+    }
+</table>
+
+

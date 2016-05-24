@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Test Website</title>
+    <title>DC Mobile As DCM</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     @*-- Style Sheet --*@
@@ -50,10 +50,16 @@
                 </div>
                 <div class="cart">
                     <p>
-                        Xin chào, @ViewBag.AccountName ! <span>Giỏ hàng:</span><div id="dd" class="wrapper-dropdown-2">
-                            0 sản phẩm - $0.00
+                        Xin chào, @ViewBag.AccountName ! 
+                        <a href="@Url.Action("ShoppingCart", "Cart")">
+                            <span>
+                                Giỏ hàng:
+                            </span>
+                        </a>
+                        <div id="dd" class="wrapper-dropdown-2">
+                            @Html.Action("ShoppingCartPartial", "Cart")
                             <ul class="dropdown">
-                                <li>Không có sản phẩm</li>
+                                @Html.Action("CartPartial", "Cart")                               
                             </ul>
                         </div>
                     </p>
@@ -227,9 +233,9 @@
                             <li><a href="#" target="_blank"><img src="web/images/twitter.png" alt="" /></a></li>
                             <li><a href="#" target="_blank"><img src="web/images/skype.png" alt="" /> </a></li>
                             <li><a href="#" target="_blank"> <img src="web/images/dribbble.png" alt="" /></a></li>
-                            <li><a href="#" target="_blank"> <img src="web/images/linkedin.png" alt="" /></a></li>
-                            <div class="clear"></div>
+                            <li><a href="#" target="_blank"> <img src="web/images/linkedin.png" alt="" /></a></li>                           
                         </ul>
+                        <div class="clear"></div>
                     </div>
                 </div>
             </div>
