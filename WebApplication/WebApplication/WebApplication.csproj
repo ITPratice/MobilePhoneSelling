@@ -88,11 +88,86 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Contents\MainPage\css\easy-responsive-tabs.css" />
+    <Content Include="Contents\MainPage\css\global.css" />
+    <Content Include="Contents\MainPage\css\slider.css" />
+    <Content Include="Contents\MainPage\css\style.css" />
+    <Content Include="Contents\MainPage\font-awesome\css\font-awesome.css" />
+    <Content Include="Contents\MainPage\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Contents\MainPage\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Contents\MainPage\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="Contents\MainPage\images\about_img.jpg" />
+    <Content Include="Contents\MainPage\images\arrow-next.png" />
+    <Content Include="Contents\MainPage\images\arrow-prev.png" />
+    <Content Include="Contents\MainPage\images\arrow_up.png" />
+    <Content Include="Contents\MainPage\images\compare.png" />
+    <Content Include="Contents\MainPage\images\delivery-img1.jpg" />
+    <Content Include="Contents\MainPage\images\delivery-img2.jpg" />
+    <Content Include="Contents\MainPage\images\delivery-img3.jpg" />
+    <Content Include="Contents\MainPage\images\dribbble.png" />
+    <Content Include="Contents\MainPage\images\drop_arrow-hover.png" />
+    <Content Include="Contents\MainPage\images\drop_arrow.png" />
+    <Content Include="Contents\MainPage\images\facebook.png" />
+    <Content Include="Contents\MainPage\images\feature-pic1.jpg" />
+    <Content Include="Contents\MainPage\images\feature-pic2.jpg" />
+    <Content Include="Contents\MainPage\images\feature-pic3.jpg" />
+    <Content Include="Contents\MainPage\images\feature-pic4.jpg" />
+    <Content Include="Contents\MainPage\images\linkedin.png" />
+    <Content Include="Contents\MainPage\images\list-img.png" />
+    <Content Include="Contents\MainPage\images\logo.png" />
+    <Content Include="Contents\MainPage\images\new-pic1.jpg" />
+    <Content Include="Contents\MainPage\images\new-pic2.jpg" />
+    <Content Include="Contents\MainPage\images\new-pic3.jpg" />
+    <Content Include="Contents\MainPage\images\new-pic4.jpg" />
+    <Content Include="Contents\MainPage\images\newsimg1.jpg" />
+    <Content Include="Contents\MainPage\images\newsimg2.jpg" />
+    <Content Include="Contents\MainPage\images\newsimg3.jpg" />
+    <Content Include="Contents\MainPage\images\preview.jpg" />
+    <Content Include="Contents\MainPage\images\price-rating.png" />
+    <Content Include="Contents\MainPage\images\productslide-1.jpg" />
+    <Content Include="Contents\MainPage\images\productslide-2.jpg" />
+    <Content Include="Contents\MainPage\images\productslide-3.jpg" />
+    <Content Include="Contents\MainPage\images\productslide-4.jpg" />
+    <Content Include="Contents\MainPage\images\productslide-5.jpg" />
+    <Content Include="Contents\MainPage\images\productslide-6.jpg" />
+    <Content Include="Contents\MainPage\images\quality-rating.png" />
+    <Content Include="Contents\MainPage\images\search.png" />
+    <Content Include="Contents\MainPage\images\skype.png" />
+    <Content Include="Contents\MainPage\images\slide-1-image.png" />
+    <Content Include="Contents\MainPage\images\slide-2-image.jpg" />
+    <Content Include="Contents\MainPage\images\slide-3-image.jpg" />
+    <Content Include="Contents\MainPage\images\tag.png" />
+    <Content Include="Contents\MainPage\images\thumbnailslide-1.jpg" />
+    <Content Include="Contents\MainPage\images\thumbnailslide-2.jpg" />
+    <Content Include="Contents\MainPage\images\thumbnailslide-3.jpg" />
+    <Content Include="Contents\MainPage\images\thumbnailslide-4.jpg" />
+    <Content Include="Contents\MainPage\images\thumbnailslide-5.jpg" />
+    <Content Include="Contents\MainPage\images\thumbnailslide-6.jpg" />
+    <Content Include="Contents\MainPage\images\twitter.png" />
+    <Content Include="Contents\MainPage\images\value-rating.png" />
+    <Content Include="Contents\MainPage\images\wishlist.png" />
+    <Content Include="Contents\MainPage\js\easing.js" />
+    <Content Include="Contents\MainPage\js\easyResponsiveTabs.js" />
+    <Content Include="Contents\MainPage\js\jquery-1.7.2.min.js" />
+    <Content Include="Contents\MainPage\js\jquery.accordion.js" />
+    <Content Include="Contents\MainPage\js\jquery.easing.js" />
+    <Content Include="Contents\MainPage\js\move-top.js" />
+    <Content Include="Contents\MainPage\js\script.js" />
+    <Content Include="Contents\MainPage\js\slides.min.jquery.js" />
+    <Content Include="Contents\MainPage\js\startstop-slider.js" />
     <Content Include="Global.asax" />
+    <Content Include="Images\galaxy_s7.png" />
+    <Content Include="Images\htc_10.png" />
+    <Content Include="Images\iphone_6s.png" />
+    <Content Include="Images\lg_g5.png" />
+    <Content Include="Images\oppo_r7s.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManufacturersController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -105,6 +180,7 @@
     <Compile Include="Models\Delivery.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Encryptor.cs" />
     <Compile Include="Models\Import.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
@@ -172,6 +248,45 @@
       <DependentUpon>MobileSellingModel.edmx</DependentUpon>
       <LastGenOutput>MobileSellingModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Layout\MainLayout.cshtml" />
+    <Content Include="Contents\MainPage\font\Amble-Regular-webfont.ttf" />
+    <Content Include="Contents\MainPage\images\Thumbs.db" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Contents\MainPage\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Contents\MainPage\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Contents\MainPage\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Contents\MainPage\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Contents\MainPage\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Contents\MainPage\font-awesome\less\animated.less" />
+    <Content Include="Contents\MainPage\font-awesome\less\bordered-pulled.less" />
+    <Content Include="Contents\MainPage\font-awesome\less\core.less" />
+    <Content Include="Contents\MainPage\font-awesome\less\fixed-width.less" />
+    <Content Include="Contents\MainPage\font-awesome\less\font-awesome.less" />
+    <Content Include="Contents\MainPage\font-awesome\less\icons.less" />
+    <Content Include="Contents\MainPage\font-awesome\less\larger.less" />
+    <Content Include="Contents\MainPage\font-awesome\less\list.less" />
+    <Content Include="Contents\MainPage\font-awesome\less\mixins.less" />
+    <Content Include="Contents\MainPage\font-awesome\less\path.less" />
+    <Content Include="Contents\MainPage\font-awesome\less\rotated-flipped.less" />
+    <Content Include="Contents\MainPage\font-awesome\less\screen-reader.less" />
+    <Content Include="Contents\MainPage\font-awesome\less\stacked.less" />
+    <Content Include="Contents\MainPage\font-awesome\less\variables.less" />
+    <Content Include="Contents\MainPage\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Contents\MainPage\font-awesome\scss\_animated.scss" />
+    <Content Include="Contents\MainPage\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Contents\MainPage\font-awesome\scss\_core.scss" />
+    <Content Include="Contents\MainPage\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="Contents\MainPage\font-awesome\scss\_icons.scss" />
+    <Content Include="Contents\MainPage\font-awesome\scss\_larger.scss" />
+    <Content Include="Contents\MainPage\font-awesome\scss\_list.scss" />
+    <Content Include="Contents\MainPage\font-awesome\scss\_mixins.scss" />
+    <Content Include="Contents\MainPage\font-awesome\scss\_path.scss" />
+    <Content Include="Contents\MainPage\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Contents\MainPage\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="Contents\MainPage\font-awesome\scss\_stacked.scss" />
+    <Content Include="Contents\MainPage\font-awesome\scss\_variables.scss" />
+    <Content Include="Views\Manufacturers\ManufacturersPartial.cshtml" />
+    <Content Include="Views\Users\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -181,7 +296,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

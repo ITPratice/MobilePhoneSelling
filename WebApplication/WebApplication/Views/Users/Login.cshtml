@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Layout/MainLayout.cshtml";
+}
+
+<h2>Đăng nhập</h2>
+<h1 style="font-family: 'ambleregular'; color:red; font-size: 25px">@ViewBag.LoginStatus</h1>
+<div class="section group">
+    <div class="col span_2_of_3">
+        <div class="contact-form">
+                @using (Html.BeginForm())
+                {
+                    <div>
+                        <span><label>Tài khoản: </label></span>
+                        <span><input name="txtName" type="text" class="textbox"></span>
+                    </div>
+                    <br />
+                    <div>
+                        <span><label>Mật khẩu: </label></span>
+                        <span><input name="txtPassword" type="password" class="textbox"></span>
+                    </div>
+                    <div>
+                        <span><input type="submit" id="btnSubmit" name="btnSubmit" /></span>
+                    </div>
+                }
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,18 @@
+﻿@using WebApplication.Models
+@model List<Supplier>
+<div class="header_bottom_left">
+    <div class="categories">
+        <ul>
+            <h3>Hãng sản xuất</h3>
+            @foreach (var _item in Model)
+            {
+                <li>
+                    <a href="@Url.Action("GetProductsByManufacturers", "Manufacturers", new { @_id = _item.Id })">@_item.Name</a>
+                </li>
+            }
+            @*<li>
+                <a href="@Url.Action("GetAllManufacturers", "Manufacturers")" class="button">Xem thêm</a>
+            <li>*@
+        </ul>
+    </div>
+</div>
