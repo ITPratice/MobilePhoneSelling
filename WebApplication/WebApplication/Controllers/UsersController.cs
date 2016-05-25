@@ -30,13 +30,13 @@ namespace WebApplication.Controllers
             Account _acc = db.Accounts.SingleOrDefault(x => x.Name == _name && x.Password == _password);
             if (_acc != null)
             {
-                ViewBag.LoginStatus = "Đăng nhập thành công !";
+                ViewBag.LoginStatus = "Đăng nhập thành công !'";
                 Session["Account"] = _acc;
                 ViewBag.AccountName = "Xin chào, " + _acc.Name + "!";
                 return View();
             }
             ViewBag.LoginStatus = "Đăng nhập không thành công !";
-            return RedirectToAction("Index", "Home");
+            return View();
         }
 
         [HttpGet]

@@ -161,10 +161,7 @@ namespace WebApplication.Controllers
             return View(_lstCart);
         }
 
-        /// <summary>
-        /// Order Controller
-        /// </summary>
-        /// <returns></returns>
+        //Init Order
         public ActionResult Order()
         {
             if (Session["Account"] == null)
@@ -176,12 +173,26 @@ namespace WebApplication.Controllers
                 RedirectToAction("Index", "Home");
             }
             Order _order = new Order();
-            Account _acc = (Account)Session["Account"];
-            Customer _customer = db.Customers.SingleOrDefault(x => x.AccountId == _acc.Id);
-            List<ShoppingCart> _lstCart = GetShoppingCart();
+            OrderDetail _orderDetails = new OrderDetail();
+            _order = GetOrder();
+            _orderDetails = GetOrderDetails(_order);
+            db.Orders.Add(_order);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
+
+        /// <summary>
+        /// Get Order Infomation
+        /// </summary>
+        /// <returns></returns>
+        public Order GetOrder()
+        {
+            Order _order = new Order(); 
+            Account _acc = (Account)Session["Account"];     // Get Account follow Session
+            Customer _customer = db.Customers.SingleOrDefault(x => x.AccountId == _acc.Id);     // Get Customer follow Account           
             var _ord = db.Orders.ToList();
             string _oldId = "";
-            if(_ord.Count==0)
+            if (_ord.Count == 0)
             {
                 _order.Id = ParamHelper.Instance.GetNewId("", "P");
             }
@@ -190,13 +201,22 @@ namespace WebApplication.Controllers
                 var _lstOrder = _ord[_ord.Count - 1];
                 _oldId = _lstOrder.Id;
                 _order.Id = ParamHelper.Instance.GetNewId(_oldId, "P");
-            }           
+            }
             _order.CustomerId = _customer.Id;
             _order.Date = DateTime.Now;
             _order.Deleted = false;
-            db.Orders.Add(_order);
-            db.SaveChanges();
-            //Order Details
+            return _order;
+        }
+
+        /// <summary>
+        /// Get Information of Order Details
+        /// </summary>
+        /// <param name="_order"></param>
+        /// <returns></returns>
+        public OrderDetail GetOrderDetails(Order _order)
+        {
+            OrderDetail _orderDetail = new OrderDetail();
+            List<ShoppingCart> _lstCart = GetShoppingCart();
             foreach (var _item in _lstCart)
             {
                 OrderDetail _orderDetails = new OrderDetail();
@@ -206,8 +226,7 @@ namespace WebApplication.Controllers
                 _orderDetails.Price = _item.ThanhTien;
                 db.OrderDetails.Add(_orderDetails);
             }
-            db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return _orderDetail;
         }
     }
 }
