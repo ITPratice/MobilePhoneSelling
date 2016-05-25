@@ -28,14 +28,30 @@ namespace WebApplication.Controllers
             string _name = _form["txtName"].ToString();
             string _password = Encryptor.MD5Hash(_form["txtPassword"].ToString());
             Account _acc = db.Accounts.SingleOrDefault(x => x.Name == _name && x.Password == _password);
-            if(_acc!=null)
+            if (_acc != null)
             {
                 ViewBag.LoginStatus = "Đăng nhập thành công !";
                 Session["Account"] = _acc;
-                ViewBag.AccountName = _acc.Name;
+                ViewBag.AccountName = "Xin chào, " + _acc.Name + "!";
                 return View();
             }
             ViewBag.LoginStatus = "Đăng nhập không thành công !";
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(Account _acc)
+        {
+            //Insert data to database
+            db.Accounts.Add(_acc);
+            //Save changes
+            db.SaveChanges();
             return View();
         }
     }

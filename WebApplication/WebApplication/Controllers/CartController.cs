@@ -22,7 +22,7 @@ namespace WebApplication.Controllers
             return _lstGioHang;
         }
 
-        //Thêm giỏ hàng
+        //Add Shopping Cart
         public ActionResult AddShoppongCart(string _idProducts, string _strUrl)
         {
             Product _products = db.Products.SingleOrDefault(x => x.Id == _idProducts);
@@ -48,11 +48,11 @@ namespace WebApplication.Controllers
             }
         }
 
-        //Cập nhật giỏ hàng
+        //Update Shopping Cart
         public ActionResult UpdateShoppingCart(string _idProduct, FormCollection _form)
         {
-            Product _sach = db.Products.SingleOrDefault(x => x.Id == _idProduct);
-            if (_sach == null)
+            Product _product = db.Products.SingleOrDefault(x => x.Id == _idProduct);
+            if (_product == null)
             {
                 Response.StatusCode = 404;  //return 404 error
                 return null;
@@ -63,10 +63,10 @@ namespace WebApplication.Controllers
             {
                 _cart.Quantity = int.Parse(_form["txtSoLuong"].ToString());
             }
-            return View("GioHang");
+            return RedirectToAction("ShoppingCart");
         }
 
-        //Xóa giỏ hàng
+        //Delete Shopping Cart
         public ActionResult DeleteShoppingCart(string _idProduct, FormCollection _form)
         {
             Product _product = db.Products.SingleOrDefault(x => x.Id == _idProduct);
@@ -99,7 +99,7 @@ namespace WebApplication.Controllers
             return View(_lstGioHang);
         }
 
-        //Tổng số lương
+        //Get Total Quantity
         public int GetQuantity()
         {
             int _tong = 0;
@@ -111,7 +111,7 @@ namespace WebApplication.Controllers
             return _tong;
         }
 
-        //Tính tổng tiền
+        //Get Sum Price
         public double GetSum()
         {
             double _sum = 0;
@@ -123,7 +123,7 @@ namespace WebApplication.Controllers
             return _sum;
         }
 
-        //Tạo Partial Giỏ hàng
+        //Create Shopping Cart Partial
         public ActionResult ShoppingCartPartial()
         {
             if (GetQuantity() == 0)
@@ -145,6 +145,17 @@ namespace WebApplication.Controllers
                 return PartialView();
             }           
             return PartialView(_lstGioHang);
+        }
+
+        //Edit Shopping Cart
+        public ActionResult EditShoppingCart()
+        {
+            if(Session["ShoppingCart"]==null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            List<ShoppingCart> _lstCart = GetShoppingCart();
+            return View(_lstCart);
         }
     }
 }

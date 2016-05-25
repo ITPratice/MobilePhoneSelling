@@ -32,11 +32,11 @@
                     <ul>
                         <li>
                             <i class="fa fa-unlock" aria-hidden="true"></i>
-                            @Html.ActionLink("Đăng ký", "Register", "Users", null, htmlAttributes: new { @class = "DangKy" })
+                            @Html.ActionLink("Đăng ký", "Register", "Users", null, htmlAttributes: new { @class = "Register" })
                         </li>
                         <li>
                             <i class="fa fa-sign-in" aria-hidden="true"></i>
-                            @Html.ActionLink("Đăng nhập", "Login", "Users", null, htmlAttributes: new { @class = "DangNhap" })
+                            @Html.ActionLink("Đăng nhập", "Login", "Users", null, htmlAttributes: new { @class = "Login" })
                         </li>
                     </ul>
                 </div>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="cart">
                     <p>
-                        Xin chào, @ViewBag.AccountName ! 
+                        @ViewBag.AccountName
                         <a href="@Url.Action("ShoppingCart", "Cart")">
                             <span>
                                 Giỏ hàng:
@@ -59,7 +59,7 @@
                         <div id="dd" class="wrapper-dropdown-2">
                             @Html.Action("ShoppingCartPartial", "Cart")
                             <ul class="dropdown">
-                                @Html.Action("CartPartial", "Cart")                               
+                                @Html.Action("CartPartial", "Cart")
                             </ul>
                         </div>
                     </p>
@@ -229,11 +229,11 @@
                     <div class="social-icons">
                         <h4>Follow Us</h4>
                         <ul>
-                            <li><a href="#" target="_blank"><img src="web/images/facebook.png" alt="" /></a></li>
-                            <li><a href="#" target="_blank"><img src="web/images/twitter.png" alt="" /></a></li>
-                            <li><a href="#" target="_blank"><img src="web/images/skype.png" alt="" /> </a></li>
-                            <li><a href="#" target="_blank"> <img src="web/images/dribbble.png" alt="" /></a></li>
-                            <li><a href="#" target="_blank"> <img src="web/images/linkedin.png" alt="" /></a></li>                           
+                            <li><a href="#" target="_blank"><img src="~/Contents/MainPage//images/facebook.png" alt="" /></a></li>
+                            <li><a href="#" target="_blank"><img src="~/Contents/MainPage/images/twitter.png" alt="" /></a></li>
+                            <li><a href="#" target="_blank"><img src="~/Contents/MainPage/images/skype.png" alt="" /> </a></li>
+                            <li><a href="#" target="_blank"> <img src="~/Contents/MainPage/images/dribbble.png" alt="" /></a></li>
+                            <li><a href="#" target="_blank"> <img src="~/Contents/MainPage/images/linkedin.png" alt="" /></a></li>
                         </ul>
                         <div class="clear"></div>
                     </div>
@@ -247,10 +247,8 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $().UItoTop({ easingType: 'easeOutQuart' });
-
         });
     </script>
     <a href="#" id="toTop"><span id="toTopHover"> </span></a>
 </body>
 </html>
-

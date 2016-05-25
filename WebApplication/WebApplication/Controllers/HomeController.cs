@@ -15,5 +15,10 @@ namespace WebApplication.Controllers
         {
             return View(db.Products.ToList());
         }
+
+        public PartialViewResult FacebookChatPartial()
+        {
+            return PartialView();
+        }
     }
 }

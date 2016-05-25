@@ -1,7 +1,7 @@
 ﻿@using WebApplication.Models
 @model List<ShoppingCart>
 @{
-    ViewBag.Title = "ShoppingCart";
+    ViewBag.Title = "EditShoppingCart";
     Layout = "~/Views/Layout/MainLayout.cshtml";
 }
 <h2>Giỏ hàng của bạn</h2>
@@ -35,21 +35,21 @@
                 <td>
                     <span>@String.Format("{0:0,0 VNĐ}", @_item.Price)</span>
                 </td>
-                <td>
-                    <span>@_item.Quantity</span>
-                </td>
-                <td>
-                    <span>@String.Format("{0:0,0 VNĐ}", @_item.ThanhTien)</span>
-                </td>
+                @using (Html.BeginForm("UpdateShoppingCart", "Cart", new { @_idProduct = _item.IdProduct }))
+                {
+                    <td>@Html.TextBox("txtSoLuong", _item.Quantity) </td>
+
+                    <td>@String.Format("{0:0,0}", _item.ThanhTien)</td>
+                    <td>
+                        <input type="submit" value="Cập nhật" />
+                        <br />
+                        @Html.ActionLink("Xóa", "DeleteShoppingCart", new { @_idProduct = _item.IdProduct })
+                    </td>
+                }
             </tr>
         }
     }
-    <tr>
-        <td colspan="6" style="text-align:right;color:blue">
-            @Html.ActionLink("Chỉnh sửa", "EditShoppingCart")
-        </td>
 
-    </tr>
 </table>
 
 <style>
@@ -63,3 +63,4 @@
             border: 1px solid #EEEEEE;
         }
 </style>
+
