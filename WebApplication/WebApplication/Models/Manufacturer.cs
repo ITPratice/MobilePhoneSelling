@@ -12,18 +12,16 @@ namespace WebApplication.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductType
+    public partial class Manufacturer
     {
-        public ProductType()
+        public Manufacturer()
         {
             this.Products = new HashSet<Product>();
-            this.Promotions = new HashSet<Promotion>();
         }
     
         public string Id { get; set; }
         public string Name { get; set; }
     
         public virtual ICollection<Product> Products { get; set; }
-        public virtual ICollection<Promotion> Promotions { get; set; }
     }
 }

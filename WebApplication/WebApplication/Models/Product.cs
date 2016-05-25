@@ -19,7 +19,6 @@ namespace WebApplication.Models
             this.ImportDetails = new HashSet<ImportDetail>();
             this.OrderDetails = new HashSet<OrderDetail>();
             this.Promotions = new HashSet<Promotion>();
-            this.Suppliers = new HashSet<Supplier>();
         }
     
         public string Id { get; set; }
@@ -29,13 +28,13 @@ namespace WebApplication.Models
         public int Quantity { get; set; }
         public string Description { get; set; }
         public bool Deleted { get; set; }
-        public string TypeId { get; set; }
         public string Image { get; set; }
+        public string AlternativeText { get; set; }
+        public string ManufacturerId { get; set; }
     
         public virtual ICollection<ImportDetail> ImportDetails { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        public virtual ProductType ProductType { get; set; }
         public virtual ICollection<Promotion> Promotions { get; set; }
-        public virtual ICollection<Supplier> Suppliers { get; set; }
+        public virtual Manufacturer Manufacturer { get; set; }
     }
 }

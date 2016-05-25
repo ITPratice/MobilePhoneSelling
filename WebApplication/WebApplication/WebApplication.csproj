@@ -175,6 +175,9 @@
     <Compile Include="Models\Account.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Manufacturer.cs">
+      <DependentUpon>MobileSellingModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\Customer.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
@@ -213,9 +216,6 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductType.cs">
-      <DependentUpon>MobileSellingModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Promotion.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
@@ -225,7 +225,7 @@
     <Compile Include="Models\Staff.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Supplier.cs">
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

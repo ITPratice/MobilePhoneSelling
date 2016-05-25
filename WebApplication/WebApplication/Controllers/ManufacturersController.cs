@@ -13,7 +13,7 @@ namespace WebApplication.Controllers
         // GET: Manufacturers
         public ActionResult ManufacturersPartial()
         {
-            return PartialView(db.Suppliers.Take(10).ToList());
+            return PartialView(db.Manufacturers.Take(10).ToList());
         }
     }
 }

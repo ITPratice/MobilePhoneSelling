@@ -18,7 +18,6 @@ namespace WebApplication.Models
         {
             this.Customers = new HashSet<Customer>();
             this.Products = new HashSet<Product>();
-            this.ProductTypes = new HashSet<ProductType>();
         }
     
         public string Id { get; set; }
@@ -29,6 +28,5 @@ namespace WebApplication.Models
     
         public virtual ICollection<Customer> Customers { get; set; }
         public virtual ICollection<Product> Products { get; set; }
-        public virtual ICollection<ProductType> ProductTypes { get; set; }
     }
 }

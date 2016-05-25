@@ -13,11 +13,9 @@
         <EntityTypeShape EntityType="MobilePhoneSellingModel.Order" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MobilePhoneSellingModel.OrderDetail" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MobilePhoneSellingModel.Product" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobilePhoneSellingModel.ProductType" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MobilePhoneSellingModel.Promotion" Width="1.5" PointX="8.25" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MobilePhoneSellingModel.Question" Width="1.5" PointX="3" PointY="18.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MobilePhoneSellingModel.Staff" Width="1.5" PointX="3.75" PointY="21.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobilePhoneSellingModel.Supplier" Width="1.5" PointX="5.25" PointY="15.75" IsExpanded="true" />
         <AssociationConnector Association="MobilePhoneSellingModel.FK_Customer_Account" ManuallyRouted="false" />
         <AssociationConnector Association="MobilePhoneSellingModel.FK_Staff_Account" ManuallyRouted="false" />
         <AssociationConnector Association="MobilePhoneSellingModel.FK_Order_Customer" ManuallyRouted="false" />
@@ -27,11 +25,11 @@
         <AssociationConnector Association="MobilePhoneSellingModel.FK_ImportDetail_Product" ManuallyRouted="false" />
         <AssociationConnector Association="MobilePhoneSellingModel.FK_OrderDetail_Order" ManuallyRouted="false" />
         <AssociationConnector Association="MobilePhoneSellingModel.FK_OrderDetail_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="MobilePhoneSellingModel.FK_Product_ProductType" ManuallyRouted="false" />
         <AssociationConnector Association="MobilePhoneSellingModel.Customer_Promotion" ManuallyRouted="false" />
         <AssociationConnector Association="MobilePhoneSellingModel.Product_Promotion" ManuallyRouted="false" />
-        <AssociationConnector Association="MobilePhoneSellingModel.ProductType_Promotion" ManuallyRouted="false" />
-        <AssociationConnector Association="MobilePhoneSellingModel.Supplier_Product" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MobilePhoneSellingModel.Manufacturer" Width="1.5" PointX="7.375" PointY="0.875" />
+        <EntityTypeShape EntityType="MobilePhoneSellingModel.sysdiagram" Width="1.5" PointX="7.375" PointY="3.75" />
+        <AssociationConnector Association="MobilePhoneSellingModel.FK_Product_Manufacturer" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
