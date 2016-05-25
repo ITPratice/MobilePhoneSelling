@@ -26,7 +26,7 @@ namespace WebApplication.Controllers
         public ActionResult Login(FormCollection _form)
         {
             string _name = _form["txtName"].ToString();
-            string _password = Encryptor.MD5Hash(_form["txtPassword"].ToString());
+            string _password = ParamHelper.Instance.MD5Hash(_form["txtPassword"].ToString());
             Account _acc = db.Accounts.SingleOrDefault(x => x.Name == _name && x.Password == _password);
             if (_acc != null)
             {
@@ -36,7 +36,7 @@ namespace WebApplication.Controllers
                 return View();
             }
             ViewBag.LoginStatus = "Đăng nhập không thành công !";
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]

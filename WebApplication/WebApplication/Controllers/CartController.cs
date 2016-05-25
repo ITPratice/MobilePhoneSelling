@@ -143,19 +143,71 @@ namespace WebApplication.Controllers
             if (Session["ShoppingCart"] == null)
             {
                 return PartialView();
-            }           
+            }
             return PartialView(_lstGioHang);
         }
 
-        //Edit Shopping Cart
+        /// <summary>
+        /// Edit Shopping Cart
+        /// </summary>
+        /// <returns></returns>
         public ActionResult EditShoppingCart()
         {
-            if(Session["ShoppingCart"]==null)
+            if (Session["ShoppingCart"] == null)
             {
                 return RedirectToAction("Index", "Home");
             }
             List<ShoppingCart> _lstCart = GetShoppingCart();
             return View(_lstCart);
+        }
+
+        /// <summary>
+        /// Order Controller
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Order()
+        {
+            if (Session["Account"] == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
+            if (Session["ShoppingCart"] == null)
+            {
+                RedirectToAction("Index", "Home");
+            }
+            Order _order = new Order();
+            Account _acc = (Account)Session["Account"];
+            Customer _customer = db.Customers.SingleOrDefault(x => x.AccountId == _acc.Id);
+            List<ShoppingCart> _lstCart = GetShoppingCart();
+            var _ord = db.Orders.ToList();
+            string _oldId = "";
+            if(_ord.Count==0)
+            {
+                _order.Id = ParamHelper.Instance.GetNewId("", "P");
+            }
+            else
+            {
+                var _lstOrder = _ord[_ord.Count - 1];
+                _oldId = _lstOrder.Id;
+                _order.Id = ParamHelper.Instance.GetNewId(_oldId, "P");
+            }           
+            _order.CustomerId = _customer.Id;
+            _order.Date = DateTime.Now;
+            _order.Deleted = false;
+            db.Orders.Add(_order);
+            db.SaveChanges();
+            //Order Details
+            foreach (var _item in _lstCart)
+            {
+                OrderDetail _orderDetails = new OrderDetail();
+                _orderDetails.OrderId = _order.Id;
+                _orderDetails.ProductId = _item.IdProduct;
+                _orderDetails.Quantity = _item.Quantity;
+                _orderDetails.Price = _item.ThanhTien;
+                db.OrderDetails.Add(_orderDetails);
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

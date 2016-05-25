@@ -181,6 +181,7 @@
     <Compile Include="Models\Manufacturer.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ParamHelper.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\Customer.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
@@ -310,9 +311,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
