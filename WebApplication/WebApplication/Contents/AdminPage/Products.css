@@ -1,0 +1,16 @@
+﻿body {
+}
+
+.image_column {
+    max-width: 50%;
+    max-height: 50%;
+}
+
+.table .header-item, .table .gradeA .row-item {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.page_area {
+    text-align: center;
+}

@@ -1,4 +1,5 @@
 ﻿@using WebApplication.Models
+@using WebApplication.Common
 @model List<Product>
 @{
     ViewBag.Title = "Trang chủ";
@@ -19,7 +20,7 @@
     {
         <div class="grid_1_of_4 images_1_of_4">
             <a href="preview.html">
-                <img src="@Url.Content("~/Images/"+_item.Image)" alt="" width="200" height="280" />
+                <img src="@Url.Content(Constants.PATH_IMAGE+"/"+_item.Image)" alt="" width="200" height="280" />
             </a>
             @if (_item.Name.Length < 35)
             {
