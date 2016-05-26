@@ -30,7 +30,7 @@
                     <span>@_item.Name</span>
                 </td>
                 <td>
-                    <img src="@Url.Content("~/Images/" + _item.Image)" width="50" height="50" />
+                    <img src="@Url.Content(_item.Image)" width="50" height="50" />
                 </td>
                 <td>
                     <span>@String.Format("{0:0,0 VNĐ}", @_item.Price)</span>

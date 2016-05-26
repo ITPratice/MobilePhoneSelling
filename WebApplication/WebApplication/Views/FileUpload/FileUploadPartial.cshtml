@@ -1,0 +1,46 @@
+﻿@model WebApplication.Models.FileUploadModel
+
+@using (@Html.BeginForm("FileUploadPartial", "FileUpload", FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
+{
+    <table>
+        <tr>
+            <td>
+                <input type="file" name="file_Uploader" />
+            </td>
+            <td>
+                <input type="button" name="Upload" value="Upload" onclick="location.href='<%: @Url.Action(" FileUpload","FileUpload")%>'"/>
+            </td>
+        </tr>
+    </table>
+    if (Session["FileUploader"] != null)
+    {
+        <div class="upload">
+            <div style="width: 500px;">
+                <table id="uploadTable" border="1">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in (List<WebApplication.Models.FileUploadModel>)Session["FileUploader"])
+                        {
+                            <tr id="@item.FileName">
+                                <td>@item.FileName</td>
+                                <td>
+                                    <img src="@Url.Content(item.FilePath)" alt="@item.FileName" style="max-width:50%;max-height:50%;" />
+                                </td>
+                                <td style="text-align: center">
+                                    @Html.ActionLink("Xóa", "RemoveUploadFile", new { @fileName = item.FileName })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+}

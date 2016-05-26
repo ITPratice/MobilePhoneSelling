@@ -23,18 +23,22 @@ namespace WebApplication.Models
     
         public string Id { get; set; }
         public string Name { get; set; }
-        public string Unit { get; set; }
-        public double Price { get; set; }
-        public int Quantity { get; set; }
+        public Nullable<double> Price { get; set; }
+        public Nullable<int> Quantity { get; set; }
         public string Description { get; set; }
         public bool Deleted { get; set; }
         public string Image { get; set; }
-        public string AlternativeText { get; set; }
         public string ManufacturerId { get; set; }
+        public string TypeId { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public string CreatedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public string ModifiedBy { get; set; }
     
         public virtual ICollection<ImportDetail> ImportDetails { get; set; }
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        public virtual ICollection<Promotion> Promotions { get; set; }
         public virtual Manufacturer Manufacturer { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual Type Type { get; set; }
+        public virtual ICollection<Promotion> Promotions { get; set; }
     }
 }
