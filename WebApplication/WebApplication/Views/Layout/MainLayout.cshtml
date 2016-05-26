@@ -30,14 +30,23 @@
                 </div>
                 <div class="account_desc">
                     <ul>
-                        <li>
-                            <i class="fa fa-unlock" aria-hidden="true"></i>
-                            @Html.ActionLink("Đăng ký", "Register", "Users", null, htmlAttributes: new { @class = "Register" })
-                        </li>
-                        <li>
-                            <i class="fa fa-sign-in" aria-hidden="true"></i>
-                            @Html.ActionLink("Đăng nhập", "Login", "Users", null, htmlAttributes: new { @class = "Login" })
-                        </li>
+                        @if (Session["Account"] == null)
+                        {
+                            <li>
+                                <i class="fa fa-unlock" aria-hidden="true"></i>
+                                @Html.ActionLink("Đăng ký", "Register", "Users", null, htmlAttributes: new { @class = "Register" })
+                            </li>
+                            <li>
+                                <i class="fa fa-sign-in" aria-hidden="true"></i>
+                                @Html.ActionLink("Đăng nhập", "Login", "Users", null, htmlAttributes: new { @class = "Login" })
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                Xin chào, <a href="#">@ViewBag.AccountName !</a>
+                            </li>
+                        }
                     </ul>
                 </div>
                 <div class="clear"></div>
@@ -49,8 +58,7 @@
                     </a>
                 </div>
                 <div class="cart">
-                    <p>
-                        @ViewBag.AccountName
+                    <p>                        
                         <a href="@Url.Action("ShoppingCart", "Cart")">
                             <span>
                                 Giỏ hàng:

@@ -32,7 +32,7 @@ namespace WebApplication.Controllers
             {
                 ViewBag.LoginStatus = "Đăng nhập thành công !'";
                 Session["Account"] = _acc;
-                ViewBag.AccountName = "Xin chào, " + _acc.Name + "!";
+                ViewBag.AccountName = _acc.Name;
                 return View();
             }
             ViewBag.LoginStatus = "Đăng nhập không thành công !";

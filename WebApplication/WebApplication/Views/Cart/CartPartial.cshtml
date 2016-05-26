@@ -1,10 +1,16 @@
 ﻿@using WebApplication.Models
 @model List<ShoppingCart>
+
 @foreach (var _item in Model)
 {
-    <li>
-        @_item.Name (@_item.Quantity) - @String.Format("{0:0,0 ₫}", @_item.Price)
-    </li>
+    if (_item == null)
+    {
+        <li>Không có sản phẩm nào !</li>
+    }
+    else
+    {
+        <li>
+            @_item.Name (@_item.Quantity) - @String.Format("{0:0,0 ₫}", @_item.Price)
+        </li>
+    }
 }
-
-

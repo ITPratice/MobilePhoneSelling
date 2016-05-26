@@ -189,7 +189,6 @@
     <Compile Include="Models\Delivery.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Encryptor.cs" />
     <Compile Include="Models\Import.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
