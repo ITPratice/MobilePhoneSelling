@@ -17,7 +17,6 @@ namespace WebApplication.Models
         public Customer()
         {
             this.Orders = new HashSet<Order>();
-            this.Questions = new HashSet<Question>();
             this.Promotions = new HashSet<Promotion>();
         }
     
@@ -28,12 +27,11 @@ namespace WebApplication.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string BankAccount { get; set; }
-        public string AccountId { get; set; }
+        public string AccountName { get; set; }
+        public string Password { get; set; }
         public bool Deleted { get; set; }
     
-        public virtual Account Account { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
-        public virtual ICollection<Question> Questions { get; set; }
         public virtual ICollection<Promotion> Promotions { get; set; }
     }
 }

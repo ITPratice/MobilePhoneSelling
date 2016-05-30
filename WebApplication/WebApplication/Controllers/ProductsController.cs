@@ -66,6 +66,7 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Create(Product product, HttpPostedFileBase fileUpload)
         {
             if (ModelState.IsValid)
@@ -112,7 +113,6 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
-        [ValidateInput(false)]
         public ActionResult Edit(Product product, HttpPostedFileBase fileUpload)
         {
             if (fileUpload != null && fileUpload.ContentLength > 0)
@@ -159,21 +159,6 @@ namespace WebApplication.Controllers
             db.Entry(product).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        public ActionResult RemoveUploadFile(int id, string fileName)
-        {
-            if (Session["FileUploader"] != null)
-            {
-                ((List<FileUploadModel>)Session["FileUploader"]).RemoveAll(x => x.FileName == fileName);
-                if (((List<FileUploadModel>)Session["FileUploader"]).Count == 0) Session["FileUploader"] = null;
-                if (!String.IsNullOrEmpty(fileName))
-                {
-                    string fullPath = Request.MapPath(Constants.PATH_IMAGE + "/" + fileName);
-                    if (System.IO.File.Exists(fullPath)) System.IO.File.Delete(fullPath);
-                }
-            }
-            return id == 1 ? RedirectToAction("Create") : RedirectToAction("Edit");
         }
 
         protected override void Dispose(bool disposing)

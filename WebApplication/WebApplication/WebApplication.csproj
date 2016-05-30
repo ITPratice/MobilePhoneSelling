@@ -280,6 +280,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Contents\Admin\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Contents\Admin\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Contents\Admin\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Contents\Admin\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Contents\Admin\tinymce\js\tinymce\langs\readme.md" />
+    <Content Include="Contents\Admin\tinymce\js\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
+    <Content Include="Contents\Admin\tinymce\js\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
+    <Content Include="Contents\Admin\tinymce\js\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
+    <Content Include="Contents\Admin\tinymce\js\tinymce\skins\lightgray\fonts\tinymce.eot" />
+    <Content Include="Contents\Admin\tinymce\js\tinymce\skins\lightgray\fonts\tinymce.ttf" />
+    <Content Include="Contents\Admin\tinymce\js\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <EntityDeploy Include="Models\MobileSellingModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MobileSellingModel.Designer.cs</LastGenOutput>
@@ -297,17 +308,6 @@
       <DependentUpon>MobileSellingModel.edmx</DependentUpon>
       <LastGenOutput>MobileSellingModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Contents\Admin\font-awesome\fonts\fontawesome-webfont.eot" />
-    <Content Include="Contents\Admin\font-awesome\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Contents\Admin\font-awesome\fonts\fontawesome-webfont.woff" />
-    <Content Include="Contents\Admin\font-awesome\fonts\FontAwesome.otf" />
-    <Content Include="Contents\Admin\tinymce\js\tinymce\langs\readme.md" />
-    <Content Include="Contents\Admin\tinymce\js\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
-    <Content Include="Contents\Admin\tinymce\js\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
-    <Content Include="Contents\Admin\tinymce\js\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
-    <Content Include="Contents\Admin\tinymce\js\tinymce\skins\lightgray\fonts\tinymce.eot" />
-    <Content Include="Contents\Admin\tinymce\js\tinymce\skins\lightgray\fonts\tinymce.ttf" />
-    <Content Include="Contents\Admin\tinymce\js\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -329,12 +329,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManufacturersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\StaffsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Account.cs">
-      <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
@@ -355,6 +353,7 @@
     </Compile>
     <Compile Include="Models\Metadata\Manufacturer.metadata.cs" />
     <Compile Include="Models\Metadata\Product.metadata.cs" />
+    <Compile Include="Models\Metadata\Staff.metadata.cs" />
     <Compile Include="Models\Metadata\Type.metadata.cs" />
     <Compile Include="Models\MobileSellingModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -377,13 +376,13 @@
     <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Position.cs">
+      <DependentUpon>MobileSellingModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Product.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Promotion.cs">
-      <DependentUpon>MobileSellingModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Question.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ShoppingCart.cs" />
@@ -458,6 +457,16 @@
     <Content Include="Views\FileUpload\FileUpload.cshtml" />
     <Content Include="Views\FileUpload\FileUploadPartial.cshtml" />
     <Content Include="Views\Layout\AdminLayout.cshtml" />
+    <Content Include="Views\Staffs\Create.cshtml" />
+    <Content Include="Views\Staffs\Delete.cshtml" />
+    <Content Include="Views\Staffs\Details.cshtml" />
+    <Content Include="Views\Staffs\Edit.cshtml" />
+    <Content Include="Views\Staffs\Index.cshtml" />
+    <Content Include="Views\Accounts\Delete.cshtml" />
+    <Content Include="Views\Accounts\Details.cshtml" />
+    <Content Include="Views\Accounts\Index.cshtml" />
+    <Content Include="Views\Accounts\Restore.cshtml" />
+    <Content Include="Views\Accounts\ResetPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

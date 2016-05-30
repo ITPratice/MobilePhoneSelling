@@ -20,10 +20,11 @@ namespace WebApplication.Models
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
-        public int Position { get; set; }
-        public string AccountId { get; set; }
+        public string AccountName { get; set; }
+        public string Password { get; set; }
+        public string PositionId { get; set; }
         public bool Deleted { get; set; }
     
-        public virtual Account Account { get; set; }
+        public virtual Position Position { get; set; }
     }
 }

@@ -34,13 +34,9 @@ namespace WebApplication.Models
             [Display(Name = "Ngày tạo")]
             [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy H:mm:ss}", ApplyFormatInEditMode = true)]
             public Nullable<System.DateTime> CreatedDate { get; set; }
-            [Display(Name = "Tạo bởi")]
-            public string CreatedBy { get; set; }
             [Display(Name = "Ngày thay đổi")]
             [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy H:mm:ss}", ApplyFormatInEditMode = true)]
             public Nullable<System.DateTime> ModifiedDate { get; set; }
-            [Display(Name = "Thay đổi bởi")]
-            public string ModifiedBy { get; set; }
         }
     }
 }

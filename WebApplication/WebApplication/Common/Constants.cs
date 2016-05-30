@@ -17,5 +17,6 @@ namespace WebApplication.Common
         public static string PREFIX_PRODUCT_TYPE = "PTY";
         public static string PREFIX_PROMOTION = "PMT";
         public static string PREFIX_QUESTION = "QUE";
+        public static string PREFIX_ACCOUNT = "ACC";
     }
 }

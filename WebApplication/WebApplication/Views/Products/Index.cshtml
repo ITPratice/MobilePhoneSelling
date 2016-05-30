@@ -8,7 +8,7 @@
 }
 
 @{
-    Layout = WebApplication.Common.Constants.PATH_ADMIN_LAYOUT;
+    Layout = Constants.PATH_ADMIN_LAYOUT;
     ViewBag.Title = "Sản phẩm";
 }
 
@@ -22,7 +22,7 @@
     @using (Html.BeginForm("Index", "Products", FormMethod.Get))
     {
         <p style="float:right;">
-            Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
             <input type="submit" value="Search" />
         </p>
     }
@@ -31,7 +31,7 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                @Html.ActionLink("Create New", "Create")
+                @Html.ActionLink("Thêm mới", "Create")
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">

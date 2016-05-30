@@ -25,6 +25,9 @@ namespace WebApplication.Models
         public System.DateTime StartDate { get; set; }
         public System.DateTime EndDate { get; set; }
         public double SaleOff { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public bool Deleted { get; set; }
     
         public virtual ICollection<Customer> Customers { get; set; }
         public virtual ICollection<Product> Products { get; set; }

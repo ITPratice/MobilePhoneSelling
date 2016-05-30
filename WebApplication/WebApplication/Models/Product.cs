@@ -31,9 +31,7 @@ namespace WebApplication.Models
         public string ManufacturerId { get; set; }
         public string TypeId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public string ModifiedBy { get; set; }
     
         public virtual ICollection<ImportDetail> ImportDetails { get; set; }
         public virtual Manufacturer Manufacturer { get; set; }

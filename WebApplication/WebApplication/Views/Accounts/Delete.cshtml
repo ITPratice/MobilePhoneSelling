@@ -1,0 +1,60 @@
+﻿@model WebApplication.Models.Account
+@using WebApplication.Common
+
+@{
+    Layout = Constants.PATH_ADMIN_LAYOUT;
+    ViewBag.Title = "Loại bỏ";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Loại Bỏ Tài Khoản</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a href="@Url.Action("Index", "Accounts")" style="margin-right:5px;">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                </a>
+                Bạn có chắn chắn muốn loại bỏ tài khoản này?
+            </div>
+            </br>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Password)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Password)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Deleted)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Deleted)
+                </dd>
+            </dl>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Loại bỏ" class="btn btn-default" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
