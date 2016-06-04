@@ -77,16 +77,9 @@ namespace WebApplication.Controllers
                 string oldId = "";
                 if (staffs.Count > 0) oldId = staffs[staffs.Count - 1].Id;
                 staff.Id = ParamHelper.Instance.GetNewId(oldId, Constants.PREFIX_STAFF);
+                staff.AccountName = "DCM" + staff.Id.Substring(Constants.PREFIX_ACCOUNT.Length);
+                staff.Password = staff.AccountName;
                 db.Staffs.Add(staff);
-                db.SaveChanges();
-                Account account = new Account();
-                oldId = "";
-                List<Account> accounts = db.Accounts.ToList();
-                if (accounts.Count > 0) oldId = accounts[accounts.Count - 1].Id;
-                account.Id = ParamHelper.Instance.GetNewId(oldId, Constants.PREFIX_ACCOUNT);
-                account.Name = "DCM" + account.Id.Substring(Constants.PREFIX_ACCOUNT.Length);
-                account.Password = account.Name;
-                db.Accounts.Add(account);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -115,7 +108,7 @@ namespace WebApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Birthday,PhoneNumber,Address,Email,Position,AccountId,Deleted")] Staff staff)
+        public ActionResult Edit(Staff staff)
         {
             if (ModelState.IsValid)
             {
@@ -128,6 +121,7 @@ namespace WebApplication.Controllers
         }
 
         // GET: Staffs/Delete/5
+        [HttpGet]
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -139,21 +133,8 @@ namespace WebApplication.Controllers
             {
                 return HttpNotFound();
             }
-            return View(staff);
-        }
-
-        // POST: Staffs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            Staff staff = db.Staffs.Find(id);
             staff.Deleted = true;
             db.Entry(staff).State = EntityState.Modified;
-            db.SaveChanges();
-            Account account = staff.Account;
-            account.Deleted = true;
-            db.Entry(account).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

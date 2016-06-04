@@ -17,8 +17,9 @@ namespace WebApplication.Models
         public string Id { get; set; }
         public string OrderId { get; set; }
         public System.DateTime Date { get; set; }
-        public string TranspoterName { get; set; }
+        public string StaffId { get; set; }
     
         public virtual Order Order { get; set; }
+        public virtual Staff Staff { get; set; }
     }
 }

@@ -14,6 +14,11 @@ namespace WebApplication.Models
     
     public partial class Staff
     {
+        public Staff()
+        {
+            this.Deliveries = new HashSet<Delivery>();
+        }
+    
         public string Id { get; set; }
         public string Name { get; set; }
         public System.DateTime Birthday { get; set; }
@@ -25,6 +30,7 @@ namespace WebApplication.Models
         public string PositionId { get; set; }
         public bool Deleted { get; set; }
     
+        public virtual ICollection<Delivery> Deliveries { get; set; }
         public virtual Position Position { get; set; }
     }
 }

@@ -12,10 +12,11 @@ namespace WebApplication.Models
     {
         internal sealed class StaffMetadata
         {
-            [Display(Name="Họ Tên")]
+            [Display(Name = "Họ Tên")]
             public string Name { get; set; }
-            [Display(Name="Ngày Sinh")]
+            [Display(Name = "Ngày Sinh")]
             [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+            [DataType(DataType.Date)]
             public System.DateTime Birthday { get; set; }
             [Display(Name = "Số điện thoại")]
             public string PhoneNumber { get; set; }
@@ -25,7 +26,9 @@ namespace WebApplication.Models
             [Display(Name = "Chức vụ")]
             public int PositionId { get; set; }
             [Display(Name = "Tên tài khoản")]
-            public string AccountId { get; set; }
+            public string AccountName { get; set; }
+            [Display(Name = "Mật khẩu")]
+            public string Password { get; set; }
             [Display(Name = "Loại bỏ")]
             public bool Deleted { get; set; }
         }

@@ -4,24 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d09f8650ce1b4e1cbfdd9b4aca4ec5f4" Name="Diagram1">
-        <EntityTypeShape EntityType="MobilePhoneSellingModel.Customer" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobilePhoneSellingModel.Delivery" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobilePhoneSellingModel.Import" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobilePhoneSellingModel.ImportDetail" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobilePhoneSellingModel.Manufacturer" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobilePhoneSellingModel.Order" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobilePhoneSellingModel.OrderDetail" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobilePhoneSellingModel.Position" Width="1.5" PointX="5.75" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobilePhoneSellingModel.Product" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobilePhoneSellingModel.Promotion" Width="1.5" PointX="8.25" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobilePhoneSellingModel.Staff" Width="1.5" PointX="8" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobilePhoneSellingModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobilePhoneSellingModel.Type" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+      <Diagram DiagramId="526df0d9b59b4f85b6cfc55c9dcd07dd" Name="Diagram1">
+        <EntityTypeShape EntityType="MobilePhoneSellingModel.Customer" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobilePhoneSellingModel.Delivery" Width="1.5" PointX="10.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobilePhoneSellingModel.Manufacturer" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobilePhoneSellingModel.Order" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobilePhoneSellingModel.OrderDetail" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobilePhoneSellingModel.Position" Width="1.5" PointX="5.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobilePhoneSellingModel.Product" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobilePhoneSellingModel.Promotion" Width="1.5" PointX="8.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobilePhoneSellingModel.Staff" Width="1.5" PointX="8" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobilePhoneSellingModel.sysdiagram" Width="1.5" PointX="10.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobilePhoneSellingModel.Type" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="MobilePhoneSellingModel.FK_Order_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="MobilePhoneSellingModel.FK_Delivery_Order" ManuallyRouted="false" />
-        <AssociationConnector Association="MobilePhoneSellingModel.FK_ImportDetail_Import" ManuallyRouted="false" />
-        <AssociationConnector Association="MobilePhoneSellingModel.FK_ImportDetail_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="MobilePhoneSellingModel.FK_Delivery_Staff" ManuallyRouted="false" />
         <AssociationConnector Association="MobilePhoneSellingModel.FK_Product_Manufacturer" ManuallyRouted="false" />
         <AssociationConnector Association="MobilePhoneSellingModel.FK_OrderDetail_Order" ManuallyRouted="false" />
         <AssociationConnector Association="MobilePhoneSellingModel.FK_OrderDetail_Product" ManuallyRouted="false" />

@@ -16,7 +16,6 @@ namespace WebApplication.Models
     {
         public Product()
         {
-            this.ImportDetails = new HashSet<ImportDetail>();
             this.OrderDetails = new HashSet<OrderDetail>();
             this.Promotions = new HashSet<Promotion>();
         }
@@ -33,7 +32,6 @@ namespace WebApplication.Models
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     
-        public virtual ICollection<ImportDetail> ImportDetails { get; set; }
         public virtual Manufacturer Manufacturer { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual Type Type { get; set; }

@@ -27,8 +27,6 @@ namespace WebApplication.Models
     
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Delivery> Deliveries { get; set; }
-        public virtual DbSet<Import> Imports { get; set; }
-        public virtual DbSet<ImportDetail> ImportDetails { get; set; }
         public virtual DbSet<Manufacturer> Manufacturers { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }

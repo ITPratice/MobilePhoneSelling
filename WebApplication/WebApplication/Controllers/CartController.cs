@@ -188,23 +188,23 @@ namespace WebApplication.Controllers
         public Order GetOrder()
         {
             Order _order = new Order(); 
-            Account _acc = (Account)Session["Account"];     // Get Account follow Session
-            Customer _customer = db.Customers.SingleOrDefault(x => x.AccountId == _acc.Id);     // Get Customer follow Account           
-            var _ord = db.Orders.ToList();
-            string _oldId = "";
-            if (_ord.Count == 0)
-            {
-                _order.Id = ParamHelper.Instance.GetNewId("", "P");
-            }
-            else
-            {
-                var _lstOrder = _ord[_ord.Count - 1];
-                _oldId = _lstOrder.Id;
-                _order.Id = ParamHelper.Instance.GetNewId(_oldId, "P");
-            }
-            _order.CustomerId = _customer.Id;
-            _order.Date = DateTime.Now;
-            _order.Deleted = false;
+            //Account _acc = (Account)Session["Account"];     // Get Account follow Session
+            //Customer _customer = db.Customers.SingleOrDefault(x => x.AccountId == _acc.Id);     // Get Customer follow Account           
+            //var _ord = db.Orders.ToList();
+            //string _oldId = "";
+            //if (_ord.Count == 0)
+            //{
+            //    _order.Id = ParamHelper.Instance.GetNewId("", "P");
+            //}
+            //else
+            //{
+            //    var _lstOrder = _ord[_ord.Count - 1];
+            //    _oldId = _lstOrder.Id;
+            //    _order.Id = ParamHelper.Instance.GetNewId(_oldId, "P");
+            //}
+            //_order.CustomerId = _customer.Id;
+            //_order.Date = DateTime.Now;
+            //_order.Deleted = false;
             return _order;
         }
 
