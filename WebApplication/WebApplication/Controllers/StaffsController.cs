@@ -26,15 +26,15 @@ namespace WebApplication.Controllers
             var staffs = from s in db.Staffs select s;
             if (!String.IsNullOrEmpty(searchString))
             {
-                staffs = staffs.Where(p => p.Name.Contains(searchString));
+                staffs = staffs.Where(s => s.Name.Contains(searchString));
             }
             switch (sortOrder)
             {
                 case "name_desc":
-                    staffs = staffs.OrderByDescending(p => p.Name);
+                    staffs = staffs.OrderByDescending(s => s.Name);
                     break;
                 default:
-                    staffs = staffs.OrderBy(p => p.Name);
+                    staffs = staffs.OrderBy(s => s.Name);
                     break;
             }
             int pageSize = 3;

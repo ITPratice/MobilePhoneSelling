@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MobilePhoneSellingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MobilePhoneSellingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="Id" />
@@ -53,6 +53,7 @@
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="CustomerId" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="IsDelivered" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -122,6 +123,7 @@
           <Property Name="Password" Type="varchar" MaxLength="100" />
           <Property Name="PositionId" Type="varchar" MaxLength="10" />
           <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="IsBusy" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -347,8 +349,7 @@
             <End Role="Staff" EntitySet="Staff" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MobilePhoneSellingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -400,6 +401,7 @@
           <NavigationProperty Name="Customer" Relationship="Self.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="Deliveries" Relationship="Self.FK_Delivery_Order" FromRole="Order" ToRole="Delivery" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
+          <Property Name="IsDelivered" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -472,6 +474,7 @@
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Deliveries" Relationship="Self.FK_Delivery_Staff" FromRole="Staff" ToRole="Delivery" />
           <NavigationProperty Name="Position" Relationship="Self.FK_Staff_Position" FromRole="Staff" ToRole="Position" />
+          <Property Name="IsBusy" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -692,6 +695,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="MobilePhoneSellingModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="IsDelivered" ColumnName="IsDelivered" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
@@ -751,6 +755,7 @@
           <EntitySetMapping Name="Staffs">
             <EntityTypeMapping TypeName="MobilePhoneSellingModel.Staff">
               <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="IsBusy" ColumnName="IsBusy" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Birthday" ColumnName="Birthday" />

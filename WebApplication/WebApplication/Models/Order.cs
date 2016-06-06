@@ -24,6 +24,7 @@ namespace WebApplication.Models
         public System.DateTime Date { get; set; }
         public string CustomerId { get; set; }
         public bool Deleted { get; set; }
+        public bool IsDelivered { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual ICollection<Delivery> Deliveries { get; set; }

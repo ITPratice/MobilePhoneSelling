@@ -31,6 +31,8 @@ namespace WebApplication.Models
             public string Password { get; set; }
             [Display(Name = "Loại bỏ")]
             public bool Deleted { get; set; }
+            [Display(Name = "Đang bận")]
+            public bool IsBusy { get; set; }
         }
     }
 }

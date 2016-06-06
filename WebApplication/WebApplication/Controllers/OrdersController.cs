@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication.Models;
+using PagedList;
+using WebApplication.Common;
 
 namespace WebApplication.Controllers
 {
@@ -15,50 +17,105 @@ namespace WebApplication.Controllers
         private MobilePhoneSellingEntities db = new MobilePhoneSellingEntities();
 
         // GET: Orders
-        public ActionResult Index()
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var orders = db.Orders.Include(o => o.Customer);
-            return View(orders.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            if (searchString != null) page = 1;
+            else searchString = currentFilter;
+            ViewBag.CurrentFilter = currentFilter;
+            var orders = from o in db.Orders select o;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                orders = orders.Where(o => o.Customer.Name.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    orders = orders.OrderByDescending(o => o.Customer.Name);
+                    break;
+                default:
+                    orders = orders.OrderBy(o => o.Customer.Name);
+                    break;
+            }
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(orders.ToPagedList(pageNumber, pageSize));
+        }
+
+        public ActionResult ShowDeliverer(string id, string sortOrder,
+            string currentFilter, string searchString, int? page)
+        {
+            Session["OrderId"] = id;
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            if (searchString != null) page = 1;
+            else searchString = currentFilter;
+            ViewBag.CurrentFilter = currentFilter;
+            var staffs = from s in db.Staffs select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                staffs = staffs.Where(s => s.Name.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    staffs = staffs.OrderByDescending(s => s.Name);
+                    break;
+                default:
+                    staffs = staffs.OrderBy(s => s.Name);
+                    break;
+            }
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(staffs.ToPagedList(pageNumber, pageSize));
+        }
+
+        public ActionResult ChooseDeliverer(string staffId)
+        {
+            string orderId = Session["OrderId"].ToString();
+            Delivery delivery = new Delivery();
+            List<Delivery> deliveries = db.Deliveries.ToList();
+            string oldId = "";
+            if (deliveries.Count > 0) oldId = deliveries[deliveries.Count - 1].Id;
+            delivery.Id = ParamHelper.Instance.GetNewId(oldId, Constants.PREFIX_DELIVERY);
+            delivery.OrderId = orderId;
+            delivery.Date = DateTime.Now;
+            delivery.StaffId = staffId;
+            db.Deliveries.Add(delivery);
+            db.SaveChanges();
+            Order order = db.Orders.Find(orderId);
+            order.IsDelivered = true;
+            db.Entry(order).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Orders/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            if (id == null)
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            if (searchString != null) page = 1;
+            else searchString = currentFilter;
+            ViewBag.CurrentFilter = currentFilter;
+            var orderDetails = from o in db.OrderDetails select o;
+            if (!String.IsNullOrEmpty(searchString))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                orderDetails = orderDetails.Where(o => o.Product.Name.Contains(searchString));
             }
-            Order order = db.Orders.Find(id);
-            if (order == null)
+            switch (sortOrder)
             {
-                return HttpNotFound();
+                case "name_desc":
+                    orderDetails = orderDetails.OrderByDescending(o => o.Product.Name);
+                    break;
+                default:
+                    orderDetails = orderDetails.OrderBy(o => o.Product.Name);
+                    break;
             }
-            return View(order);
-        }
-
-        // GET: Orders/Create
-        public ActionResult Create()
-        {
-            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "Name");
-            return View();
-        }
-
-        // POST: Orders/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Date,CustomerId,Deleted")] Order order)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Orders.Add(order);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "Name", order.CustomerId);
-            return View(order);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(orderDetails.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Orders/Edit/5
@@ -106,18 +163,18 @@ namespace WebApplication.Controllers
             {
                 return HttpNotFound();
             }
+            order.Deleted = true;
+            db.Entry(order).State = EntityState.Modified;
+            db.SaveChanges();
             return View(order);
         }
 
-        // POST: Orders/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteDetail(string orderId, string productId)
         {
-            Order order = db.Orders.Find(id);
-            db.Orders.Remove(order);
+            OrderDetail orderDetail = db.OrderDetails.Find(orderId, productId);
+            db.OrderDetails.Remove(orderDetail);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details");
         }
 
         protected override void Dispose(bool disposing)

@@ -347,7 +347,10 @@
     <Compile Include="Models\Manufacturer.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Metadata\Customer.metadata.cs" />
     <Compile Include="Models\Metadata\Manufacturer.metadata.cs" />
+    <Compile Include="Models\Metadata\Order.metadata.cs" />
+    <Compile Include="Models\Metadata\OrderDetail.metadata.cs" />
     <Compile Include="Models\Metadata\Product.metadata.cs" />
     <Compile Include="Models\Metadata\Staff.metadata.cs" />
     <Compile Include="Models\Metadata\Type.metadata.cs" />
@@ -461,11 +464,11 @@
     <Content Include="Views\Customers\Details.cshtml" />
     <Content Include="Views\Customers\Edit.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
-    <Content Include="Views\Orders\Create.cshtml" />
     <Content Include="Views\Orders\Delete.cshtml" />
     <Content Include="Views\Orders\Details.cshtml" />
-    <Content Include="Views\Orders\Edit.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Orders\ShowDeliverer.cshtml" />
+    <Content Include="Views\Orders\EditDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

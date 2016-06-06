@@ -29,6 +29,7 @@ namespace WebApplication.Models
         public string Password { get; set; }
         public string PositionId { get; set; }
         public bool Deleted { get; set; }
+        public bool IsBusy { get; set; }
     
         public virtual ICollection<Delivery> Deliveries { get; set; }
         public virtual Position Position { get; set; }
