@@ -19,5 +19,16 @@ namespace WebApplication.Common
         public static string PREFIX_QUESTION = "QUE";
         public static string PREFIX_ACCOUNT = "ACC";
         public static string PREFIX_DELIVERY = "DLV";
+        public static string TEMPLATE_EMAIL_REGISTER = "TempleteEmail";
+        public static string TEMPLATE_EMAIL_RESET_PASS = "ResetPassword";
+
+        // Get random password
+        public static int DEFAULT_MIN_PASSWORD_LENGTH = 8;
+        public static int DEFAULT_MAX_PASSWORD_LENGTH = 10;
+
+        public static string PASSWORD_CHARS_LCASE = "abcdefgijkmnopqrstwxyz";
+        public static string PASSWORD_CHARS_UCASE = "ABCDEFGHJKLMNPQRSTWXYZ";
+        public static string PASSWORD_CHARS_NUMERIC = "23456789";
+        public static string PASSWORD_CHARS_SPECIAL = "*$-+?_&=!%{}/";
     }
 }

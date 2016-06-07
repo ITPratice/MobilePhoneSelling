@@ -163,7 +163,7 @@ namespace WebApplication.Controllers
                     FormsAuthentication.SetAuthCookie(_newUser.Name, false);
                     db.Customers.Add(_newUser);
                     db.SaveChanges();
-                    SendEmail(_newUser);
+                    SendEmail(_newUser, Constants.TEMPLATE_EMAIL_REGISTER, "ConfirmationMail", "Customers");
                     return RedirectToAction("ConfirmationStepTwo");
                 }
                 return View(_customer);
@@ -241,6 +241,62 @@ namespace WebApplication.Controllers
         }
         #endregion
 
+        [HttpGet]
+        public ActionResult ForgetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ForgetPassword(Customer _customer)
+        {
+            if (ModelState.IsValid)
+            {
+                Customer _cus = db.Customers.SingleOrDefault(x => x.Email == _customer.Email);
+                if (_cus != null)
+                {
+                    SendEmail(_cus, Constants.TEMPLATE_EMAIL_RESET_PASS, "ResetPassword", "Customers");
+                    return RedirectToAction("ForgetPasswordStep2", "Customers");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Khong tim thay Email !");
+                }
+            }
+            else
+                ModelState.AddModelError("", "Error");
+            return View(_customer);
+        }
+
+        public ActionResult ForgetPasswordStep2()
+        {
+            return View();
+        }
+
+        public ActionResult ResetPassword(string token)
+        {
+            Customer _customer = db.Customers.Find(token);
+            if (ModelState.IsValid)
+            {
+                if (_customer != null)
+                {
+                    string _newPass = ParamHelper.Instance.GeneratePassword(8, 10);
+                    ViewBag.NewPassword = _newPass;
+                    _customer.Password = ParamHelper.Instance.MD5Hash(_newPass);
+                    db.Entry(_customer).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return View();
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Customer is not correct");
+                }
+            }
+            else
+                ModelState.AddModelError("", "Data is not correct");
+            return View(_customer);
+        }
         #endregion
 
         #region Method
@@ -262,11 +318,11 @@ namespace WebApplication.Controllers
         /// Send mail Confirm Registration
         /// </summary>
         /// <param name="_cus"></param>
-        private void SendEmail(Customer _cus)
+        private void SendEmail(Customer _cus, string _template, string actionName, string controllerName)
         {
-            string confirm = Url.Action("ConfirmationMail", "Customers", new { token = _cus.Id }, Request.Url.Scheme);
-            dynamic email = new Email("TempleteEmail");
-            email.To = "cuongdvt261@gmail.com";
+            string confirm = Url.Action(actionName, controllerName, new { token = _cus.Id }, Request.Url.Scheme);
+            dynamic email = new Email(_template);
+            email.To = _cus.Email;
             email.UserName = _cus.AccountName;
             email.ConfirmationToken = confirm;
             email.Send();
