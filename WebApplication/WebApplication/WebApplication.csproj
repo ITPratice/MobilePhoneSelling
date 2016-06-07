@@ -46,12 +46,24 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
     <Reference Include="PagedList.Mvc">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Postal, Version=0.7.3.0, Culture=neutral, PublicKeyToken=45719375b8b4d528, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Project\ITPratice\MobilePhoneSelling\WebApplication\WebApplication\bin\Postal.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -270,6 +282,67 @@
     <Content Include="Contents\AdminPage\bootstrap.min.css" />
     <Content Include="Contents\AdminPage\Site.css" />
     <Content Include="Contents\AdminPage\PagedList.css" />
+    <Content Include="Contents\MasterPage\css\bootstrap.css" />
+    <Content Include="Contents\MasterPage\css\etalage.css" />
+    <Content Include="Contents\MasterPage\css\megamenu.css" />
+    <Content Include="Contents\MasterPage\css\style.css" />
+    <Content Include="Contents\MasterPage\images\1.jpg" />
+    <Content Include="Contents\MasterPage\images\10.jpg" />
+    <Content Include="Contents\MasterPage\images\11.jpg" />
+    <Content Include="Contents\MasterPage\images\2.jpg" />
+    <Content Include="Contents\MasterPage\images\3.jpg" />
+    <Content Include="Contents\MasterPage\images\4.jpg" />
+    <Content Include="Contents\MasterPage\images\5.jpg" />
+    <Content Include="Contents\MasterPage\images\6.jpg" />
+    <Content Include="Contents\MasterPage\images\7.jpg" />
+    <Content Include="Contents\MasterPage\images\8.jpg" />
+    <Content Include="Contents\MasterPage\images\9.jpg" />
+    <Content Include="Contents\MasterPage\images\arrows.png" />
+    <Content Include="Contents\MasterPage\images\arrwss.png" />
+    <Content Include="Contents\MasterPage\images\art.png" />
+    <Content Include="Contents\MasterPage\images\art1.png" />
+    <Content Include="Contents\MasterPage\images\bag.png" />
+    <Content Include="Contents\MasterPage\images\bag1.png" />
+    <Content Include="Contents\MasterPage\images\cart-c.png" />
+    <Content Include="Contents\MasterPage\images\close_1.png" />
+    <Content Include="Contents\MasterPage\images\d1.jpg" />
+    <Content Include="Contents\MasterPage\images\d2.jpg" />
+    <Content Include="Contents\MasterPage\images\d3.jpg" />
+    <Content Include="Contents\MasterPage\images\d4.jpg" />
+    <Content Include="Contents\MasterPage\images\facebook.png" />
+    <Content Include="Contents\MasterPage\images\gift.jpg" />
+    <Content Include="Contents\MasterPage\images\img-sprite.png" />
+    <Content Include="Contents\MasterPage\images\line.png" />
+    <Content Include="Contents\MasterPage\images\login.jpg" />
+    <Content Include="Contents\MasterPage\images\logo.png" />
+    <Content Include="Contents\MasterPage\images\phon.png" />
+    <Content Include="Contents\MasterPage\images\right_arrow.png" />
+    <Content Include="Contents\MasterPage\images\search.png" />
+    <Content Include="Contents\MasterPage\images\soc_icons.png" />
+    <Content Include="Contents\MasterPage\images\s_icon1.png" />
+    <Content Include="Contents\MasterPage\images\s_icon2.png" />
+    <Content Include="Contents\MasterPage\images\s_icon3.png" />
+    <Content Include="Contents\MasterPage\images\tick.png" />
+    <Content Include="Contents\MasterPage\images\w1.jpg" />
+    <Content Include="Contents\MasterPage\images\w10.jpg" />
+    <Content Include="Contents\MasterPage\images\w11.jpg" />
+    <Content Include="Contents\MasterPage\images\w12.jpg" />
+    <Content Include="Contents\MasterPage\images\w2.jpg" />
+    <Content Include="Contents\MasterPage\images\w3.jpg" />
+    <Content Include="Contents\MasterPage\images\w4.jpg" />
+    <Content Include="Contents\MasterPage\images\w5.jpg" />
+    <Content Include="Contents\MasterPage\images\w6.jpg" />
+    <Content Include="Contents\MasterPage\images\w7.jpg" />
+    <Content Include="Contents\MasterPage\images\w8.jpg" />
+    <Content Include="Contents\MasterPage\images\w9.jpg" />
+    <Content Include="Contents\MasterPage\js\jquery-1.11.1.min.js" />
+    <Content Include="Contents\MasterPage\js\jquery-ui.min.js" />
+    <Content Include="Contents\MasterPage\js\jquery.etalage.min.js" />
+    <Content Include="Contents\MasterPage\js\jquery.jscrollpane.min.js" />
+    <Content Include="Contents\MasterPage\js\megamenu.js" />
+    <Content Include="Contents\MasterPage\js\menu_jquery.js" />
+    <Content Include="Contents\MasterPage\js\simpleCart.min.js" />
+    <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\galaxy_s7.png" />
@@ -308,6 +381,7 @@
       <DependentUpon>MobileSellingModel.edmx</DependentUpon>
       <LastGenOutput>MobileSellingModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Contents\MasterPage\images\Thumbs.db" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -319,7 +393,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -404,7 +480,6 @@
     <Content Include="Views\Layout\MainLayout.cshtml" />
     <Content Include="Contents\MainPage\font\Amble-Regular-webfont.ttf" />
     <Content Include="Contents\MainPage\images\Thumbs.db" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Contents\MainPage\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="Contents\MainPage\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="Contents\MainPage\font-awesome\fonts\fontawesome-webfont.woff" />
@@ -469,6 +544,16 @@
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Orders\ShowDeliverer.cshtml" />
     <Content Include="Views\Orders\EditDetail.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Customers\Register.cshtml" />
+    <Content Include="Views\Emails\TempleteEmail.cshtml" />
+    <Content Include="Views\Customers\ConfirmationMail.cshtml" />
+    <Content Include="Views\Layout\MasterPage.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Customers\ConfirmationStepTwo.cshtml" />
+    <Content Include="Views\Customers\Login.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -481,6 +566,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

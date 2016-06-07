@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Layout/MasterPage.cshtml";
+}
+@if (Request.IsAuthenticated)
+{
+    @Html.ActionLink("Trang chủ", "Index", "Home")
+}
+else
+{
+    <div class="registration_left">
+        <div class="registration_form">
+            @using (Html.BeginForm())
+            {
+                <div>
+                    <label>
+                        <input type="text" name="txtUsername" placeholder="Username" />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="password" name="txtPassword" placeholder="Password" />
+                    </label>
+                </div>
+                <div>
+                    <input type="submit" value="Đăng nhập" id="register-submit">
+                </div>
+                <label for="checkbox"><input type="checkbox" name="chkRemember" id="chkRemember"> <i>Remember me</i></label>
+                <div class="forget">
+                    <a href="#">Quên mật khẩu ?</a>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+

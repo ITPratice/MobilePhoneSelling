@@ -1,0 +1,83 @@
+﻿@model WebApplication.Models.Customer
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Layout/MasterPage.cshtml";
+}
+
+@if (Request.IsAuthenticated)
+{
+    @Html.ActionLink("Trang chủ", "Index", "Home")
+}
+else
+{
+    <div class="registration">
+        <div class="registration_left">
+            <h2>Đăng kí tài khoản</h2>
+            <div class="registration_form">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div>
+                        <label>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { placeholder = "Họ và tên", type = "text" } })
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { placeholder = "Ngày sinh", type = "date" } })
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { placeholder = "Số điện thoại", type = "text" } })
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { placeholder = "Địa chỉ", type = "text" } })
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = "Email", type = "email" } })
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            @Html.EditorFor(model => model.AccountName, new { htmlAttributes = new { placeholder = "Tên tài khoản", type = "text" } })
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "Mật khẩu", type = "password" } })
+                        </label>
+                    </div>
+                    <div>
+                        <input type="submit" value="Đăng kí" id="register-submit">
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <script>
+        (function () {
+            // Change text inside send button on submit
+            var send = document.getElementById('register-submit');
+            if (send) {
+                send.onclick = function () {
+                    this.innerHTML = '...Đang xử lý';
+                }
+            }
+        })();
+    </script>
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

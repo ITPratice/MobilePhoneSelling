@@ -13,15 +13,6 @@ namespace WebApplication.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            //Account _acc = (Account)Session["Account"];
-            //if (_acc == null)
-            //{
-            //    ViewBag.AccountName = "";
-            //}
-            //else
-            //{
-            //    ViewBag.AccountName =  _acc.Name;
-            //}
             return View(db.Products.ToList());
         }
 

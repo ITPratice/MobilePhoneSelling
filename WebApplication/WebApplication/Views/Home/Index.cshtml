@@ -2,72 +2,32 @@
 @using WebApplication.Common
 @model List<Product>
 @{
-    ViewBag.Title = "Trang chủ";
-    Layout = "~/Views/Layout/MainLayout.cshtml";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/MasterPage.cshtml";
 }
-@*-- Main Page --*@
-<div class="content_top">
-    <div class="heading">
-        <h3>Sản phẩm mới</h3>
-    </div>
-    <div class="see">
-        <p><a href="#">Xem tất cả</a></p>
-    </div>
-    <div class="clear"></div>
-</div>
-<div class="section group">
-    @foreach (var _item in Model)
-    {
-        <div class="grid_1_of_4 images_1_of_4">
-            <a href="preview.html">
-                <img src="@Url.Content(Constants.PATH_IMAGE+"/"+_item.Image)" alt="" width="200" height="280" />
+
+@foreach (var item in Model)
+{
+    <div class="grid1_of_4">
+        <div class="content_box">
+            <a href="details.html">
+                <img src="@Url.Content(Constants.PATH_IMAGE+"/"+item.Image)" class="img-responsive" alt="" />
             </a>
-            @if (_item.Name.Length < 35)
-            {
-                <h2>@_item.Name</h2>
-            }
-            else
-            {
-                <h2>@_item.Name.Substring(0, 35) ...</h2>
-            }
-            <div class="price-details">
-                <div class="price-number">
-                    <p>
-                        <span class="rupees">
-                            @String.Format("{0:0,0 ₫}", @_item.Price)
-                        </span>
-                    </p>
+            <h4><a href="details.html">@item.Name</a></h4>
+            <div class="grid_1 simpleCart_shelfItem">
+                <div class="item_add">
+                    <span class="item_price">
+                        <h6>@String.Format("{0:0,0 ₫}", @item.Price)</h6>
+                    </span>
                 </div>
-                <div class="add-cart">
-                    <h4><a href="@Url.Action("AddShoppongCart", "Cart", new { @_idProducts = _item.Id, @_strUrl = Request.Url.ToString() })">Giỏ hàng</a></h4>
+                <div class="item_add">
+                    <span class="item_price">
+                        <a href="#">add to cart</a>
+                    </span>
                 </div>
             </div>
         </div>
-    }
-</div>
-<div class="clear"></div>
-<div class="content_bottom">
-    <div class="heading">
-        <h3>Sản phẩm bán chạy</h3>
     </div>
-    <div class="see">
-        <p><a href="#">Xem tất cả</a></p>
-    </div>
-    <div class="clear"></div>
-</div>
-<div class="section group">
-    <div class="grid_1_of_4 images_1_of_4">
-        <a href="preview.html"><img src="web/images/new-pic1.jpg" alt="" /></a>
-        <h2>Lorem Ipsum is simply </h2>
-        <div class="price-details">
-            <div class="price-number">
-                <p><span class="rupees">$849.99</span></p>
-            </div>
-            <div class="add-cart">
-                <h4><a href="preview.html">Add to Cart</a></h4>
-            </div>
-            <div class="clear"></div>
-        </div>
-    </div>
-</div>
+}
+
 
