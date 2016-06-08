@@ -185,6 +185,11 @@ namespace WebApplication.Controllers
             Customer _customer = db.Customers.Find(token);
             if (ModelState.IsValid)
             {
+                if (_customer.IsActivated == true)
+                {
+                    Response.StatusCode = 404;
+                    return null;
+                }
                 if (_customer != null)
                 {
                     _customer.IsActivated = true;
@@ -215,9 +220,10 @@ namespace WebApplication.Controllers
         {
             string _username = _form["txtUsername"].ToString();
             string _password = ParamHelper.Instance.MD5Hash(_form["txtPassword"].ToString());
-            bool _remember = Convert.ToBoolean(_form["chkRemember"]);
-            bool _isCustomer = Convert.ToBoolean(_form["chkCustomer"]);
-            bool _isStaff = Convert.ToBoolean(_form["chkStaff"]);
+
+            bool _remember = Convert.ToBoolean(Request["chkRemember"]);
+            bool _isCustomer = Convert.ToBoolean(Request["chkCustomer"]);
+            bool _isStaff = Convert.ToBoolean(Request["chkStaff"]);
 
             if (ModelState.IsValid)
             {
@@ -234,9 +240,18 @@ namespace WebApplication.Controllers
                         ModelState.AddModelError("", "Thông tin không chính xác !");
                     }
                 }
+                    
                 else if (_isStaff)
                 {
-                    return RedirectToAction("Index", "Staffs");
+                    Staff _staff = db.Staffs.SingleOrDefault(x => x.AccountName == _username && x.Password == _password);
+                    if(_staff!=null)
+                    {
+                        return RedirectToAction("Index", "Staffs");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Login fail");
+                    }
                 }
                 else
                     return View();
@@ -253,6 +268,7 @@ namespace WebApplication.Controllers
         }
         #endregion
 
+        #region Reset Password
         [HttpGet]
         public ActionResult ForgetPassword()
         {
@@ -310,6 +326,8 @@ namespace WebApplication.Controllers
                 ModelState.AddModelError("", "Data is not correct");
             return View(_customer);
         }
+        #endregion
+
         #endregion
 
         #region Method

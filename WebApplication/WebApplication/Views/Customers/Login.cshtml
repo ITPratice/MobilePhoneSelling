@@ -8,10 +8,12 @@
 }
 else
 {
-    <div class="registration_left">
-        <div class="registration_form">
-            @using (Html.BeginForm())
-            {
+    @*<div class="registration_left">
+        <div class="registration_form">*@
+    using (Html.BeginForm("Login", "Customers", FormMethod.Post))
+    {
+        <div class="registration_left">
+            <div class="registration_form">
                 <div>
                     <label>
                         <input type="text" name="txtUsername" placeholder="Username" />
@@ -25,28 +27,22 @@ else
                 <div>
                     <input type="submit" value="Đăng nhập" id="register-submit">
                 </div>
-                <label for="checkbox"><input type="checkbox" name="chkRemember" id="chkRemember"> <i>Remember me</i></label>
+                <label for="checkbox"><input type="checkbox" name="chkRemember" id="chkRemember" value="true" @(Request.Form["chkRemember"] == "true" ? " checked" : "")> <i>Remember me</i></label>
                 <div class="forget">
                     <a href="@Url.Action("ForgetPassword", "Customers")">Quên mật khẩu ?</a>
                 </div>
-            }
+            </div>
         </div>
-    </div>
-    <div class="registration_left">
-        <div class="registration_form">
-            @using (Html.BeginForm())
-            {
-                @*@Html.CheckBox("chkCustomer", true)
-                    <label for="checkbox"><i>Khách hàng</i></label>
-                    @Html.CheckBox("chkStaff", false)
-                    <label for="checkbox"><i>Nhân viên</i></label>*@
+        <div class="registration_left">
+            <div class="registration_form">
                 <section class="sky-form">
-                    <label class="checkbox"><input type="checkbox" name="chkCustomer" id="chkCustomer"><i></i>Khách hàng</label>
-                    <label class="checkbox"><input type="checkbox" name="chkStaff" id="chkStaff"><i></i>Nhân viên</label>
+                    <label class="checkbox">
+                        <input type="checkbox" name="chkCustomer" id="chkCustomer" value="true" checked="checked" @(Request.Form["chkCustomer"] == "true" ? " checked" : "") /><i></i>Khách hàng</label>
+                    <label class="checkbox"><input type="checkbox" name="chkStaff" id="chkStaff" value="true" @(Request.Form["chkStaff"] == "true" ? " checked" : "") /><i></i>Nhân viên</label>
                 </section>
-            }
+            </div>
         </div>
-    </div>
+    }
 }
 
 
