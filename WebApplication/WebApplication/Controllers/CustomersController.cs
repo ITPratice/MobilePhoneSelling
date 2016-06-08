@@ -216,18 +216,30 @@ namespace WebApplication.Controllers
             string _username = _form["txtUsername"].ToString();
             string _password = ParamHelper.Instance.MD5Hash(_form["txtPassword"].ToString());
             bool _remember = Convert.ToBoolean(_form["chkRemember"]);
+            bool _isCustomer = Convert.ToBoolean(_form["chkCustomer"]);
+            bool _isStaff = Convert.ToBoolean(_form["chkStaff"]);
+
             if (ModelState.IsValid)
             {
-                Customer _cus = db.Customers.SingleOrDefault(x => x.AccountName == _username && x.Password == _password);
-                if (_cus != null)
+                if (_isCustomer)
                 {
-                    FormsAuthentication.SetAuthCookie(_cus.Name, _remember);
-                    return RedirectToAction("Index", "Home");
+                    Customer _cus = db.Customers.SingleOrDefault(x => x.AccountName == _username && x.Password == _password);
+                    if (_cus != null)
+                    {
+                        FormsAuthentication.SetAuthCookie(_cus.Name, _remember);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Thông tin không chính xác !");
+                    }
+                }
+                else if (_isStaff)
+                {
+                    return RedirectToAction("Index", "Staffs");
                 }
                 else
-                {
-                    ModelState.AddModelError("", "Thông tin không chính xác !");
-                }
+                    return View();
             }
             return View();
         }
@@ -256,6 +268,7 @@ namespace WebApplication.Controllers
                 Customer _cus = db.Customers.SingleOrDefault(x => x.Email == _customer.Email);
                 if (_cus != null)
                 {
+                    Session["ForgetPass"] = _cus;
                     SendEmail(_cus, Constants.TEMPLATE_EMAIL_RESET_PASS, "ResetPassword", "Customers");
                     return RedirectToAction("ForgetPasswordStep2", "Customers");
                 }

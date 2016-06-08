@@ -9,7 +9,7 @@
                     @foreach (var _item in Model)
                     {
                         <li>
-                            <a href="#">
+                            <a href="@Url.Action("ProductsByManufacturerId", "Manufacturers", new { @_manuId = _item.Id })">
                                 @_item.Name
                             </a>
                         </li>

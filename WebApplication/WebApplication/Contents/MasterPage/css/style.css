@@ -1758,7 +1758,7 @@ list-style: none;
 	width: 23.22222%;
 	margin-left: 2.33333%;
 	text-align:center;
-    border:solid 1px;
+    border:dotted 1px;
 }
 .grid1_of_4:first-child{
 	margin-left: 0;

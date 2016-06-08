@@ -1,2 +1,14 @@
-﻿<i class="fa fa-shopping-cart" aria-hidden="true"></i>  
-    (@ViewBag.TongSoLuong) - (@String.Format("{0:0,0 ₫}", @ViewBag.TongTien))
+﻿@if (Session["ShoppingCart"] == null)
+{
+    <p>
+        <div class="simpleCart_empty">(empty cart)</div>
+    </p>
+}
+else
+{
+    <h3>
+        @String.Format("{0:0,0 ₫}", @ViewBag.TongTien) (@ViewBag.TongSoLuong)
+        <img src="~/Contents/MasterPage/images/bag.png" alt="">
+    </h3>
+}
+<div class="clearfix"> </div>

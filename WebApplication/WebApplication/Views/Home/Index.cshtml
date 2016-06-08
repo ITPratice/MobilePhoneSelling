@@ -3,31 +3,35 @@
 @model List<Product>
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Layout/MasterPage.cshtml";
+    Layout = Constants.PATH_MASTER_PAGE;
 }
+<div class="col-md-9 w_content">
+    <div class="grids_of_4">
+        @foreach (var item in Model)
+        {
 
-@foreach (var item in Model)
-{
-    <div class="grid1_of_4">
-        <div class="content_box">
-            <a href="details.html">
-                <img src="@Url.Content(Constants.PATH_IMAGE+"/"+item.Image)" class="img-responsive" alt="" />
-            </a>
-            <h4><a href="details.html">@item.Name</a></h4>
-            <div class="grid_1 simpleCart_shelfItem">
-                <div class="item_add">
-                    <span class="item_price">
-                        <h6>@String.Format("{0:0,0 ₫}", @item.Price)</h6>
-                    </span>
-                </div>
-                <div class="item_add">
-                    <span class="item_price">
-                        <a href="#">add to cart</a>
-                    </span>
+            <div class="grid1_of_4">
+                <div class="content_box">
+                    <a href="#">
+                        <img src="@Url.Content(Constants.PATH_IMAGE + "/" + item.Image)" class="img-responsive" alt="" />
+                    </a>
+                    <h4><a href="details.html">@item.Name</a></h4>
+                    <div class="grid_1 simpleCart_shelfItem">
+                        <div class="item_add">
+                            <span class="item_price">
+                                <h6>@String.Format("{0:0,0 ₫}", @item.Price)</h6>
+                            </span>
+                        </div>
+                        <div class="item_add">
+                            <span class="item_price">
+                                <a href="@Url.Action("AddShoppongCart", "Cart", new { @_idProducts = item.Id, @_strUrl = Request.Url.ToString() })">Thêm vào giỏ hàng</a>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-}
 
+        }
+    </div>
+</div>
 

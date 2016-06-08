@@ -400,7 +400,6 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\Constants.cs" />
-    <Compile Include="Common\Pass.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
@@ -559,6 +558,8 @@
     <Content Include="Views\Customers\ForgetPassword.cshtml" />
     <Content Include="Views\Customers\ForgetPasswordStep2.cshtml" />
     <Content Include="Views\Customers\ResetPassword.cshtml" />
+    <Content Include="Views\Manufacturers\ProductsByManufacturerId.cshtml" />
+    <Content Include="Views\Layout\DetailLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

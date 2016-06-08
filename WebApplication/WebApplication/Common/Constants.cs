@@ -9,6 +9,8 @@ namespace WebApplication.Common
     {
         public static string PATH_IMAGE = "~/Contents/Images";
         public static string PATH_ADMIN_LAYOUT = "~/Views/Layout/AdminLayout.cshtml";
+        public static string PATH_MASTER_PAGE = "~/Views/Layout/MasterPage.cshtml";
+
         public static string PREFIX_PRODUCT = "PRO";
         public static string PREFIX_CUSTOMER = "CUS";
         public static string PREFIX_STAFF = "STA";

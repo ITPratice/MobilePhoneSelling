@@ -164,10 +164,6 @@ namespace WebApplication.Controllers
         //Init Order
         public ActionResult Order()
         {
-            if (Session["Account"] == null)
-            {
-                return RedirectToAction("Login", "Users");
-            }
             if (Session["ShoppingCart"] == null)
             {
                 RedirectToAction("Index", "Home");
