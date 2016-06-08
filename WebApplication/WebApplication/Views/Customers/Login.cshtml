@@ -8,8 +8,6 @@
 }
 else
 {
-    @*<div class="registration_left">
-        <div class="registration_form">*@
     using (Html.BeginForm("Login", "Customers", FormMethod.Post))
     {
         <div class="registration_left">
@@ -36,8 +34,8 @@ else
         <div class="registration_left">
             <div class="registration_form">
                 <section class="sky-form">
-                    <label class="checkbox"><input type="checkbox" name="chkCustomer" id="chkCustomer" value="true" checked="checked" @(Request.Form["chkCustomer"] == "true" ? " checked" : "") /><i></i>Khách hàng</label>
-                    <label class="checkbox"><input type="checkbox" name="chkStaff" id="chkStaff" value="true" @(Request.Form["chkStaff"] == "true" ? " checked" : "") /><i></i>Nhân viên</label>
+                    <label class="radio-inline"><input type="radio" name="checkUser" value="customer" checked="checked" />Khách hàng</label>
+                    <label class="radio-inline"><input type="radio" name="checkUser" value="staff" />Nhân viên</label>
                 </section>
             </div>
         </div>

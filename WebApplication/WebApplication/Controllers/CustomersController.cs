@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using WebApplication.Common;
 using WebApplication.Models;
+using PagedList;
 
 namespace WebApplication.Controllers
 {
@@ -22,47 +23,30 @@ namespace WebApplication.Controllers
 
         #region ActionResult
         // GET: Customers
-        public ActionResult Index()
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Customers.ToList());
-        }
-
-        // GET: Customers/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            if (searchString != null) page = 1;
+            else searchString = currentFilter;
+            ViewBag.CurrentFilter = currentFilter;
+            var customers = from c in db.Customers select c;
+            if (!String.IsNullOrEmpty(searchString))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                customers = customers.Where(c => c.Name.Contains(searchString));
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            switch (sortOrder)
             {
-                return HttpNotFound();
+                case "name_desc":
+                    customers = customers.OrderByDescending(c => c.Name);
+                    break;
+                default:
+                    customers = customers.OrderBy(c => c.Name);
+                    break;
             }
-            return View(customer);
-        }
-
-        // GET: Customers/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Customers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Birthday,Address,PhoneNumber,Email,BankAccount,AccountName,Password,Deleted")] Customer customer)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Customers.Add(customer);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(customer);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(customers.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Customers/Edit/5
@@ -108,16 +92,25 @@ namespace WebApplication.Controllers
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            customer.Deleted = true;
+            db.Entry(customer).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
-        // POST: Customers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult Restore(string id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Customer customer = db.Customers.Find(id);
-            db.Customers.Remove(customer);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            customer.Deleted = false;
+            db.Entry(customer).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -217,12 +210,10 @@ namespace WebApplication.Controllers
             string _password = ParamHelper.Instance.MD5Hash(_form["txtPassword"].ToString());
 
             bool _remember = Convert.ToBoolean(Request["chkRemember"]);
-            bool _isCustomer = Convert.ToBoolean(Request["chkCustomer"]);
-            bool _isStaff = Convert.ToBoolean(Request["chkStaff"]);
-
+            string user = Request["checkUser"];
             if (ModelState.IsValid)
             {
-                if (_isCustomer)
+                if (user.Equals("customer"))
                 {
                     Customer _cus = db.Customers.SingleOrDefault(x => x.AccountName == _username && x.Password == _password);
                     if (_cus != null)
@@ -235,21 +226,18 @@ namespace WebApplication.Controllers
                         ModelState.AddModelError("", "Thông tin không chính xác !");
                     }
                 }
-                    
-                else if (_isStaff)
+                else 
                 {
                     Staff _staff = db.Staffs.SingleOrDefault(x => x.AccountName == _username && x.Password == _password);
                     if(_staff!=null)
                     {
-                        return RedirectToAction("Index", "Staffs");
+                        return RedirectToAction("Index", "Products");
                     }
                     else
                     {
                         ModelState.AddModelError("", "Login fail");
                     }
                 }
-                else
-                    return View();
             }
             return View();
         }

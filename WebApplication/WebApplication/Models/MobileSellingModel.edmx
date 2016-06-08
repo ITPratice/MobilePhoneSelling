@@ -37,6 +37,7 @@
           <Property Name="OrderId" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="StaffId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IsDelivered" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
@@ -53,7 +54,7 @@
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="CustomerId" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Deleted" Type="bit" Nullable="false" />
-          <Property Name="IsDelivered" Type="bit" Nullable="false" />
+          <Property Name="IsAssigned" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -381,6 +382,7 @@
           <Property Name="StaffId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Delivery_Order" FromRole="Delivery" ToRole="Order" />
           <NavigationProperty Name="Staff" Relationship="Self.FK_Delivery_Staff" FromRole="Delivery" ToRole="Staff" />
+          <Property Name="IsDelivered" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
@@ -401,7 +403,7 @@
           <NavigationProperty Name="Customer" Relationship="Self.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="Deliveries" Relationship="Self.FK_Delivery_Order" FromRole="Order" ToRole="Delivery" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
-          <Property Name="IsDelivered" Type="Boolean" Nullable="false" />
+          <Property Name="IsAssigned" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -677,6 +679,7 @@
           <EntitySetMapping Name="Deliveries">
             <EntityTypeMapping TypeName="MobilePhoneSellingModel.Delivery">
               <MappingFragment StoreEntitySet="Delivery">
+                <ScalarProperty Name="IsDelivered" ColumnName="IsDelivered" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -695,7 +698,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="MobilePhoneSellingModel.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="IsDelivered" ColumnName="IsDelivered" />
+                <ScalarProperty Name="IsAssigned" ColumnName="IsAssigned" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />

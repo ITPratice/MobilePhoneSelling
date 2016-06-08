@@ -21,7 +21,7 @@ namespace WebApplication.Models
             [Display(Name = "Loại bỏ")]
             public bool Deleted { get; set; }
             [Display(Name = "Đã giao hàng")]
-            public bool IsDelivered { get; set; }
+            public bool IsAssigned { get; set; }
         }
     }
 }

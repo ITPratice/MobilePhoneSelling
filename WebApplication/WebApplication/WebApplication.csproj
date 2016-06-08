@@ -63,9 +63,11 @@
     <Reference Include="PagedList.Mvc">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Postal, Version=0.7.3.0, Culture=neutral, PublicKeyToken=45719375b8b4d528, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Project\ITPratice\MobilePhoneSelling\WebApplication\WebApplication\bin\Postal.dll</HintPath>
+    <Reference Include="Postal">
+      <HintPath>..\packages\Postal.Mvc5.1.2.0\lib\net45\Postal.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\RazorEngine.3.4.1\lib\net45\RazorEngine.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -422,11 +424,13 @@
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\DeliveriesController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManufacturersController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\PromotionsController.cs" />
     <Compile Include="Controllers\StaffsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -448,6 +452,7 @@
     <Compile Include="Models\Metadata\Order.metadata.cs" />
     <Compile Include="Models\Metadata\OrderDetail.metadata.cs" />
     <Compile Include="Models\Metadata\Product.metadata.cs" />
+    <Compile Include="Models\Metadata\Promotion.metadata.cs" />
     <Compile Include="Models\Metadata\Staff.metadata.cs" />
     <Compile Include="Models\Metadata\Type.metadata.cs" />
     <Compile Include="Models\MobileSellingModel.Context.cs">
@@ -553,9 +558,6 @@
     <Content Include="Views\Staffs\Create.cshtml" />
     <Content Include="Views\Staffs\Edit.cshtml" />
     <Content Include="Views\Staffs\Index.cshtml" />
-    <Content Include="Views\Customers\Create.cshtml" />
-    <Content Include="Views\Customers\Delete.cshtml" />
-    <Content Include="Views\Customers\Details.cshtml" />
     <Content Include="Views\Customers\Edit.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Orders\Delete.cshtml" />
@@ -579,6 +581,15 @@
     <Content Include="Views\Customers\ResetPassword.cshtml" />
     <Content Include="Views\Manufacturers\ProductsByManufacturerId.cshtml" />
     <Content Include="Views\Products\ProductDetails.cshtml" />
+    <Content Include="Views\Emails\Web.config" />
+    <Content Include="Views\Emails\_ViewStart.cshtml" />
+    <Content Include="Views\Deliveries\Details.cshtml" />
+    <Content Include="Views\Deliveries\Index.cshtml" />
+    <Content Include="Views\Promotions\Create.cshtml" />
+    <Content Include="Views\Promotions\Delete.cshtml" />
+    <Content Include="Views\Promotions\Details.cshtml" />
+    <Content Include="Views\Promotions\Edit.cshtml" />
+    <Content Include="Views\Promotions\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
