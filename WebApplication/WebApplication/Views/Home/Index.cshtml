@@ -9,10 +9,9 @@
     <div class="grids_of_4">
         @foreach (var item in Model)
         {
-
             <div class="grid1_of_4">
                 <div class="content_box">
-                    <a href="#">
+                    <a href="@Url.Action("ProductDetails", "Products", new { @id = item.Id })">
                         <img src="@Url.Content(Constants.PATH_IMAGE + "/" + item.Image)" class="img-responsive" alt="" />
                     </a>
                     <h4><a href="details.html">@item.Name</a></h4>

@@ -185,11 +185,6 @@ namespace WebApplication.Controllers
             Customer _customer = db.Customers.Find(token);
             if (ModelState.IsValid)
             {
-                if (_customer.IsActivated == true)
-                {
-                    Response.StatusCode = 404;
-                    return null;
-                }
                 if (_customer != null)
                 {
                     _customer.IsActivated = true;

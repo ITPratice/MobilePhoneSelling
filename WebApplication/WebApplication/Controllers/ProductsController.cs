@@ -43,6 +43,7 @@ namespace WebApplication.Controllers
             return View(products.ToPagedList(pageNumber, pageSize));
         }
 
+        #region Admin
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -160,6 +161,28 @@ namespace WebApplication.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        #endregion
+
+        #region Get Details of Products
+        public ActionResult ProductDetails(string id = "")
+        {
+
+            Product _prod = db.Products.SingleOrDefault(x => x.Id == id);
+            if (_prod == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(_prod);
+        }
+        #endregion
+
+        #region Get Relative Products
+        public PartialViewResult RelativeProducts()
+        {
+            return PartialView();
+        }
+        #endregion
 
         protected override void Dispose(bool disposing)
         {

@@ -578,6 +578,7 @@
     <Content Include="Views\Customers\ForgetPasswordStep2.cshtml" />
     <Content Include="Views\Customers\ResetPassword.cshtml" />
     <Content Include="Views\Manufacturers\ProductsByManufacturerId.cshtml" />
+    <Content Include="Views\Products\ProductDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
