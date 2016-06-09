@@ -6,21 +6,28 @@
     ViewBag.Title = "ProductsByManufacturerId";
     Layout = "~/Views/Layout/MasterPage.cshtml";
 }
+<script type="text/javascript">
+    $(function () {
+        $('.radio').on('change', function () {
+            $('#formFilter').submit();
+        });
+    });
+</script>
 <div class="col-md-3 s-d">
     <div class="w_sidebar">
         <section class="sky-form">
             <h4>Giá từ</h4>
             <div class="row1 scroll-pane">
-                <div class="col col-4">
-                    <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Nhỏ hơn 1 triệu</label>
-                </div>
-                <div class="col col-4">
-                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Từ 2 đến 3 triệu</label>
-                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Từ 3 đến 5 triệu</label>
-                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Từ 5 đến 8 triệu</label>
-                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Từ 8 đến 10 triệu</label>
-                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Lớn hơn 10 triệu</label>
-                </div>
+                @using (Html.BeginForm("ProductsByManufacturerId", "Manufacturers", FormMethod.Post, new { id = "formFilter" }))
+                {                                 
+                    <div class="col col-4">
+                        <label class="checkbox"><input type="radio" name="chkFilter" class="radio" value="chk1" checked="checked" /><i></i>Nhỏ hơn 1 triệu</label>
+                        <label class="checkbox"><input type="radio" name="chkFilter" class="radio" value="chk1to3" /><i></i>Từ 1 đến 3 triệu</label>
+                        <label class="checkbox"><input type="radio" name="chkFilter" class="radio" value="chk3to7" /><i></i>Từ 3 đến 7 triệu</label>
+                        <label class="checkbox"><input type="radio" name="chkFilter" class="radio" value="chk7to10" /><i></i>Từ 7 đến 10 triệu</label>
+                        <label class="checkbox"><input type="radio" name="chkFilter" class="radio" value="chk10" /><i></i>Trên 10 triệu</label>
+                    </div>
+                }
             </div>
         </section>
 
