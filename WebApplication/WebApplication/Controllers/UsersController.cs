@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication.Models;
 using Microsoft.AspNet.Identity;
+using System.Web.Security;
 
 namespace WebApplication.Controllers
 {
@@ -46,5 +47,60 @@ namespace WebApplication.Controllers
             }
             return View(customer);
         }
+
+        #region Login
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(FormCollection _form)
+        {
+            string _username = _form["txtUsername"].ToString();
+            string _password = ParamHelper.Instance.MD5Hash(_form["txtPassword"].ToString());
+
+            bool _remember = Convert.ToBoolean(Request["chkRemember"]);
+            string user = Request["checkUser"];
+            if (ModelState.IsValid)
+            {
+                if (user.Equals("customer"))
+                {
+                    Customer _cus = db.Customers.SingleOrDefault(x => x.AccountName == _username && x.Password == _password);
+                    if (_cus != null)
+                    {
+                        FormsAuthentication.SetAuthCookie(_cus.Name, _remember);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Thông tin không chính xác !");
+                    }
+                }
+                else
+                {
+                    Staff _staff = db.Staffs.SingleOrDefault(x => x.AccountName == _username && x.Password == _password);
+                    if (_staff != null)
+                    {
+                        return RedirectToAction("Index", "Products");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Login fail");
+                    }
+                }
+            }
+            return View();
+        }
+        #endregion
+
+        #region Logout
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
+        #endregion
     }
 }

@@ -92,14 +92,14 @@ namespace WebApplication.Controllers
         }
 
         // GET: Orders/Details/5
-        public ActionResult Details(string sortOrder, string currentFilter, string searchString, int? page)
+        public ActionResult Details(string orderId, string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             if (searchString != null) page = 1;
             else searchString = currentFilter;
             ViewBag.CurrentFilter = currentFilter;
-            var orderDetails = from o in db.OrderDetails select o;
+            var orderDetails = from o in db.OrderDetails where o.OrderId == orderId select o;
             if (!String.IsNullOrEmpty(searchString))
             {
                 orderDetails = orderDetails.Where(o => o.Product.Name.Contains(searchString));

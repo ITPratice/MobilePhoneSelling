@@ -88,9 +88,22 @@
                                         @Html.DisplayFor(modelItem => item.Deleted)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                        @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
+                                        @Html.ActionLink("Chi tiết", "Details", new { promotionId = item.Id }) |
+                                        @if (!item.Deleted)
+                                        {
+                                            @Html.ActionLink("Loại bỏ",
+                                                         "Delete",
+                                                         new { id = item.Id },
+                                                         new { onclick = "return confirm('Bạn có thực sự muốn hủy chương trình khuyến mãi này không?')" })
+                                        }
+                                        else
+                                        {
+                                            @Html.ActionLink("Khôi phục",
+                                                         "Restore",
+                                                         new { id = item.Id },
+                                                         new { onclick = "return confirm('Bạn có thực sự muốn khôi phục chương trình khuyến mãi này không?')" })
+                                        }
                                     </td>
                                 </tr>
                             }

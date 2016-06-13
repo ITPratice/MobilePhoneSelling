@@ -99,6 +99,8 @@ namespace WebApplication.Controllers
             {
                 return HttpNotFound();
             }
+            DateTime now = DateTime.Now;
+            staff.Birthday = now;
             ViewBag.PositionId = new SelectList(db.Positions, "Id", "Name", staff.PositionId);
             return View(staff);
         }

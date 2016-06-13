@@ -1,29 +1,45 @@
 ﻿@{
     ViewBag.Title = "Login";
-    Layout = "~/Views/Layout/MainLayout.cshtml";
+    Layout = "~/Views/Layout/MasterPage.cshtml";
 }
-<h2>Đăng nhập</h2>
-<h1 style="font-family: 'ambleregular'; color:red; font-size: 25px">@ViewBag.LoginStatus</h1>
-<div class="section group">
-    <div class="col span_2_of_3">
-        <div class="contact-form">
-            @using (Html.BeginForm())
-            {
+@if (Request.IsAuthenticated)
+{
+    @Html.ActionLink("Trang chủ", "Index", "Home")
+}
+else
+{
+    using (Html.BeginForm("Login", "Customers", FormMethod.Post))
+    {
+        <div class="registration_left">
+            <div class="registration_form">
                 <div>
-                    <span><label>Tài khoản: </label></span>
-                    <span><input name="txtName" type="text" class="textbox"></span>
-                </div>
-                <br />
-                <div>
-                    <span><label>Mật khẩu: </label></span>
-                    <span><input name="txtPassword" type="password" class="textbox"></span>
+                    <label>
+                        <input type="text" name="txtUsername" placeholder="Username" />
+                    </label>
                 </div>
                 <div>
-                    <span><input type="submit" id="btnSubmit" name="btnSubmit" /></span>
+                    <label>
+                        <input type="password" name="txtPassword" placeholder="Password" />
+                    </label>
                 </div>
-                <span><a href="@Url.Action("ForgetPassword", "Customers")">Quên mật khẩu ?</a></span>
-            }
+                <div>
+                    <input type="submit" value="Đăng nhập" id="register-submit">
+                </div>
+                <label for="checkbox"><input type="checkbox" name="chkRemember" id="chkRemember" value="true" @(Request.Form["chkRemember"] == "true" ? " checked" : "")> <i>Remember me</i></label>
+                <div class="forget">
+                    <a href="@Url.Action("ForgetPassword", "Customers")">Quên mật khẩu ?</a>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+        <div class="registration_left">
+            <div class="registration_form">
+                <section class="sky-form">
+                    <label class="radio-inline"><input type="radio" name="checkUser" value="customer" checked="checked" />Khách hàng</label>
+                    <label class="radio-inline"><input type="radio" name="checkUser" value="staff" />Nhân viên</label>
+                </section>
+            </div>
+        </div>
+    }
+}
+
 

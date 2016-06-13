@@ -16,7 +16,6 @@ namespace WebApplication.Models
     {
         public Promotion()
         {
-            this.Customers = new HashSet<Customer>();
             this.Products = new HashSet<Product>();
         }
     
@@ -29,7 +28,6 @@ namespace WebApplication.Models
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public bool Deleted { get; set; }
     
-        public virtual ICollection<Customer> Customers { get; set; }
         public virtual ICollection<Product> Products { get; set; }
     }
 }

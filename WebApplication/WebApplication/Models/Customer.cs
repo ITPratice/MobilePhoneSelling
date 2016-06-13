@@ -17,7 +17,6 @@ namespace WebApplication.Models
         public Customer()
         {
             this.Orders = new HashSet<Order>();
-            this.Promotions = new HashSet<Promotion>();
         }
     
         public string Id { get; set; }
@@ -33,6 +32,5 @@ namespace WebApplication.Models
         public bool IsActivated { get; set; }
     
         public virtual ICollection<Order> Orders { get; set; }
-        public virtual ICollection<Promotion> Promotions { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MobilePhoneSellingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MobilePhoneSellingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="Id" />
@@ -20,14 +20,6 @@
           <Property Name="Password" Type="varchar" MaxLength="100" />
           <Property Name="Deleted" Type="bit" Nullable="false" />
           <Property Name="IsActivated" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Customer_Promotion">
-          <Key>
-            <PropertyRef Name="CustomerId" />
-            <PropertyRef Name="PromotionId" />
-          </Key>
-          <Property Name="CustomerId" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="PromotionId" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="Delivery">
           <Key>
@@ -89,7 +81,7 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
-        <EntityType Name="Product_Promotion">
+        <EntityType Name="ProductPromotion">
           <Key>
             <PropertyRef Name="ProductId" />
             <PropertyRef Name="PromotionId" />
@@ -143,30 +135,6 @@
           <Property Name="Id" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" />
         </EntityType>
-        <Association Name="FK_Customer_Promotion_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-          <End Role="Customer_Promotion" Type="Self.Customer_Promotion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Customer_Promotion">
-              <PropertyRef Name="CustomerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Customer_Promotion_Promotion">
-          <End Role="Promotion" Type="Self.Promotion" Multiplicity="1" />
-          <End Role="Customer_Promotion" Type="Self.Customer_Promotion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Promotion">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Customer_Promotion">
-              <PropertyRef Name="PromotionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Delivery_Order">
           <End Role="Order" Type="Self.Order" Multiplicity="1" />
           <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
@@ -239,30 +207,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_Promotion_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="Product_Promotion" Type="Self.Product_Promotion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Product_Promotion">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_Promotion_Promotion">
-          <End Role="Promotion" Type="Self.Promotion" Multiplicity="1" />
-          <End Role="Product_Promotion" Type="Self.Product_Promotion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Promotion">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Product_Promotion">
-              <PropertyRef Name="PromotionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Product_Type">
           <End Role="Type" Type="Self.Type" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -272,6 +216,30 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductPromotion_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductPromotion" Type="Self.ProductPromotion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductPromotion">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductPromotion_Promotion">
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="1" />
+          <End Role="ProductPromotion" Type="Self.ProductPromotion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductPromotion">
+              <PropertyRef Name="PromotionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -289,26 +257,17 @@
         </Association>
         <EntityContainer Name="MobilePhoneSellingModelStoreContainer">
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Customer_Promotion" EntityType="Self.Customer_Promotion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Delivery" EntityType="Self.Delivery" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Product_Promotion" EntityType="Self.Product_Promotion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductPromotion" EntityType="Self.ProductPromotion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Customer_Promotion_Customer" Association="Self.FK_Customer_Promotion_Customer">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="Customer_Promotion" EntitySet="Customer_Promotion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Customer_Promotion_Promotion" Association="Self.FK_Customer_Promotion_Promotion">
-            <End Role="Promotion" EntitySet="Promotion" />
-            <End Role="Customer_Promotion" EntitySet="Customer_Promotion" />
-          </AssociationSet>
           <AssociationSet Name="FK_Delivery_Order" Association="Self.FK_Delivery_Order">
             <End Role="Order" EntitySet="Order" />
             <End Role="Delivery" EntitySet="Delivery" />
@@ -333,24 +292,25 @@
             <End Role="Manufacturer" EntitySet="Manufacturer" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_Promotion_Product" Association="Self.FK_Product_Promotion_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Product_Promotion" EntitySet="Product_Promotion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Promotion_Promotion" Association="Self.FK_Product_Promotion_Promotion">
-            <End Role="Promotion" EntitySet="Promotion" />
-            <End Role="Product_Promotion" EntitySet="Product_Promotion" />
-          </AssociationSet>
           <AssociationSet Name="FK_Product_Type" Association="Self.FK_Product_Type">
             <End Role="Type" EntitySet="Type" />
             <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductPromotion_Product" Association="Self.FK_ProductPromotion_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductPromotion" EntitySet="ProductPromotion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductPromotion_Promotion" Association="Self.FK_ProductPromotion_Promotion">
+            <End Role="Promotion" EntitySet="Promotion" />
+            <End Role="ProductPromotion" EntitySet="ProductPromotion" />
           </AssociationSet>
           <AssociationSet Name="FK_Staff_Position" Association="Self.FK_Staff_Position">
             <End Role="Position" EntitySet="Position" />
             <End Role="Staff" EntitySet="Staff" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MobilePhoneSellingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -370,7 +330,6 @@
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
           <Property Name="IsActivated" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
-          <NavigationProperty Name="Promotions" Relationship="Self.Customer_Promotion" FromRole="Customer" ToRole="Promotion" />
         </EntityType>
         <EntityType Name="Delivery">
           <Key>
@@ -380,9 +339,9 @@
           <Property Name="OrderId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="StaffId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsDelivered" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Delivery_Order" FromRole="Delivery" ToRole="Order" />
           <NavigationProperty Name="Staff" Relationship="Self.FK_Delivery_Staff" FromRole="Delivery" ToRole="Staff" />
-          <Property Name="IsDelivered" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
@@ -400,10 +359,10 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CustomerId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="IsAssigned" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="Deliveries" Relationship="Self.FK_Delivery_Order" FromRole="Order" ToRole="Delivery" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
-          <Property Name="IsAssigned" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -443,7 +402,7 @@
           <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
           <NavigationProperty Name="Type" Relationship="Self.FK_Product_Type" FromRole="Product" ToRole="Type" />
-          <NavigationProperty Name="Promotions" Relationship="Self.Product_Promotion" FromRole="Product" ToRole="Promotion" />
+          <NavigationProperty Name="Promotions" Relationship="Self.ProductPromotion" FromRole="Product" ToRole="Promotion" />
         </EntityType>
         <EntityType Name="Promotion">
           <Key>
@@ -457,8 +416,7 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Customers" Relationship="Self.Customer_Promotion" FromRole="Promotion" ToRole="Customer" />
-          <NavigationProperty Name="Products" Relationship="Self.Product_Promotion" FromRole="Promotion" ToRole="Product" />
+          <NavigationProperty Name="Products" Relationship="Self.ProductPromotion" FromRole="Promotion" ToRole="Product" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
@@ -474,9 +432,9 @@
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="PositionId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="IsBusy" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Deliveries" Relationship="Self.FK_Delivery_Staff" FromRole="Staff" ToRole="Delivery" />
           <NavigationProperty Name="Position" Relationship="Self.FK_Staff_Position" FromRole="Staff" ToRole="Position" />
-          <Property Name="IsBusy" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -592,11 +550,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Customer_Promotion">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
-          <End Role="Promotion" Type="Self.Promotion" Multiplicity="*" />
-        </Association>
-        <Association Name="Product_Promotion">
+        <Association Name="ProductPromotion">
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <End Role="Promotion" Type="Self.Promotion" Multiplicity="*" />
         </Association>
@@ -644,11 +598,7 @@
             <End Role="Type" EntitySet="Types" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="Customer_Promotion" Association="Self.Customer_Promotion">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Promotion" EntitySet="Promotions" />
-          </AssociationSet>
-          <AssociationSet Name="Product_Promotion" Association="Self.Product_Promotion">
+          <AssociationSet Name="ProductPromotion" Association="Self.ProductPromotion">
             <End Role="Product" EntitySet="Products" />
             <End Role="Promotion" EntitySet="Promotions" />
           </AssociationSet>
@@ -679,11 +629,11 @@
           <EntitySetMapping Name="Deliveries">
             <EntityTypeMapping TypeName="MobilePhoneSellingModel.Delivery">
               <MappingFragment StoreEntitySet="Delivery">
-                <ScalarProperty Name="IsDelivered" ColumnName="IsDelivered" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+                <ScalarProperty Name="IsDelivered" ColumnName="IsDelivered" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -698,11 +648,11 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="MobilePhoneSellingModel.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="IsAssigned" ColumnName="IsAssigned" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="IsAssigned" ColumnName="IsAssigned" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -758,7 +708,6 @@
           <EntitySetMapping Name="Staffs">
             <EntityTypeMapping TypeName="MobilePhoneSellingModel.Staff">
               <MappingFragment StoreEntitySet="Staff">
-                <ScalarProperty Name="IsBusy" ColumnName="IsBusy" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Birthday" ColumnName="Birthday" />
@@ -769,6 +718,7 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="PositionId" ColumnName="PositionId" />
                 <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="IsBusy" ColumnName="IsBusy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -791,15 +741,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="Customer_Promotion" TypeName="MobilePhoneSellingModel.Customer_Promotion" StoreEntitySet="Customer_Promotion">
-            <EndProperty Name="Customer">
-              <ScalarProperty Name="Id" ColumnName="CustomerId" />
-            </EndProperty>
-            <EndProperty Name="Promotion">
-              <ScalarProperty Name="Id" ColumnName="PromotionId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="Product_Promotion" TypeName="MobilePhoneSellingModel.Product_Promotion" StoreEntitySet="Product_Promotion">
+          <AssociationSetMapping Name="ProductPromotion" TypeName="MobilePhoneSellingModel.ProductPromotion" StoreEntitySet="ProductPromotion">
             <EndProperty Name="Product">
               <ScalarProperty Name="Id" ColumnName="ProductId" />
             </EndProperty>
