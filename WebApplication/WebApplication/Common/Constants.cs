@@ -21,6 +21,8 @@ namespace WebApplication.Common
         public static string PREFIX_QUESTION = "QUE";
         public static string PREFIX_ACCOUNT = "ACC";
         public static string PREFIX_DELIVERY = "DLV";
+
+        // Email Configuration
         public static string TEMPLATE_EMAIL_REGISTER = "TempleteEmail";
         public static string TEMPLATE_EMAIL_RESET_PASS = "ResetPassword";
 
@@ -32,5 +34,16 @@ namespace WebApplication.Common
         public static string PASSWORD_CHARS_UCASE = "ABCDEFGHJKLMNPQRSTWXYZ";
         public static string PASSWORD_CHARS_NUMERIC = "23456789";
         public static string PASSWORD_CHARS_SPECIAL = "*$-+?_&=!%{}/";
+
+        /// <summary>
+        /// Paypal Configuration
+        /// </summary>
+        /// Account Personal: cuongdvt261@gmail.com | @duvuthacu@
+        /// Account Bussiness: admin_test@localhost.com | @duvuthacu@
+        /// Url login check blance: https://www.sandbox.paypal.com
+        public static string BUSSINESS_EMAIL = "admin_test@localhost.com";
+        public static string URL_RETURN = "http://localhost:1775/Cart/Order";
+        public static string URL_SUBMIT_PAYMENT = "https://www.sandbox.paypal.com/cgi-bin/webscr";
+        public static string TOKEN = "LnfpgO-wVWIYACjMOXlZQucwnLNGJOv_SWPkjsUVT1_dTeSkIWY_qNHXISy";
     }
 }

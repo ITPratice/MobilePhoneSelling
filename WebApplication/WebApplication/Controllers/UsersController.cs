@@ -70,7 +70,8 @@ namespace WebApplication.Controllers
                     Customer _cus = db.Customers.SingleOrDefault(x => x.AccountName == _username && x.Password == _password);
                     if (_cus != null)
                     {
-                        FormsAuthentication.SetAuthCookie(_cus.Name, _remember);
+                        Session["Account"] = _cus;
+                        ViewBag.Account = _cus.Name;
                         return RedirectToAction("Index", "Home");
                     }
                     else
@@ -98,7 +99,7 @@ namespace WebApplication.Controllers
         #region Logout
         public ActionResult Logout()
         {
-            FormsAuthentication.SignOut();
+            Session["Account"] = null;
             return RedirectToAction("Index", "Home");
         }
         #endregion

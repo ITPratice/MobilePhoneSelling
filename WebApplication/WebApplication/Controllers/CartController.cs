@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication.Models;
+using WebApplication.Common;
 
 namespace WebApplication.Controllers
 {
@@ -13,11 +14,11 @@ namespace WebApplication.Controllers
         // GET: Cart
         public List<ShoppingCart> GetShoppingCart()
         {
-            List<ShoppingCart> _lstGioHang = Session["ShoppingCart"] as List<ShoppingCart>;
+            List<ShoppingCart> _lstGioHang = Session["cart"] as List<ShoppingCart>;
             if (_lstGioHang == null)
             {
                 _lstGioHang = new List<ShoppingCart>();
-                Session["ShoppingCart"] = _lstGioHang;
+                Session["cart"] = _lstGioHang;
             }
             return _lstGioHang;
         }
@@ -91,7 +92,7 @@ namespace WebApplication.Controllers
         //Trang giỏ hàng
         public ActionResult ShoppingCart()
         {
-            if (Session["ShoppingCart"] == null)
+            if (Session["cart"] == null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -103,7 +104,7 @@ namespace WebApplication.Controllers
         public int GetQuantity()
         {
             int _tong = 0;
-            List<ShoppingCart> _lstGioHang = Session["ShoppingCart"] as List<ShoppingCart>;
+            List<ShoppingCart> _lstGioHang = Session["cart"] as List<ShoppingCart>;
             if (_lstGioHang != null)
             {
                 _tong = _lstGioHang.Sum(x => x.Quantity);
@@ -115,7 +116,7 @@ namespace WebApplication.Controllers
         public double GetSum()
         {
             double _sum = 0;
-            List<ShoppingCart> _lstGioHang = Session["ShoppingCart"] as List<ShoppingCart>;
+            List<ShoppingCart> _lstGioHang = Session["cart"] as List<ShoppingCart>;
             if (_lstGioHang != null)
             {
                 _sum = _lstGioHang.Sum(x => x.ThanhTien);
@@ -140,7 +141,7 @@ namespace WebApplication.Controllers
         public ActionResult CartPartial()
         {
             List<ShoppingCart> _lstGioHang = GetShoppingCart();
-            if (Session["ShoppingCart"] == null)
+            if (Session["cart"] == null)
             {
                 return PartialView();
             }
@@ -153,7 +154,7 @@ namespace WebApplication.Controllers
         /// <returns></returns>
         public ActionResult EditShoppingCart()
         {
-            if (Session["ShoppingCart"] == null)
+            if (Session["cart"] == null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -161,10 +162,11 @@ namespace WebApplication.Controllers
             return View(_lstCart);
         }
 
+        #region Order
         //Init Order
         public ActionResult Order()
         {
-            if (Session["ShoppingCart"] == null)
+            if (Session["cart"] == null)
             {
                 RedirectToAction("Index", "Home");
             }
@@ -174,7 +176,7 @@ namespace WebApplication.Controllers
             _orderDetails = GetOrderDetails(_order);
             db.Orders.Add(_order);
             db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return View();
         }
 
         /// <summary>
@@ -183,24 +185,24 @@ namespace WebApplication.Controllers
         /// <returns></returns>
         public Order GetOrder()
         {
-            Order _order = new Order(); 
-            //Account _acc = (Account)Session["Account"];     // Get Account follow Session
-            //Customer _customer = db.Customers.SingleOrDefault(x => x.AccountId == _acc.Id);     // Get Customer follow Account           
-            //var _ord = db.Orders.ToList();
-            //string _oldId = "";
-            //if (_ord.Count == 0)
-            //{
-            //    _order.Id = ParamHelper.Instance.GetNewId("", "P");
-            //}
-            //else
-            //{
-            //    var _lstOrder = _ord[_ord.Count - 1];
-            //    _oldId = _lstOrder.Id;
-            //    _order.Id = ParamHelper.Instance.GetNewId(_oldId, "P");
-            //}
-            //_order.CustomerId = _customer.Id;
-            //_order.Date = DateTime.Now;
-            //_order.Deleted = false;
+            Order _order = new Order();
+            Customer _acc = (Customer)Session["Account"]; 
+            Customer _customer = db.Customers.SingleOrDefault(x => x.Id == _acc.Id);         
+            var _ord = db.Orders.ToList();
+            string _oldId = "";
+            if (_ord.Count == 0)
+            {
+                _order.Id = ParamHelper.Instance.GetNewId("", Constants.PREFIX_ORDER);
+            }
+            else
+            {
+                var _lstOrder = _ord[_ord.Count - 1];
+                _oldId = _lstOrder.Id;
+                _order.Id = ParamHelper.Instance.GetNewId(_oldId, Constants.PREFIX_ORDER);
+            }
+            _order.CustomerId = _customer.Id;
+            _order.Date = DateTime.Now;
+            _order.Deleted = false;
             return _order;
         }
 
@@ -224,5 +226,9 @@ namespace WebApplication.Controllers
             }
             return _orderDetail;
         }
+        #endregion
+
+        #region Paypal Payment
+        #endregion
     }
 }

@@ -13,6 +13,12 @@ namespace WebApplication.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            //var _curPromotion = from c in db.Promotions.Where(pr => pr.StartDate.CompareTo(DateTime.Now) <= 0 && pr.EndDate.CompareTo(DateTime.Now) >= 0)
+            //                    select c;
+            //var _custProList = (from c in _curPromotion
+            //                    from p in db.Products.Where(pr => pr.Promotions.Contains(c))
+            //                    select p);
+            //ViewBag.SaleOff = _curPromotion.ToList()[0].SaleOff;
             return View(db.Products.ToList());
         }
 

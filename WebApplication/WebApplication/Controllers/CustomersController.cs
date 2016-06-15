@@ -153,7 +153,8 @@ namespace WebApplication.Controllers
                     _newUser.Password = ParamHelper.Instance.MD5Hash(_customer.Password);
                     _newUser.AccountName = _customer.AccountName;
                     _newUser.Deleted = false;
-                    FormsAuthentication.SetAuthCookie(_newUser.Name, false);
+                    //FormsAuthentication.SetAuthCookie(_newUser.Name, false);
+                    Session["Account"] = _newUser;
                     db.Customers.Add(_newUser);
                     db.SaveChanges();
                     SendEmail(_newUser, Constants.TEMPLATE_EMAIL_REGISTER, "ConfirmationMail", "Customers");

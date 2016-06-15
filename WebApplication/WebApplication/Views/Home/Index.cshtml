@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = Constants.PATH_MASTER_PAGE;
+    //double saleOff = ViewBag.SaleOff;
 }
 @{int count = 0;}
 <div class="col-lg-12 w_content">
@@ -13,6 +14,8 @@
             count++;
             <div class="grid1_of_5">
                 <div class="content_box">
+                    @*@ViewBag.SaleOff*@
+                    @*@Html.Action("GetPromotion", "Products", new { @id = item.Id })*@
                     <a href="@Url.Action("ProductDetails", "Products", new { @id = item.Id })">
                         <img src="@Url.Content(Constants.PATH_IMAGE + "/" + item.Image)" class="img-responsive" alt="" />
                     </a>
@@ -20,7 +23,7 @@
                     <div class="grid_1 simpleCart_shelfItem">
                         <div class="item_add">
                             <span class="item_price">
-                                <h6>@String.Format("{0:0,0 ₫}", @item.Price)</h6>
+                                <h6>@String.Format("{0:$ 0,0}", @item.Price)</h6>
                             </span>
                         </div>
                         <div class="item_add">

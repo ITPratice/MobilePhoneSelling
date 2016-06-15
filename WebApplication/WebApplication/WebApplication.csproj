@@ -320,6 +320,7 @@
     <Content Include="Contents\MasterPage\images\art1.png" />
     <Content Include="Contents\MasterPage\images\bag.png" />
     <Content Include="Contents\MasterPage\images\bag1.png" />
+    <Content Include="Contents\MasterPage\images\btnPaypal.jpg" />
     <Content Include="Contents\MasterPage\images\cart-c.png" />
     <Content Include="Contents\MasterPage\images\close_1.png" />
     <Content Include="Contents\MasterPage\images\d1.jpg" />
@@ -359,6 +360,7 @@
     <Content Include="Contents\MasterPage\js\megamenu.js" />
     <Content Include="Contents\MasterPage\js\menu_jquery.js" />
     <Content Include="Contents\MasterPage\js\simpleCart.min.js" />
+    <Content Include="Contents\MasterPage\mystyle.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -436,6 +438,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManufacturersController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\PaypalPaymentController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\PromotionsController.cs" />
     <Compile Include="Controllers\StaffsController.cs" />
@@ -483,6 +486,7 @@
     <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PayPal.cs" />
     <Compile Include="Models\Position.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
@@ -596,6 +600,9 @@
     <Content Include="Views\Promotions\Index.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
     <Content Include="Views\Promotions\ChooseProducts.cshtml" />
+    <Content Include="Views\Products\GetPromotionPartial.cshtml" />
+    <Content Include="Views\Cart\Order.cshtml" />
+    <Content Include="Views\Cart\ReturnResult.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -605,6 +612,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\PaypalPayment\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

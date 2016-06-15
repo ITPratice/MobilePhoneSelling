@@ -184,6 +184,23 @@ namespace WebApplication.Controllers
         }
         #endregion
 
+        #region Get Promotion of Products
+        public ActionResult GetPromotion(string id)
+        {
+            var promotion = from pr in db.Promotions
+                            where (from p in db.Promotions
+                                   where p.Products.Any(x => x.Id == id)
+                                   select p.Id).Contains(pr.Id)
+                            select pr.Name;
+            if (promotion == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }        
+            return View(promotion);
+        }
+        #endregion
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

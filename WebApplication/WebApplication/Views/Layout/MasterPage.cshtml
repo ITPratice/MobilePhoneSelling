@@ -1,7 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using WebApplication.Models
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Gretong a Ecommerce Category Flat Bootstarp Responsive Website Template | Women :: w3layouts</title>
+    <title>DC Mobile As DCM</title>
     <link href="~/Contents/MasterPage/css/bootstrap.css" rel="stylesheet" />
     <!-- jQuery (necessary JavaScript plugins) -->
     <script src="~/Contents/MasterPage/js/jquery-1.11.1.min.js"></script>
@@ -54,18 +55,7 @@
                     <!-- start header_right -->
                     <div class="header_right">
                         <div class="rgt-bottom">
-                            @if (Request.IsAuthenticated)
-                            {
-                                <div class="reg">                                    
-                                    <a href="@Url.Action("Edit", "Users")">
-                                        @Html.Encode(User.Identity.Name)
-                                    </a>
-                                </div>
-                                <div class="reg">
-                                    @Html.ActionLink("Logout", "Logout", "Users")
-                                </div>
-                            }
-                            else
+                            @if (Session["Account"] == null || Session["Account"].ToString() == "")
                             {
                                 <div class="log">
                                     <div id="loginContainer">
@@ -77,9 +67,24 @@
                                 <div class="reg">
                                     <a href="@Url.Action("Register", "Customers")">Đăng kí</a>
                                 </div>
+
+                            }
+                            else
+                            {
+                                <div class="reg">
+                                    <a href="@Url.Action("Edit", "Users")">
+                                        @{
+                                            Customer cus = (Customer)Session["Account"];
+                                            <span>@cus.Name</span>
+                                        }
+                                    </a>
+                                </div>
+                                <div class="reg">
+                                    @Html.ActionLink("Logout", "Logout", "Users")
+                                </div>
                             }
                             <div class="cart box_1">
-                                    @Html.Action("ShoppingCartPartial", "Cart")
+                                @Html.Action("ShoppingCartPartial", "Cart")
                             </div>
                             <div class="create_btn">
                                 <a href="@Url.Action("ShoppingCart", "Cart")">GIỎ HÀNG</a>
@@ -117,7 +122,7 @@
     <div class="container">
         <div class="women_main">
             <!-- start content -->
-                    @RenderBody()
+            @RenderBody()
             <div class="clearfix"></div>
             <!-- end content -->
         </div>
