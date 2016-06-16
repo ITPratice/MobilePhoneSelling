@@ -23,8 +23,7 @@
     <script src="~/Contents/MasterPage/js/menu_jquery.js"></script>
     <script src="~/Contents/MasterPage/js/simpleCart.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <!--Font awesom-->
     <link href="~/Contents/MainPage/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <script type="text/javascript">
@@ -99,8 +98,8 @@
                                 <div class="reg">
                                     <a href="@Url.Action("Edit", "Users", new { @id = Session["AccId"].ToString() })">
                                         @{
-                                            Customer cus = (Customer)Session["Account"];
-                                            <span>@cus.Name</span>
+                                Customer cus = (Customer)Session["Account"];
+                                <span>@cus.Name</span>
                                         }
                                     </a>
                                 </div>
@@ -131,7 +130,7 @@
                 <ul class="megamenu skyblue">
                     <li class="active grid"><a class="color1" href="@Url.Action("Index", "Home")">Trang chủ</a></li>
                     <li class="grid">
-                        <a class="color2" href="#">Điện thoại</a>
+                        <a class="color2" href="#">Điện thoại</a>             
                         @Html.Action("ManufacturersPartial", "Manufacturers")
                     </li>
                     <li>
