@@ -1,5 +1,7 @@
 ﻿<!DOCTYPE html>
 
+@using WebApplication.Common
+
 <html>
 <head>
     <title>@ViewBag.Title</title>
@@ -8,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <meta name="viewport" content="width=device-width" />
     @* css *@
     <link href="~/Contents/Admin/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Contents/Admin/css/metisMenu.min.css" rel="stylesheet" />
@@ -17,7 +19,7 @@
     <link href="~/Contents/Admin/css/morris.css" rel="stylesheet" />
     <link href="~/Contents/Admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     @RenderSection("Styles", required: false)
-
+    @RenderSection("Scripts", required: false)
     @* script for editor *@
     <script src="~/Contents/Admin/tinymce/js/tinymce/tinymce.min.js"></script>
     <script>tinymce.init({ selector: 'textarea' });</script>
@@ -31,29 +33,40 @@
                 <a class="navbar-brand" href="index.html">DC Mobile</a>
             </div>
             <!-- /.navbar-header -->
-
             <ul class="nav navbar-top-links navbar-left">
-                <li>
-                    @Html.ActionLink("Sản phẩm", "Index", "Products")
-                </li>
-                <li>
-                    @Html.ActionLink("Nhân viên", "Index", "Staffs")
-                </li>
-                <li>
-                    @Html.ActionLink("Khách hàng", "Index", "Customers")
-                </li>
-                <li>
-                    @Html.ActionLink("Đơn hàng", "Index", "Orders")
-                </li>
-                <li>
-                    @Html.ActionLink("Phiếu giao hàng", "Index", "Deliveries")
-                </li>
-                <li>
-                    @Html.ActionLink("Khuyến mãi", "Index", "Promotions")
-                </li>
-                <li>
-                    Thống kê
-                </li>
+                @if (Session[Constants.SESSION_ROLE].Equals("Admin"))
+                {
+                    <li>
+                        @Html.ActionLink("Sản phẩm", "Index", "Products")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Nhân viên", "Index", "Staffs")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Khách hàng", "Index", "Customers")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Khuyến mãi", "Index", "Promotions")
+                    </li>
+                }
+                @if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch"))
+                {
+                    <li>
+                        @Html.ActionLink("Đơn hàng", "Index", "Orders")
+                    </li>
+                }
+                @if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch") || Session[Constants.SESSION_ROLE].Equals("Nhân viên giao hàng"))
+                {
+                    <li>
+                        @Html.ActionLink("Phiếu giao hàng", "Index", "Deliveries")
+                    </li>
+                }
+                @if (Session[Constants.SESSION_ROLE].Equals("Admin"))
+                {
+                    <li>
+                        @Html.ActionLink("Thống kê", "Index", "Statistics")
+                    </li>
+                }
             </ul>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -65,12 +78,9 @@
                         <li>
                             <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <a href="@Url.Action("Logout","Users")"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -87,18 +97,14 @@
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="~/Contents/Admin/js/jquery.min.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="~/Contents/Admin/js/bootstrap.min.js"></script>
-
     <!-- Metis Menu Plugin JavaScript -->
     <script src="~/Contents/Admin/js/metisMenu.min.js"></script>
-
     <!-- Morris Charts JavaScript -->
     <script src="~/Contents/Admin/js/raphael-min.js"></script>
     <script src="~/Contents/Admin/js/morris.min.js"></script>
     <script src="~/Contents/Admin/js/morris-data.js"></script>
-
     <!-- Custom Theme JavaScript -->
     <script src="~/Contents/Admin/js/sb-admin-2.js"></script>
 </body>

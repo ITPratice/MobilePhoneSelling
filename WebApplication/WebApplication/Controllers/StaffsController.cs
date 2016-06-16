@@ -78,7 +78,7 @@ namespace WebApplication.Controllers
                 if (staffs.Count > 0) oldId = staffs[staffs.Count - 1].Id;
                 staff.Id = ParamHelper.Instance.GetNewId(oldId, Constants.PREFIX_STAFF);
                 staff.AccountName = "DCM" + staff.Id.Substring(Constants.PREFIX_ACCOUNT.Length);
-                staff.Password = staff.AccountName;
+                staff.Password = ParamHelper.Instance.MD5Hash(staff.AccountName);
                 db.Staffs.Add(staff);
                 db.SaveChanges();
                 return RedirectToAction("Index");

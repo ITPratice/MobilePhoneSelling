@@ -1,0 +1,89 @@
+﻿@using WebApplication.Common
+
+@{
+    Layout = Constants.PATH_ADMIN_LAYOUT;
+    ViewBag.Title = "Thống kê";
+}
+
+@section Scripts{
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.2.min.js"></script>
+    <script type="text/javascript">
+        function jsonThongKeTheoNSX(handleData) {
+            $.ajax({
+                url: "/Statistics/GetJsonData",
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: true,
+                success: function (result) {
+                    handleData(result);
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+            return false;
+        }
+    </script>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+
+        var manufacturers = [];
+        var count = [];
+        var datas;
+
+        jsonThongKeTheoNSX(function (data) {
+            $.each(data, function (i, item) {
+                manufacturers.push([item.Name].toString());
+                count.push([item.NumberOfProducts]);
+                datas = data; // Dành cho biểu đồ cột
+            });
+            google.setOnLoadCallback(drawChartNSX);
+            google.setOnLoadCallback(drawChart);
+        });
+
+        function drawChartNSX() {
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Name');
+            data.addColumn('number', 'NumberOfProducts');
+
+            data.addRows(manufacturers.length);
+
+            for (var i = 0; i < manufacturers.length; i++) {
+                data.setCell(i, 0, manufacturers[i] + ' (' + count[i] + ' sản phẩm)');
+                data.setCell(i, 1, parseInt(count[i]));
+            }
+            // Set chart options
+            var options = {
+                'title': 'Thống kê số lượng sản phẩm',
+                is3D: true
+            };
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+
+        function drawChart() {
+            var dataArray = [['Nhà sản xuất', 'Số lượng sản phẩm']];
+            $.each(datas, function (i, item) {
+                dataArray.push([item.Name, item.NumberOfProducts]);
+            });
+
+            var data = new google.visualization.arrayToDataTable(dataArray);
+            var options = {
+                title: 'So sánh số lượng sản phẩm',
+                hAxis: { title: 'Nhà sản xuất', titleTextStyle: { color: 'red' } }
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+
+            chart.draw(data, options);
+        }
+    </script>
+}
+
+<div id="piechart" style="width: 900px; height: 500px;"></div>
+<div id="chart_div" style="width: 900px; height: 500px;"></div>

@@ -445,6 +445,7 @@
     <Compile Include="Controllers\PromotionsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\StaffsController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -457,9 +458,11 @@
     </Compile>
     <Compile Include="Models\FileUploadModel.cs" />
     <Compile Include="Common\ParamHelper.cs" />
+    <Compile Include="Models\Lop.cs" />
     <Compile Include="Models\Manufacturer.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ManufacturerStatistic.cs" />
     <Compile Include="Models\Metadata\Customer.metadata.cs" />
     <Compile Include="Models\Metadata\Manufacturer.metadata.cs" />
     <Compile Include="Models\Metadata\Order.metadata.cs" />
@@ -607,6 +610,9 @@
     <Content Include="Views\Users\ChangePassword.cshtml" />
     <Content Include="Views\Home\AjaxSearch.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\Cart\ReturnResult.cshtml" />
+    <Content Include="Views\Statistics\Index.cshtml" />
+    <Content Include="Views\Users\ChangeStaffPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

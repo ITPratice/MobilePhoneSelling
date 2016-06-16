@@ -7,8 +7,8 @@ using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication.Models;
-using Microsoft.AspNet.Identity;
 using System.Web.Security;
+using WebApplication.Common;
 
 namespace WebApplication.Controllers
 {
@@ -87,6 +87,21 @@ namespace WebApplication.Controllers
             return View();
         }
 
+        public ActionResult ChangeStaffPassword(string id)
+        {
+            Staff staff = db.Staffs.Find(id);
+            return View(staff);
+        }
+
+        [HttpPost]
+        public ActionResult ChangeStaffPassword(string oldPassword, string newPassword)
+        {
+            Staff staff = (Staff)Session[Constants.SESSION_ACCOUNT];
+            Session[Constants.SESSION_ACCOUNT] = null;
+            Session[Constants.SESSION_ACCOUNT_ID] = null;
+            return RedirectToAction("Login");
+        }
+
         #region Login
         [HttpGet]
         public ActionResult Login()
@@ -109,14 +124,13 @@ namespace WebApplication.Controllers
                     Customer _cus = db.Customers.SingleOrDefault(x => x.AccountName == _username && x.Password == _password);
                     if (_cus != null)
                     {
-                        Session["Account"] = _cus;
-                        Session["AccId"] = _cus.Id;
-                        ViewBag.Account = _cus.Name;
+                        Session[Constants.SESSION_ACCOUNT] = _cus;
+                        Session[Constants.SESSION_ACCOUNT_ID] = _cus.Id;
                         return RedirectToAction("Index", "Home");
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Thông tin không chính xác !");
+                        ModelState.AddModelError("", "Thông tin không chính xác!");
                     }
                 }
                 else
@@ -124,11 +138,32 @@ namespace WebApplication.Controllers
                     Staff _staff = db.Staffs.SingleOrDefault(x => x.AccountName == _username && x.Password == _password);
                     if (_staff != null)
                     {
-                        return RedirectToAction("Index", "Products");
+                        Session[Constants.SESSION_ACCOUNT] = _staff;
+                        Session[Constants.SESSION_ACCOUNT_ID] = _staff.Id;
+                        //if (_staff.Password.Equals(ParamHelper.Instance.MD5Hash(_staff.AccountName)))
+                        //{
+                        //    return RedirectToAction("ChangeStaffPassword", "Users", new { id = _staff.Id });
+                        //}
+                        //else
+                        //{
+                            Session["Role"] = _staff.Position.Name;
+                            if (_staff.Position.Name.Equals("Admin"))
+                            {
+                                return RedirectToAction("Index", "Products");
+                            }
+                            else if (_staff.Position.Name.Equals("Nhân viên giao dịch"))
+                            {
+                                return RedirectToAction("Index", "Orders");
+                            }
+                            else if (_staff.Position.Name.Equals("Nhân viên giao hàng"))
+                            {
+                                return RedirectToAction("Index", "Deliveries");
+                            }
+                        //}
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Login fail");
+                        ModelState.AddModelError("", "Đăng nhập thất bại!");
                     }
                 }
             }

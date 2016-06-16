@@ -45,5 +45,9 @@ namespace WebApplication.Common
         public static string URL_RETURN = "http://localhost:1775/Cart/Order";
         public static string URL_SUBMIT_PAYMENT = "https://www.sandbox.paypal.com/cgi-bin/webscr";
         public static string TOKEN = "LnfpgO-wVWIYACjMOXlZQucwnLNGJOv_SWPkjsUVT1_dTeSkIWY_qNHXISy";
+
+        public static string SESSION_ACCOUNT = "Account";
+        public static string SESSION_ACCOUNT_ID = "AccId";
+        public static string SESSION_ROLE = "Role";
     }
 }
