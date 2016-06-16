@@ -57,6 +57,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="PagedList">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -104,6 +105,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -486,7 +488,7 @@
     <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PayPal.cs" />
+    <Compile Include="Models\Paypal.cs" />
     <Compile Include="Models\Position.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
@@ -549,7 +551,7 @@
     <Content Include="Contents\MainPage\font-awesome\scss\_screen-reader.scss" />
     <Content Include="Contents\MainPage\font-awesome\scss\_stacked.scss" />
     <Content Include="Contents\MainPage\font-awesome\scss\_variables.scss" />
-    <Content Include="Views\Manufacturers\ManufacturersPartial.cshtml" />
+    <Content Include="Views\Layout\Manufacturers\ManufacturersPartial.cshtml" />
     <Content Include="Views\Cart\ShoppingCartPartial.cshtml" />
     <Content Include="Views\Cart\ShoppingCart.cshtml" />
     <Content Include="Views\Cart\CartPartial.cshtml" />
@@ -588,7 +590,7 @@
     <Content Include="Views\Customers\ForgetPassword.cshtml" />
     <Content Include="Views\Customers\ForgetPasswordStep2.cshtml" />
     <Content Include="Views\Customers\ResetPassword.cshtml" />
-    <Content Include="Views\Manufacturers\ProductsByManufacturerId.cshtml" />
+    <Content Include="Views\Layout\Manufacturers\ProductsByManufacturerId.cshtml" />
     <Content Include="Views\Products\ProductDetails.cshtml" />
     <Content Include="Views\Emails\Web.config" />
     <Content Include="Views\Emails\_ViewStart.cshtml" />
@@ -600,9 +602,10 @@
     <Content Include="Views\Promotions\Index.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
     <Content Include="Views\Promotions\ChooseProducts.cshtml" />
-    <Content Include="Views\Products\GetPromotionPartial.cshtml" />
     <Content Include="Views\Cart\Order.cshtml" />
-    <Content Include="Views\Cart\ReturnResult.cshtml" />
+    <Content Include="Views\Manufacturers\ManufacturersPartial.cshtml" />
+    <Content Include="Views\Manufacturers\ProductsByManufacturerId.cshtml" />
+    <Content Include="Views\Users\ChangePassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -164,19 +164,27 @@ namespace WebApplication.Controllers
 
         #region Order
         //Init Order
-        public ActionResult Order()
+        public ActionResult Order(Order _order)
         {
             if (Session["cart"] == null)
             {
                 RedirectToAction("Index", "Home");
             }
-            Order _order = new Order();
-            OrderDetail _orderDetails = new OrderDetail();
-            _order = GetOrder();
-            _orderDetails = GetOrderDetails(_order);
-            db.Orders.Add(_order);
-            db.SaveChanges();
-            return View();
+            Paypal pp = new Paypal();
+            string strReturn = pp.GetPayPalResponse(Request.QueryString["tx"]);
+            ViewBag.tx = Request.QueryString["tx"];
+            if (ViewBag.tx == null)
+                return HttpNotFound();
+            else
+            {
+                OrderDetail _orderDetails = new OrderDetail();
+                _order = GetOrder();
+                _orderDetails = GetOrderDetails(_order);
+                db.Orders.Add(_order);
+                db.SaveChanges();
+                Session["cart"] = null;
+                return View();
+            }
         }
 
         /// <summary>

@@ -155,6 +155,7 @@ namespace WebApplication.Controllers
                     _newUser.Deleted = false;
                     //FormsAuthentication.SetAuthCookie(_newUser.Name, false);
                     Session["Account"] = _newUser;
+                    Session["AccId"] = _newUser.Id;
                     db.Customers.Add(_newUser);
                     db.SaveChanges();
                     SendEmail(_newUser, Constants.TEMPLATE_EMAIL_REGISTER, "ConfirmationMail", "Customers");

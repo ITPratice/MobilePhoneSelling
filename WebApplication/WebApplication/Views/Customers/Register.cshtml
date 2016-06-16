@@ -5,7 +5,7 @@
     Layout = "~/Views/Layout/MasterPage.cshtml";
 }
 
-@if (Request.IsAuthenticated)
+@if (Session["Account"] != null)
 {
     @Html.ActionLink("Trang chủ", "Index", "Home")
 }
@@ -30,7 +30,7 @@ else
                     </div>
                     <div>
                         <label>
-                            @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { placeholder = "Ngày sinh", type = "date" } })
+                            @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { placeholder = "Ngày sinh", type = "time" } })
                         </label>
                     </div>
                     <div>

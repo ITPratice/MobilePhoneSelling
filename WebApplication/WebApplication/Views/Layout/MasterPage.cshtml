@@ -72,7 +72,7 @@
                             else
                             {
                                 <div class="reg">
-                                    <a href="@Url.Action("Edit", "Users")">
+                                    <a href="@Url.Action("Edit", "Users", new { @id = Session["AccId"].ToString() })">
                                         @{
                                             Customer cus = (Customer)Session["Account"];
                                             <span>@cus.Name</span>
@@ -87,7 +87,7 @@
                                 @Html.Action("ShoppingCartPartial", "Cart")
                             </div>
                             <div class="create_btn">
-                                <a href="@Url.Action("ShoppingCart", "Cart")">GIỎ HÀNG</a>
+                                <a href="@Url.Action("ShoppingCart", "Cart")">KIỂM TRA</a>
                             </div>
                             <div class="clearfix"> </div>
                         </div>

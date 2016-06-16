@@ -1,9 +1,15 @@
 ﻿@using WebApplication.Models
+@using WebApplication.Common
 @model Order
 @{
     ViewBag.Title = "Order";
     Layout = "~/Views/Layout/MasterPage.cshtml";
 }
 Thành công !!
+<br />
 <h2>Order</h2>
+<br />
 
+<input type="hidden" name="cmd" value="_notify-synch">
+<input type="hidden" name="tx" value="@ViewBag.tx">
+<input type="hidden" name="at" value="@Url.Content(Constants.TOKEN)">
