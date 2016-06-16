@@ -1,4 +1,5 @@
 ﻿@using WebApplication.Models
+@using WebApplication.Common
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,8 +22,33 @@
     <script>$(document).ready(function () { $(".megamenu").megamenu(); });</script>
     <script src="~/Contents/MasterPage/js/menu_jquery.js"></script>
     <script src="~/Contents/MasterPage/js/simpleCart.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
     <!--Font awesom-->
     <link href="~/Contents/MainPage/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#txtTimKiem").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Home/AjaxSearch",
+                        type: "POST",
+                        dataType: "json",
+                        data: { keyword: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.Name, value: item.Name };
+                            }))
+                        }
+                    })
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+        })
+    </script>
 </head>
 <body>
     <!-- header_top -->
@@ -67,7 +93,6 @@
                                 <div class="reg">
                                     <a href="@Url.Action("Register", "Customers")">Đăng kí</a>
                                 </div>
-
                             }
                             else
                             {
@@ -92,10 +117,11 @@
                             <div class="clearfix"> </div>
                         </div>
                         <div class="search">
-                            <form>
-                                <input type="text" value="" placeholder="search...">
+                            @using (Html.BeginForm("Search", "Search", FormMethod.Post))
+                            {
+                                @Html.TextBox("txtTimKiem", "", htmlAttributes: new { @placeholder = "Nhập vào từ khóa cần tìm ..." })
                                 <input type="submit" value="">
-                            </form>
+                            }
                         </div>
                         <div class="clearfix"> </div>
                     </div>
@@ -103,7 +129,7 @@
                 </div>
                 <!-- start header menu -->
                 <ul class="megamenu skyblue">
-                    <li class="active grid"><a class="color1" href="index.html">Trang chủ</a></li>
+                    <li class="active grid"><a class="color1" href="@Url.Action("Index", "Home")">Trang chủ</a></li>
                     <li class="grid">
                         <a class="color2" href="#">Điện thoại</a>
                         @Html.Action("ManufacturersPartial", "Manufacturers")

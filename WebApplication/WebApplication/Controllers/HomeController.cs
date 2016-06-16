@@ -26,5 +26,20 @@ namespace WebApplication.Controllers
         {
             return PartialView();
         }
+
+        [HttpGet]
+        public ActionResult AjaxSearch()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult AjaxSearch(string keyword)
+        {
+            var _prodQuery = (from n in db.Products
+                              where n.Name.StartsWith(keyword)
+                              select new { n.Name });
+            return Json(_prodQuery, JsonRequestBehavior.AllowGet);
+        }
     }
 }

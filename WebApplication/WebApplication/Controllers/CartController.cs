@@ -97,6 +97,7 @@ namespace WebApplication.Controllers
                 return RedirectToAction("Index", "Home");
             }
             List<ShoppingCart> _lstGioHang = GetShoppingCart();
+            ViewBag.TongTien = GetSum();
             return View(_lstGioHang);
         }
 
