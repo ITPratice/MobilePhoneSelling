@@ -13,13 +13,8 @@ namespace WebApplication.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            //var _curPromotion = from c in db.Promotions.Where(pr => pr.StartDate.CompareTo(DateTime.Now) <= 0 && pr.EndDate.CompareTo(DateTime.Now) >= 0)
-            //                    select c;
-            //var _custProList = (from c in _curPromotion
-            //                    from p in db.Products.Where(pr => pr.Promotions.Contains(c))
-            //                    select p);
-            //ViewBag.SaleOff = _curPromotion.ToList()[0].SaleOff;
-            return View(db.Products.ToList());
+            var product = from p in db.Products.Where(p => p.Deleted != true) select p;
+            return View(product.ToList());
         }
 
         public PartialViewResult FacebookChatPartial()
@@ -37,7 +32,7 @@ namespace WebApplication.Controllers
         public JsonResult AjaxSearch(string keyword)
         {
             var _prodQuery = (from n in db.Products
-                              where n.Name.StartsWith(keyword)
+                              where n.Name.StartsWith(keyword) && n.Deleted != true
                               select new { n.Name });
             return Json(_prodQuery, JsonRequestBehavior.AllowGet);
         }

@@ -88,11 +88,10 @@ namespace WebApplication.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Customer customer = db.Customers.Find(id);
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
+            if (customer == null) return HttpNotFound();
             customer.Deleted = true;
+            customer.Account.Deleted = true;
+            db.Entry(customer.Account).State = EntityState.Modified;
             db.Entry(customer).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -110,6 +109,8 @@ namespace WebApplication.Controllers
                 return HttpNotFound();
             }
             customer.Deleted = false;
+            customer.Account.Deleted = false;
+            db.Entry(customer.Account).State = EntityState.Modified;
             db.Entry(customer).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -42,21 +42,6 @@ namespace WebApplication.Controllers
             return View(staffs.ToPagedList(pageNumber, pageSize));
         }
 
-        // GET: Staffs/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Staff staff = db.Staffs.Find(id);
-            if (staff == null)
-            {
-                return HttpNotFound();
-            }
-            return View(staff);
-        }
-
         // GET: Staffs/Create
         public ActionResult Create()
         {
@@ -145,6 +130,8 @@ namespace WebApplication.Controllers
                 return HttpNotFound();
             }
             staff.Deleted = true;
+            staff.Account.Deleted = true;
+            db.Entry(staff.Account).State = EntityState.Modified;
             db.Entry(staff).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
