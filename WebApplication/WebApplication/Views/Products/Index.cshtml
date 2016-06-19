@@ -91,16 +91,17 @@
                                     @if (!item.Deleted)
                                     {
                                         <td class="row-item">
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                            @Html.ActionLink("Sửa đổi", "Edit", new { id = item.Id }) |
+                                            @Html.ActionLink("Loại bỏ",
+                                                         "Delete",
+                                                         new { id = item.Id },
+                                                         new { onclick = "return confirm('Bạn có thực sự muốn loại bỏ sản phẩm này không?')" })
                                         </td>
                                     }
                                     else
                                     {
                                         <td class="row-item">
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                            @Html.ActionLink("Details", "Details", new { id = item.Id })
+                                            @Html.ActionLink("Sửa đổi", "Edit", new { id = item.Id })
                                         </td>
                                     }
                                 </tr>

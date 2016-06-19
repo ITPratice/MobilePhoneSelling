@@ -21,6 +21,8 @@ namespace WebApplication.Common
         public static string PREFIX_QUESTION = "QUE";
         public static string PREFIX_ACCOUNT = "ACC";
         public static string PREFIX_DELIVERY = "DLV";
+        public static string PREFIX_POSITION = "POS";
+        public static string PREFIX_STAFF_ACCOUNT_NAME = "DCM";
 
         // Email Configuration
         public static string TEMPLATE_EMAIL_REGISTER = "TempleteEmail";

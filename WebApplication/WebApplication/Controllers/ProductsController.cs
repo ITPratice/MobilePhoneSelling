@@ -44,19 +44,6 @@ namespace WebApplication.Controllers
         }
 
         #region Admin
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
-        }
 
         [HttpGet]
         public ActionResult Create()
@@ -148,17 +135,12 @@ namespace WebApplication.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            Product product = db.Products.Find(id);
-            product.Deleted = true;
-            db.Entry(product).State = EntityState.Modified;
-            db.SaveChanges();
+            else
+            {
+                product.Deleted = true;
+                db.Entry(product).State = EntityState.Modified;
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
         #endregion

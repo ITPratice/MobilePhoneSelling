@@ -450,6 +450,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account.cs">
+      <DependentUpon>MobileSellingModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Customer.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
@@ -463,6 +466,7 @@
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManufacturerStatistic.cs" />
+    <Compile Include="Models\Metadata\Account.metadata.cs" />
     <Compile Include="Models\Metadata\Customer.metadata.cs" />
     <Compile Include="Models\Metadata\Manufacturer.metadata.cs" />
     <Compile Include="Models\Metadata\Order.metadata.cs" />
@@ -562,8 +566,6 @@
     <Content Include="Views\Home\FacebookChatPartial.cshtml" />
     <Content Include="Views\Cart\EditShoppingCart.cshtml" />
     <Content Include="Views\Products\Create.cshtml" />
-    <Content Include="Views\Products\Delete.cshtml" />
-    <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\FileUpload\Index.cshtml" />

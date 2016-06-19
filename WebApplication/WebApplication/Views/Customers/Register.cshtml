@@ -30,7 +30,7 @@ else
                     </div>
                     <div>
                         <label>
-                            @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { placeholder = "Ngày sinh", type = "time" } })
+                            @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { placeholder = "Ngày sinh", type = "date" } })
                         </label>
                     </div>
                     <div>
@@ -50,12 +50,12 @@ else
                     </div>
                     <div>
                         <label>
-                            @Html.EditorFor(model => model.AccountName, new { htmlAttributes = new { placeholder = "Tên tài khoản", type = "text" } })
+                            <input type="text" name="accountName" placeholder="Tên tài khoản"/>
                         </label>
                     </div>
                     <div>
                         <label>
-                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "Mật khẩu", type = "password" } })
+                            <input type="password" name="password" placeholder="Mật khẩu"/>
                         </label>
                     </div>
                     <div>

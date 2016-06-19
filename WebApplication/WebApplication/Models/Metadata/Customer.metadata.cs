@@ -22,10 +22,6 @@ namespace WebApplication.Models
             public string PhoneNumber { get; set; }
             [Display(Name = "Số tài khoản ngân hàng")]
             public string BankAccount { get; set; }
-            [Display(Name = "Tên đăng nhập")]
-            public string AccountName { get; set; }
-            [Display(Name = "Mật khẩu")]
-            public string Password { get; set; }
             [Display(Name = "Loại bỏ")]
             public bool Deleted { get; set; }
             [Display(Name = "Đã kích hoạt")]

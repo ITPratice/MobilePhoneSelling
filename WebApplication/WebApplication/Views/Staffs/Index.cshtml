@@ -57,10 +57,7 @@
                                     @Html.DisplayNameFor(model => model.First().PositionId)
                                 </th>
                                 <th class="header-item">
-                                    @Html.DisplayNameFor(model => model.First().AccountName)
-                                </th>
-                                <th class="header-item">
-                                    @Html.DisplayNameFor(model => model.First().Password)
+                                    @Html.DisplayNameFor(model => model.First().Account.Name)
                                 </th>
                                 <th class="header-item">
                                     @Html.DisplayNameFor(model => model.First().Deleted)
@@ -91,10 +88,7 @@
                                         @Html.DisplayFor(modelItem => item.Position.Name)
                                     </td>
                                     <td class="row-item">
-                                        @Html.DisplayFor(modelItem => item.AccountName)
-                                    </td>
-                                    <td class="row-item">
-                                        @Html.DisplayFor(modelItem => item.Password)
+                                        @Html.DisplayFor(modelItem => item.Account.Name)
                                     </td>
                                     <td class="row-item">
                                         @Html.DisplayFor(modelItem => item.Deleted)

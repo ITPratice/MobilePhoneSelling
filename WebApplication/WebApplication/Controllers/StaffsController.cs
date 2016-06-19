@@ -73,12 +73,21 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                List<Staff> staffs = db.Staffs.ToList();
-                string oldId = "";
-                if (staffs.Count > 0) oldId = staffs[staffs.Count - 1].Id;
-                staff.Id = ParamHelper.Instance.GetNewId(oldId, Constants.PREFIX_STAFF);
-                staff.AccountName = "DCM" + staff.Id.Substring(Constants.PREFIX_ACCOUNT.Length);
-                staff.Password = ParamHelper.Instance.MD5Hash(staff.AccountName);
+                List<Staff> staffs = db.Staffs.OrderBy(s=>s.Id).ToList();
+                string oldStaffId = "";
+                if (staffs.Count > 0) oldStaffId = staffs[staffs.Count - 1].Id;
+                staff.Id = ParamHelper.Instance.GetNewId(oldStaffId, Constants.PREFIX_STAFF);
+                string oldAccountId = "";
+                List<Account> accounts = db.Accounts.OrderBy(a=>a.Id).ToList();
+                if (accounts.Count > 0) oldAccountId = accounts[accounts.Count - 1].Id;
+                Account account = new Account();
+                account.Id = ParamHelper.Instance.GetNewId(oldAccountId, Constants.PREFIX_ACCOUNT);
+                account.Name = Constants.PREFIX_STAFF_ACCOUNT_NAME + 
+                    account.Id.Substring(Constants.PREFIX_ACCOUNT.Length);
+                account.Password = ParamHelper.Instance.MD5Hash(account.Name);
+                db.Accounts.Add(account);
+                db.SaveChanges();
+                staff.AccountId = account.Id;
                 db.Staffs.Add(staff);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -69,7 +69,7 @@ namespace WebApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Birthday,Address,PhoneNumber,Email,BankAccount,AccountName,Password,Deleted")] Customer customer)
+        public ActionResult Edit(Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -133,12 +133,12 @@ namespace WebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(Customer _customer)
+        public ActionResult Register(Customer _customer, string accountName, string password)
         {
             if (ModelState.IsValid)
             {
                 var _newUser = db.Customers.Create();
-                if (db.Customers.Any(x => x.AccountName == _customer.AccountName))
+                if (db.Accounts.Any(x => x.Name == accountName))
                 {
                     ModelState.AddModelError("", "Tài khoản đã được sử dụng");
                 }
@@ -150,12 +150,21 @@ namespace WebApplication.Controllers
                     _newUser.PhoneNumber = _customer.PhoneNumber;
                     _newUser.Address = _customer.Address;
                     _newUser.Email = _customer.Email;
-                    _newUser.Password = ParamHelper.Instance.MD5Hash(_customer.Password);
-                    _newUser.AccountName = _customer.AccountName;
                     _newUser.Deleted = false;
+                    Account account = new Account();
+                    List<Account> accounts = db.Accounts.OrderBy(a => a.Id).ToList();
+                    string oldAccountId = "";
+                    if (accounts.Count > 0) oldAccountId = accounts[accounts.Count - 1].Id;
+                    account.Id = ParamHelper.Instance.GetNewId(oldAccountId, Constants.PREFIX_ACCOUNT);
+                    account.Name = accountName;
+                    account.Password = ParamHelper.Instance.MD5Hash(password);
+                    db.Accounts.Add(account);
+                    db.SaveChanges();
+                    _newUser.AccountId = account.Id;
                     //FormsAuthentication.SetAuthCookie(_newUser.Name, false);
-                    Session["Account"] = _newUser;
-                    Session["AccId"] = _newUser.Id;
+                    Session[Constants.SESSION_ACCOUNT] = _newUser;
+                    Session[Constants.SESSION_ACCOUNT_ID] = _newUser.Id;
+                    Session[Constants.SESSION_ROLE] = "Khách hàng";
                     db.Customers.Add(_newUser);
                     db.SaveChanges();
                     SendEmail(_newUser, Constants.TEMPLATE_EMAIL_REGISTER, "ConfirmationMail", "Customers");
@@ -242,7 +251,7 @@ namespace WebApplication.Controllers
                 {
                     string _newPass = ParamHelper.Instance.GeneratePassword(8, 10);
                     ViewBag.NewPassword = _newPass;
-                    _customer.Password = ParamHelper.Instance.MD5Hash(_newPass);
+                    _customer.Account.Password = ParamHelper.Instance.MD5Hash(_newPass);
                     db.Entry(_customer).State = EntityState.Modified;
                     db.SaveChanges();
                     return View();
@@ -284,7 +293,7 @@ namespace WebApplication.Controllers
             string confirm = Url.Action(actionName, controllerName, new { token = _cus.Id }, Request.Url.Scheme);
             dynamic email = new Email(_template);
             email.To = _cus.Email;
-            email.UserName = _cus.AccountName;
+            email.UserName = _cus.Account.Name;
             email.ConfirmationToken = confirm;
             email.Send();
         }
