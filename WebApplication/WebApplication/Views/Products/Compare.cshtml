@@ -1,0 +1,42 @@
+﻿@using WebApplication.Models
+@using WebApplication.Common
+@model List<ProductPartial>
+@{
+    ViewBag.Title = "Compare";
+    Layout = "~/Views/Layout/MasterPage.cshtml";
+}
+
+<table class="table">
+    <thead class="thead-default">
+        <tr>
+            <th scope="row">Tên</th>
+            @foreach (var item in Model)
+            {
+                <th>@item.Product.Name</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">Hệ điều hành</th>
+            @foreach (var item in Model)
+            {
+                <td>@item.OS</td>
+            }
+        </tr>
+        <tr>
+            <th scope="row">Kích thước màn hình</th>
+            @foreach (var item in Model)
+            {
+                <td>@item.ScreenSize</td>
+            }
+        </tr>
+        <tr>
+            <th scope="row">CPU</th>
+            @foreach (var item in Model)
+            {
+                <td>@item.CPU</td>
+            }
+        </tr>
+    </tbody>
+</table>

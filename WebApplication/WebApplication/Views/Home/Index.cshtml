@@ -6,6 +6,7 @@
     Layout = Constants.PATH_MASTER_PAGE;
 }
 @{int count = 0;}
+@Html.ActionLink("Compare", "Compare", "Products")
 <div class="col-lg-12 w_content">
     <div class="grids_of_5">
         @foreach (var item in Model)
@@ -26,6 +27,9 @@
                         <div class="item_add">
                             <span class="item_price">
                                 <a href="@Url.Action("AddShoppongCart", "Cart", new { @_idProducts = item.Id, @_strUrl = Request.Url.ToString() })">Thêm vào giỏ hàng</a>
+                            </span>
+                            <span class="item_price">
+                                <a href="@Url.Action("AddProducts", "Products", new { @ProductID = item.Id, @_strUrl = Request.Url.ToString() })">Thêm vào giỏ hàng</a>
                             </span>
                         </div>
                     </div>

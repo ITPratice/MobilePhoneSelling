@@ -28,6 +28,8 @@
         <AssociationConnector Association="MobilePhoneSellingModel.FK_Staff_Position" ManuallyRouted="false" />
         <AssociationConnector Association="MobilePhoneSellingModel.FK_Product_Type" ManuallyRouted="false" />
         <AssociationConnector Association="MobilePhoneSellingModel.ProductPromotion" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MobilePhoneSellingModel.ProductPartial" Width="1.5" PointX="7.25" PointY="3.625" />
+        <AssociationConnector Association="MobilePhoneSellingModel.FK_ProductPartial_Product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

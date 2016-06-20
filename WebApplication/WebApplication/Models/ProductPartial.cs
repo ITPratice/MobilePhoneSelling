@@ -15,24 +15,30 @@ namespace WebApplication.Models
 using System;
     using System.Collections.Generic;
     
-public partial class Delivery
+public partial class ProductPartial
 {
 
-    public string Id { get; set; }
+    public string ProductID { get; set; }
 
-    public string OrderId { get; set; }
+    public string ScreenSize { get; set; }
 
-    public System.DateTime Date { get; set; }
+    public string OS { get; set; }
 
-    public string StaffId { get; set; }
+    public string Camera1 { get; set; }
 
-    public bool IsDelivered { get; set; }
+    public string Camera2 { get; set; }
+
+    public string CPU { get; set; }
+
+    public string Ram { get; set; }
+
+    public string InterMemory { get; set; }
+
+    public string Connection { get; set; }
 
 
 
-    public virtual Order Order { get; set; }
-
-    public virtual Staff Staff { get; set; }
+    public virtual Product Product { get; set; }
 
 }
 

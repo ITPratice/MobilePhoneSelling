@@ -503,6 +503,9 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductPartial.cs">
+      <DependentUpon>MobileSellingModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Promotion.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
@@ -615,6 +618,7 @@
     <Content Include="Views\Cart\ReturnResult.cshtml" />
     <Content Include="Views\Statistics\Index.cshtml" />
     <Content Include="Views\Users\ChangeStaffPassword.cshtml" />
+    <Content Include="Views\Products\Compare.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

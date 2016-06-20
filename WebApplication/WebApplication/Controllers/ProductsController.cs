@@ -178,8 +178,49 @@ namespace WebApplication.Controllers
             {
                 Response.StatusCode = 404;
                 return null;
-            }        
+            }
             return View(promotion);
+        }
+        #endregion
+
+        #region Compare Products
+        public List<Product> GetProducts()
+        {
+            List<Product> _lstProducts = Session["compare"] as List<Product>;
+            if (_lstProducts == null)
+            {
+                _lstProducts = new List<Product>();
+                Session["compare"] = _lstProducts;
+            }
+            return _lstProducts;
+        }
+
+        public ActionResult AddProducts(string ProductID, string _strUrl)
+        {
+            Product _products = db.Products.SingleOrDefault(x => x.Id == ProductID);
+            if (_products == null)
+            {
+                return HttpNotFound();
+            }
+            List<Product> _lstProducts = GetProducts();
+            _lstProducts.Add(_products);
+            return Redirect(_strUrl);
+        }
+
+        public ActionResult Compare()
+        {
+            if (Session["compare"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            List<Product> _lstProducts = GetProducts();
+            List<ProductPartial> _lst = new List<ProductPartial>();
+            foreach(var item in _lstProducts)
+            {
+                ProductPartial partial = db.ProductPartials.Single(p => p.ProductID == item.Id);
+                _lst.Add(partial);
+            }
+            return View(_lst);
         }
         #endregion
 

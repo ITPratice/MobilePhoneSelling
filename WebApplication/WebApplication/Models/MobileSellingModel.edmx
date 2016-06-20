@@ -89,6 +89,20 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="ProductPartial">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ScreenSize" Type="varchar(max)" />
+          <Property Name="OS" Type="varchar(max)" />
+          <Property Name="Camera1" Type="varchar(max)" />
+          <Property Name="Camera2" Type="varchar(max)" />
+          <Property Name="CPU" Type="varchar(max)" />
+          <Property Name="Ram" Type="varchar(max)" />
+          <Property Name="InterMemory" Type="varchar(max)" />
+          <Property Name="Connection" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="ProductPromotion">
           <Key>
             <PropertyRef Name="ProductId" />
@@ -238,6 +252,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductPartial_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductPartial" Type="Self.ProductPartial" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductPartial">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductPromotion_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="ProductPromotion" Type="Self.ProductPromotion" Multiplicity="*" />
@@ -295,6 +321,7 @@
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductPartial" EntityType="Self.ProductPartial" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductPromotion" EntityType="Self.ProductPromotion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
@@ -331,6 +358,10 @@
           <AssociationSet Name="FK_Product_Type" Association="Self.FK_Product_Type">
             <End Role="Type" EntitySet="Type" />
             <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductPartial_Product" Association="Self.FK_ProductPartial_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductPartial" EntitySet="ProductPartial" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductPromotion_Product" Association="Self.FK_ProductPromotion_Product">
             <End Role="Product" EntitySet="Product" />
@@ -453,6 +484,7 @@
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
           <NavigationProperty Name="Type" Relationship="Self.FK_Product_Type" FromRole="Product" ToRole="Type" />
           <NavigationProperty Name="Promotions" Relationship="Self.ProductPromotion" FromRole="Product" ToRole="Promotion" />
+          <NavigationProperty Name="ProductPartial" Relationship="MobilePhoneSellingModel.FK_ProductPartial_Product" FromRole="Product" ToRole="ProductPartial" />
         </EntityType>
         <EntityType Name="Promotion">
           <Key>
@@ -685,7 +717,39 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="Promotion" EntitySet="Promotions" />
           </AssociationSet>
+          <EntitySet Name="ProductPartials" EntityType="MobilePhoneSellingModel.ProductPartial" />
+          <AssociationSet Name="FK_ProductPartial_Product" Association="MobilePhoneSellingModel.FK_ProductPartial_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductPartial" EntitySet="ProductPartials" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="ProductPartial">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ScreenSize" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Camera1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Camera2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CPU" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Ram" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="InterMemory" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Connection" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Product" Relationship="MobilePhoneSellingModel.FK_ProductPartial_Product" FromRole="ProductPartial" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_ProductPartial_Product">
+          <End Type="MobilePhoneSellingModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="MobilePhoneSellingModel.ProductPartial" Role="ProductPartial" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductPartial">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -840,6 +904,21 @@
               <ScalarProperty Name="Id" ColumnName="PromotionId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="ProductPartials">
+            <EntityTypeMapping TypeName="MobilePhoneSellingModel.ProductPartial">
+              <MappingFragment StoreEntitySet="ProductPartial">
+                <ScalarProperty Name="Connection" ColumnName="Connection" />
+                <ScalarProperty Name="InterMemory" ColumnName="InterMemory" />
+                <ScalarProperty Name="Ram" ColumnName="Ram" />
+                <ScalarProperty Name="CPU" ColumnName="CPU" />
+                <ScalarProperty Name="Camera2" ColumnName="Camera2" />
+                <ScalarProperty Name="Camera1" ColumnName="Camera1" />
+                <ScalarProperty Name="OS" ColumnName="OS" />
+                <ScalarProperty Name="ScreenSize" ColumnName="ScreenSize" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
