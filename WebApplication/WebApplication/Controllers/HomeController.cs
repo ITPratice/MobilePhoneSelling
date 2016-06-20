@@ -14,7 +14,7 @@ namespace WebApplication.Controllers
         public ActionResult Index()
         {
             var product = from p in db.Products.Where(p => p.Deleted != true) select p;
-            return View(product.ToList());
+            return View(product.Take(8).ToList());
         }
 
         public PartialViewResult FacebookChatPartial()

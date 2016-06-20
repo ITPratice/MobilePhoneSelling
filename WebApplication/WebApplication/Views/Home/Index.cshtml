@@ -7,40 +7,80 @@
 }
 @{int count = 0;}
 @Html.ActionLink("Compare", "Compare", "Products")
-<div class="col-lg-12 w_content">
-    <div class="grids_of_5">
-        @foreach (var item in Model)
+<div class="col-md-3 s-d">
+    <div class="w_sidebar">
+        <section class="sky-form">
+            <h4>Giá từ</h4>
+            <div class="row1 scroll-pane">
+                <div class="col col-4">
+                    <label class="radio"><input type="radio" name="rdFilter" class="rdFilter" value="from100" onclick="this.form.submit()" @(Session["Filter"] == "from100" ? "checked" : "") /> <i></i>Dưới $100</label>
+                    <label class="radio"><input type="radio" name="rdFilter" class="rdFilter" value="100to300" onclick="this.form.submit()" @(Session["Filter"] == "100to300" ? "checked" : "") /> <i></i>Từ $100 đến $300</label>
+                    <label class="radio"><input type="radio" name="rdFilter" class="rdFilter" value="300to700" onclick="this.form.submit()" @(Session["Filter"] == "300to700" ? "checked" : "") /> <i></i>Từ $300 đến $700</label>
+                    <label class="radio"><input type="radio" name="rdFilter" class="rdFilter" value="700to1000" onclick="this.form.submit()" @(Session["Filter"] == "700to1000" ? "checked" : "") /> <i></i>Từ $700 đến $1000</label>
+                    <label class="radio"><input type="radio" name="rdFilter" class="rdFilter" value="from1000" onclick="this.form.submit()" @(Session["Filter"] == "from1000" ? "checked" : "") /> <i></i>Trên $1000</label>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+<div class="col-md-9 w_content">
+    <div class="grids_of_4">
+        @for (int i = 0; i < 4; i++)
         {
-            count++;
-            <div class="grid1_of_5">
+            <div class="grid1_of_4">
                 <div class="content_box">
-                    <a href="@Url.Action("ProductDetails", "Products", new { @id = item.Id })">
-                        <img src="@Url.Content(Constants.PATH_IMAGE + "/" + item.Image)" class="img-responsive" alt="" />
+                    <a href="@Url.Action("ProductDetails", "Products", new { @id = Model[i].Id })">
+                        <img src="@Url.Content(Constants.PATH_IMAGE + "/" + Model[i].Image)" class="img-responsive" alt="" />
                     </a>
-                    <h4><a href="details.html">@item.Name</a></h4>
+                    <h4><a href="details.html">@Model[i].Name</a></h4>
                     <div class="grid_1 simpleCart_shelfItem">
                         <div class="item_add">
                             <span class="item_price">
-                                <h6>@String.Format("{0:$ 0,0}", @item.Price)</h6>
+                                <h6>@String.Format("{0:$ 0,0}", @Model[i].Price)</h6>
                             </span>
                         </div>
                         <div class="item_add">
                             <span class="item_price">
-                                <a href="@Url.Action("AddShoppongCart", "Cart", new { @_idProducts = item.Id, @_strUrl = Request.Url.ToString() })">Thêm vào giỏ hàng</a>
+                                <a href="@Url.Action("AddShoppongCart", "Cart", new { @_idProducts = Model[i].Id, @_strUrl = Request.Url.ToString() })">Thêm vào giỏ hàng</a>
                             </span>
-                            <span class="item_price">
-                                <a href="@Url.Action("AddProducts", "Products", new { @ProductID = item.Id, @_strUrl = Request.Url.ToString() })">Thêm vào giỏ hàng</a>
-                            </span>
+                            @*<span class="item_price">
+                                    <a href="@Url.Action("AddProducts", "Products", new { @ProductID = item.Id, @_strUrl = Request.Url.ToString() })">So sánh</a>
+                                </span>*@
                         </div>
                     </div>
                 </div>
             </div>
-            if (count % 5 == 0)
-            {
-                <div style="clear:both"></div>
-            }
         }
+        <div class="clearfix"></div>
+    </div>
+    <div class="grids_of_4">
+        @for (int i = 4; i < 8; i++)
+        {
+            <div class="grid1_of_4">
+                <div class="content_box">
+                    <a href="@Url.Action("ProductDetails", "Products", new { @id = Model[i].Id })">
+                        <img src="@Url.Content(Constants.PATH_IMAGE + "/" + Model[i].Image)" class="img-responsive" alt="" />
+                    </a>
+                    <h4><a href="details.html">@Model[i].Name</a></h4>
+                    <div class="grid_1 simpleCart_shelfItem">
+                        <div class="item_add">
+                            <span class="item_price">
+                                <h6>@String.Format("{0:$ 0,0}", @Model[i].Price)</h6>
+                            </span>
+                        </div>
+                        <div class="item_add">
+                            <span class="item_price">
+                                <a href="@Url.Action("AddShoppongCart", "Cart", new { @_idProducts = Model[i].Id, @_strUrl = Request.Url.ToString() })">Thêm vào giỏ hàng</a>
+                            </span>
+                            @*<span class="item_price">
+                                    <a href="@Url.Action("AddProducts", "Products", new { @ProductID = item.Id, @_strUrl = Request.Url.ToString() })">So sánh</a>
+                                </span>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="clearfix"></div>
     </div>
 </div>
-<div style="clear:both"></div>
-
