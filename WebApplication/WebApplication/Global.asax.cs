@@ -11,8 +11,16 @@ namespace WebApplication
     {
         protected void Application_Start()
         {
+            Application["Totaluser"] = 0;
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+        }
+
+        protected void Session_Start()
+        {
+            Application.Lock();
+            Application["Totaluser"] = (int)Application["Totaluser"] + 1;
+            Application.UnLock();
         }
     }
 }

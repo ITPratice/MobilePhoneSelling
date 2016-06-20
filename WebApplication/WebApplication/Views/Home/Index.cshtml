@@ -13,11 +13,7 @@
             <h4>Giá từ</h4>
             <div class="row1 scroll-pane">
                 <div class="col col-4">
-                    <label class="radio"><input type="radio" name="rdFilter" class="rdFilter" value="from100" onclick="this.form.submit()" @(Session["Filter"] == "from100" ? "checked" : "") /> <i></i>Dưới $100</label>
-                    <label class="radio"><input type="radio" name="rdFilter" class="rdFilter" value="100to300" onclick="this.form.submit()" @(Session["Filter"] == "100to300" ? "checked" : "") /> <i></i>Từ $100 đến $300</label>
-                    <label class="radio"><input type="radio" name="rdFilter" class="rdFilter" value="300to700" onclick="this.form.submit()" @(Session["Filter"] == "300to700" ? "checked" : "") /> <i></i>Từ $300 đến $700</label>
-                    <label class="radio"><input type="radio" name="rdFilter" class="rdFilter" value="700to1000" onclick="this.form.submit()" @(Session["Filter"] == "700to1000" ? "checked" : "") /> <i></i>Từ $700 đến $1000</label>
-                    <label class="radio"><input type="radio" name="rdFilter" class="rdFilter" value="from1000" onclick="this.form.submit()" @(Session["Filter"] == "from1000" ? "checked" : "") /> <i></i>Trên $1000</label>
+                    <p>Khách ghé thăm: @ApplicationInstance.Application["Totaluser"]</p>
                 </div>
             </div>
         </section>

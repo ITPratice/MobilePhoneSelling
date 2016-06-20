@@ -118,7 +118,7 @@ namespace WebApplication.Controllers
             string user = Request["checkUser"];
             if (ModelState.IsValid)
             {
-                Account account = db.Accounts.Single(a => a.Name == _username && 
+                Account account = db.Accounts.SingleOrDefault(a => a.Name == _username &&
                     a.Password == _password && a.Deleted != true);
                 if (account != null)
                 {
