@@ -1,6 +1,6 @@
 ﻿@using WebApplication.Models
 @using WebApplication.Common
-@model List<ProductPartial>
+@model List<Product>
 @{
     ViewBag.Title = "Compare";
     Layout = "~/Views/Layout/MasterPage.cshtml";
@@ -12,7 +12,7 @@
             <th scope="row">Tên</th>
             @foreach (var item in Model)
             {
-                <th>@item.Product.Name</th>
+                <th>@item.Name</th>
             }
         </tr>
     </thead>

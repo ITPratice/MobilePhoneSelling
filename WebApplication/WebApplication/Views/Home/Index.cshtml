@@ -31,7 +31,7 @@
             <div class="grid1_of_4">
                 <div class="content_box">
                     <a href="@Url.Action("ProductDetails", "Products", new { @id = Model[i].Id })">
-                        <img src="@Url.Content(Constants.PATH_IMAGE + "/" + Model[i].Image)" class="img-responsive" alt="" />
+                        <img src="@Url.Content(Constants.PATH_IMAGE + "/" + Model[i].Image)" class="img-responsive" alt="" width="400" height="460" />
                     </a>
                     <h4><a href="details.html">@Model[i].Name</a></h4>
                     <div class="grid_1 simpleCart_shelfItem">
@@ -44,9 +44,9 @@
                             <span class="item_price">
                                 <a href="@Url.Action("AddShoppongCart", "Cart", new { @_idProducts = Model[i].Id, @_strUrl = Request.Url.ToString() })">Thêm vào giỏ hàng</a>
                             </span>
-                            @*<span class="item_price">
-                                    <a href="@Url.Action("AddProducts", "Products", new { @ProductID = item.Id, @_strUrl = Request.Url.ToString() })">So sánh</a>
-                                </span>*@
+                            <span class="item_price">
+                                <a href="@Url.Action("AddProducts", "Products", new { @ProductID = Model[i].Id, @_strUrl = Request.Url.ToString() })">So sánh</a>
+                            </span>
                         </div>
                     </div>
                 </div>

@@ -49,7 +49,7 @@ namespace WebApplication.Controllers
         public ActionResult Create()
         {
             ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name");
-            ViewBag.TypeId = new SelectList(db.Types, "Id", "Name");
+            //ViewBag.TypeId = new SelectList(db.Types, "Id", "Name");
             return View();
         }
 
@@ -79,7 +79,7 @@ namespace WebApplication.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", product.ManufacturerId);
-            ViewBag.TypeId = new SelectList(db.Types, "Id", "Name", product.TypeId);
+            //ViewBag.TypeId = new SelectList(db.Types, "Id", "Name", product.TypeId);
             return View(product);
         }
 
@@ -96,7 +96,7 @@ namespace WebApplication.Controllers
                 return HttpNotFound();
             }
             ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", product.ManufacturerId);
-            ViewBag.TypeId = new SelectList(db.Types, "Id", "Name", product.TypeId);
+            //ViewBag.TypeId = new SelectList(db.Types, "Id", "Name", product.TypeId);
             return View(product);
         }
 
@@ -119,7 +119,7 @@ namespace WebApplication.Controllers
                 }
             }
             ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", product.ManufacturerId);
-            ViewBag.TypeId = new SelectList(db.Types, "Id", "Name", product.TypeId);
+            //ViewBag.TypeId = new SelectList(db.Types, "Id", "Name", product.TypeId);
             return View(product);
         }
 
@@ -214,13 +214,7 @@ namespace WebApplication.Controllers
                 return RedirectToAction("Index", "Home");
             }
             List<Product> _lstProducts = GetProducts();
-            List<ProductPartial> _lst = new List<ProductPartial>();
-            foreach(var item in _lstProducts)
-            {
-                ProductPartial partial = db.ProductPartials.Single(p => p.ProductID == item.Id);
-                _lst.Add(partial);
-            }
-            return View(_lst);
+            return View(_lstProducts);
         }
         #endregion
 
