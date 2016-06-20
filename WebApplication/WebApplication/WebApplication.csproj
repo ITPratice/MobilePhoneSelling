@@ -503,9 +503,6 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductPartial.cs">
-      <DependentUpon>MobileSellingModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Promotion.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
@@ -514,9 +511,6 @@
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>MobileSellingModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Type.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
