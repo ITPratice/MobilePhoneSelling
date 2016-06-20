@@ -216,20 +216,6 @@
     <Content Include="Contents\Admin\tinymce\js\tinymce\tinymce.min.js" />
     <Content Include="Contents\Admin\tinymce\LICENSE.TXT" />
     <Content Include="Contents\FacebookChat\js\chatbox.js" />
-    <Content Include="Contents\Images\galaxy_s6_edge.jpg" />
-    <Content Include="Contents\Images\htc-102.png" />
-    <Content Include="Contents\Images\htc-one-a9.jpg" />
-    <Content Include="Contents\Images\iphone-6s.png" />
-    <Content Include="Contents\Images\iphone_6s.jpg" />
-    <Content Include="Contents\Images\lg-g5.png" />
-    <Content Include="Contents\Images\oppo-r7s.png" />
-    <Content Include="Contents\Images\oppo_f1_plus.png" />
-    <Content Include="Contents\Images\oppo_r7s.jpg" />
-    <Content Include="Contents\Images\samsung-galaxy-s6-edge-plus.png" />
-    <Content Include="Contents\Images\samsung_galaxy_a7.png" />
-    <Content Include="Contents\Images\samsung_galaxy_s7.png" />
-    <Content Include="Contents\Images\sony-xperia-z5-premium.png" />
-    <Content Include="Contents\Images\xiaomi_mi5.jpg" />
     <Content Include="Contents\MainPage\css\easy-responsive-tabs.css" />
     <Content Include="Contents\MainPage\css\global.css" />
     <Content Include="Contents\MainPage\css\slider.css" />
@@ -370,11 +356,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Images\galaxy_s7.png" />
-    <Content Include="Images\htc_10.png" />
-    <Content Include="Images\iphone_6s.png" />
-    <Content Include="Images\lg_g5.png" />
-    <Content Include="Images\oppo_r7s.png" />
     <Content Include="Contents\Admin\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="Contents\Admin\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="Contents\Admin\font-awesome\fonts\fontawesome-webfont.woff" />
@@ -622,6 +603,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Contents\Images\" />
     <Folder Include="Views\PaypalPayment\" />
   </ItemGroup>
   <ItemGroup>

@@ -25,10 +25,6 @@ namespace WebApplication.Models
             public string Email { get; set; }
             [Display(Name = "Chức vụ")]
             public int PositionId { get; set; }
-            [Display(Name = "Tên tài khoản")]
-            public string AccountName { get; set; }
-            [Display(Name = "Mật khẩu")]
-            public string Password { get; set; }
             [Display(Name = "Loại bỏ")]
             public bool Deleted { get; set; }
             [Display(Name = "Đang bận")]

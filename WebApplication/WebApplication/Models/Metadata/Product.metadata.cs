@@ -29,14 +29,25 @@ namespace WebApplication.Models
             public string Image { get; set; }
             [Display(Name = "Nhà sản xuất")]
             public string ManufacturerId { get; set; }
-            [Display(Name = "Loại sản phẩm")]
-            public string TypeId { get; set; }
             [Display(Name = "Ngày tạo")]
             [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy H:mm:ss}", ApplyFormatInEditMode = true)]
             public Nullable<System.DateTime> CreatedDate { get; set; }
             [Display(Name = "Ngày thay đổi")]
             [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy H:mm:ss}", ApplyFormatInEditMode = true)]
             public Nullable<System.DateTime> ModifiedDate { get; set; }
+            [Display(Name = "Màn hình")]
+            public string ScreenSize { get; set; }
+            [Display(Name = "Hệ điều hành")]
+            public string OS { get; set; }
+            [Display(Name = "Camera trước")]
+            public string Camera1 { get; set; }
+            [Display(Name = "Camera sau")]
+            public string Camera2 { get; set; }
+            [Display(Name = "Bộ nhớ trong")]
+            public string InterMemory { get; set; }
+            [Display(Name = "Kết nối")]
+            public string Connection { get; set; }
+
         }
     }
 }

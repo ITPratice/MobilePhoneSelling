@@ -51,5 +51,8 @@ namespace WebApplication.Common
         public static string SESSION_ACCOUNT = "Account";
         public static string SESSION_ACCOUNT_ID = "AccId";
         public static string SESSION_ROLE = "Role";
+
+        public static int IMAGE_WIDTH = 400;
+        public static int IMAGE_HEIGHT = 460;
     }
 }

@@ -34,8 +34,8 @@
             </div>
             <!-- /.navbar-header -->
             <ul class="nav navbar-top-links navbar-left">
-                @if (Session[Constants.SESSION_ROLE].Equals("Admin"))
-                {
+                @*@if (Session[Constants.SESSION_ROLE].Equals("Admin"))
+                {*@
                     <li>
                         @Html.ActionLink("Sản phẩm", "Index", "Products")
                     </li>
@@ -48,25 +48,25 @@
                     <li>
                         @Html.ActionLink("Khuyến mãi", "Index", "Promotions")
                     </li>
-                }
+                @*}
                 @if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch"))
-                {
+                {*@
                     <li>
                         @Html.ActionLink("Đơn hàng", "Index", "Orders")
                     </li>
-                }
+                @*}
                 @if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch") || Session[Constants.SESSION_ROLE].Equals("Nhân viên giao hàng"))
-                {
+                {*@
                     <li>
                         @Html.ActionLink("Phiếu giao hàng", "Index", "Deliveries")
                     </li>
-                }
+                @*}
                 @if (Session[Constants.SESSION_ROLE].Equals("Admin"))
-                {
+                {*@
                     <li>
                         @Html.ActionLink("Thống kê", "Index", "Statistics")
                     </li>
-                }
+                
             </ul>
 
             <ul class="nav navbar-top-links navbar-right">

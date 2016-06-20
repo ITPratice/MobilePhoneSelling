@@ -10,6 +10,7 @@ using PagedList;
 using WebApplication.Models;
 using System.IO;
 using WebApplication.Common;
+using System.Drawing;
 
 namespace WebApplication.Controllers
 {
@@ -49,7 +50,6 @@ namespace WebApplication.Controllers
         public ActionResult Create()
         {
             ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name");
-            //ViewBag.TypeId = new SelectList(db.Types, "Id", "Name");
             return View();
         }
 
@@ -64,7 +64,12 @@ namespace WebApplication.Controllers
                     List<FileUploadModel> uploadFileModel = new List<FileUploadModel>();
                     string fileName = Path.GetFileName(fileUpload.FileName);
                     var path = Path.Combine(Server.MapPath(Constants.PATH_IMAGE), fileName);
-                    if (!System.IO.File.Exists(path)) fileUpload.SaveAs(path);
+                    if (!System.IO.File.Exists(path))
+                    {
+                        Bitmap resizedImage = ParamHelper.Instance.ResizeImage(
+                            Bitmap.FromStream(fileUpload.InputStream), Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT);
+                        resizedImage.Save(path, System.Drawing.Imaging.ImageFormat.Png);
+                    }
                     product.Image = fileName;
                 }
                 List<Product> products = db.Products.ToList();
@@ -79,7 +84,6 @@ namespace WebApplication.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", product.ManufacturerId);
-            //ViewBag.TypeId = new SelectList(db.Types, "Id", "Name", product.TypeId);
             return View(product);
         }
 
@@ -96,7 +100,6 @@ namespace WebApplication.Controllers
                 return HttpNotFound();
             }
             ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", product.ManufacturerId);
-            //ViewBag.TypeId = new SelectList(db.Types, "Id", "Name", product.TypeId);
             return View(product);
         }
 
@@ -119,7 +122,6 @@ namespace WebApplication.Controllers
                 }
             }
             ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", product.ManufacturerId);
-            //ViewBag.TypeId = new SelectList(db.Types, "Id", "Name", product.TypeId);
             return View(product);
         }
 
