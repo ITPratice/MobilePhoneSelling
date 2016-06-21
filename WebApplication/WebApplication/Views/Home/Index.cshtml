@@ -21,62 +21,28 @@
     </div>
 </div>
 <div class="col-md-9 w_content">
-    <div class="grids_of_4">
-        @for (int i = 0; i < 4; i++)
-        {
-            <div class="grid1_of_4">
-                <div class="content_box">
-                    <a href="@Url.Action("ProductDetails", "Products", new { @id = Model[i].Id })">
-                        <img src="@Url.Content(Constants.PATH_IMAGE + "/" + Model[i].Image)" class="img-responsive" alt="" width="400" height="460" />
-                    </a>
-                    <h4><a href="details.html">@Model[i].Name</a></h4>
-                    <div class="grid_1 simpleCart_shelfItem">
-                        <div class="item_add">
-                            <span class="item_price">
-                                <h6>@String.Format("{0:$ 0,0}", @Model[i].Price)</h6>
-                            </span>
-                        </div>
-                        <div class="item_add">
-                            <span class="item_price">
-                                <a href="@Url.Action("AddShoppongCart", "Cart", new { @_idProducts = Model[i].Id, @_strUrl = Request.Url.ToString() })">Thêm vào giỏ hàng</a>
-                            </span>
-                            <span class="item_price">
-                                <a href="@Url.Action("AddProducts", "Products", new { @ProductID = Model[i].Id, @_strUrl = Request.Url.ToString() })">So sánh</a>
-                            </span>
-                        </div>
+    @foreach (var item in Model)
+    {
+        <div class="grid1_of_4">
+            <div class="content_box">
+                <a href="@Url.Action("ProductDetails", "Products", new { @id = item.Id })">
+                    <img src="@Url.Content(Constants.PATH_IMAGE + "/" + @item.Image)" class="img-responsive" alt="" />
+                </a>
+                <h4><a href="details.html">@item.Name</a></h4>
+                <div class="grid_1 simpleCart_shelfItem">
+                    <div class="item_add">
+                        <span class="item_price">
+                            <h6>@String.Format("{0:$ 0,0}", @item.Price)</h6>
+                        </span>
+                    </div>
+                    <div class="item_add">
+                        <span class="item_price">
+                            <a href="@Url.Action("AddShoppongCart", "Cart", new { @_idProducts = item.Id, @_strUrl = Request.Url.ToString() })">Thêm vào giỏ hàng</a>
+                        </span>
                     </div>
                 </div>
             </div>
-        }
-        <div class="clearfix"></div>
-    </div>
-    <div class="grids_of_4">
-        @for (int i = 4; i < 8; i++)
-        {
-            <div class="grid1_of_4">
-                <div class="content_box">
-                    <a href="@Url.Action("ProductDetails", "Products", new { @id = Model[i].Id })">
-                        <img src="@Url.Content(Constants.PATH_IMAGE + "/" + Model[i].Image)" class="img-responsive" alt="" />
-                    </a>
-                    <h4><a href="details.html">@Model[i].Name</a></h4>
-                    <div class="grid_1 simpleCart_shelfItem">
-                        <div class="item_add">
-                            <span class="item_price">
-                                <h6>@String.Format("{0:$ 0,0}", @Model[i].Price)</h6>
-                            </span>
-                        </div>
-                        <div class="item_add">
-                            <span class="item_price">
-                                <a href="@Url.Action("AddShoppongCart", "Cart", new { @_idProducts = Model[i].Id, @_strUrl = Request.Url.ToString() })">Thêm vào giỏ hàng</a>
-                            </span>
-                            @*<span class="item_price">
-                                    <a href="@Url.Action("AddProducts", "Products", new { @ProductID = item.Id, @_strUrl = Request.Url.ToString() })">So sánh</a>
-                                </span>*@
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-        <div class="clearfix"></div>
-    </div>
+        </div>
+    }
+    <div class="clearfix"></div>
 </div>

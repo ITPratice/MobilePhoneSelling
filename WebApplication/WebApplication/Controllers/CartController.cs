@@ -195,8 +195,8 @@ namespace WebApplication.Controllers
         public Order GetOrder()
         {
             Order _order = new Order();
-            Customer _acc = (Customer)Session["Account"]; 
-            Customer _customer = db.Customers.SingleOrDefault(x => x.Id == _acc.Id);         
+            Customer _acc = (Customer)Session["Account"];
+            Customer _customer = db.Customers.SingleOrDefault(x => x.Id == _acc.Id);
             var _ord = db.Orders.ToList();
             string _oldId = "";
             if (_ord.Count == 0)

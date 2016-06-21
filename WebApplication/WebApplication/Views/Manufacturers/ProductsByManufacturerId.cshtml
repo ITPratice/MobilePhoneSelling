@@ -7,10 +7,10 @@
     Layout = "~/Views/Layout/MasterPage.cshtml";
 }
 @*<script type="text/javascript">
-    $('input[type=radio]').on('change', function () {
-        $(this).closest('#formFilter').submit();
-    });
-</script>*@
+        $('input[type=radio]').on('change', function () {
+            $(this).closest('#formFilter').submit();
+        });
+    </script>*@
 @ViewBag.Test
 <form id="formFilter" method="post" action="#">
     <div class="col-md-3 s-d">
@@ -30,37 +30,35 @@
         </div>
     </div>
     <div class="col-md-9 w_content">
-        <div class="grids_of_4">
-            @if (Model.Count == 0)
+        @if (Model.Count == 0)
+        {
+            <label>Khong co san pham</label>
+        }
+        else
+        {
+            foreach (var item in Model)
             {
-                <label>Khong co san pham</label>
-            }
-            else
-            {
-                foreach (var item in Model)
-                {
-                    <div class="grid1_of_4">
-                        <div class="content_box">
-                            <a href="details.html">
-                                <img src="@Url.Content(Constants.PATH_IMAGE + "/" + item.Image)" class="img-responsive" alt="" />
-                            </a>
-                            <h4><a href="details.html">@item.Name</a></h4>
-                            <div class="grid_1 simpleCart_shelfItem">
-                                <div class="item_add">
-                                    <span class="item_price">
-                                        <h6>@String.Format("{0:$ 0,0}", @item.Price)</h6>
-                                    </span>
-                                </div>
-                                <div class="item_add">
-                                    <span class="item_price">
-                                        <a href="@Url.Action("AddShoppongCart", "Cart", new { @_idProducts = item.Id, @_strUrl = Request.Url.ToString() })">Thêm vào giỏ hàng</a>
-                                    </span>
-                                </div>
+                <div class="grid1_of_4">
+                    <div class="content_box">
+                        <a href="details.html">
+                            <img src="@Url.Content(Constants.PATH_IMAGE + "/" + item.Image)" class="img-responsive" alt="" />
+                        </a>
+                        <h4><a href="details.html">@item.Name</a></h4>
+                        <div class="grid_1 simpleCart_shelfItem">
+                            <div class="item_add">
+                                <span class="item_price">
+                                    <h6>@String.Format("{0:$ 0,0}", @item.Price)</h6>
+                                </span>
+                            </div>
+                            <div class="item_add">
+                                <span class="item_price">
+                                    <a href="@Url.Action("AddShoppongCart", "Cart", new { @_idProducts = item.Id, @_strUrl = Request.Url.ToString() })">Thêm vào giỏ hàng</a>
+                                </span>
                             </div>
                         </div>
                     </div>
-                }
+                </div>
             }
-        </div>
+        }
     </div>
 </form>
