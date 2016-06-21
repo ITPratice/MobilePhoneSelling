@@ -3,8 +3,8 @@
 @using WebApplication.Common
 
 @section Styles{
-    <link href="~/Contents/AdminPage/Products.css" rel="stylesheet" type="text/css" />
-    <link href="~/Contents/AdminPage/PagedList.css" rel="stylesheet" type="text/css" />
+    <link href="~/Contents/Admin/css/Products.css" rel="stylesheet" type="text/css" />
+    <link href="~/Contents/Admin/css/PagedList.css" rel="stylesheet" type="text/css" />
 }
 
 @{
@@ -31,11 +31,11 @@
             <div class="panel-body">
                 <div class="dataTable_wrapper">
                     <div>
-                        @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+                        @using (Html.BeginForm("Index", "Deliveries", FormMethod.Get))
                         {
                             <p style="float:right;">
                                 @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
-                                <input type="submit" value="Search" />
+                                <input type="submit" value="Search" class="btn btn-default" />
                             </p>
                         }
                     </div>
@@ -44,7 +44,7 @@
                         <thead>
                             <tr>
                                 <th class="header-item">
-                                    @Html.ActionLink("Tên Sản phẩm", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
+                                    @Html.ActionLink("Tên sản phẩm", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
                                 </th>
                                 <th class="header-item">@Html.DisplayNameFor(model => model.First().Image)</th>
                                 <th class="header-item">@Html.DisplayNameFor(model => model.First().ManufacturerId)</th>
@@ -65,7 +65,7 @@
                                         @Html.DisplayFor(modelItem => item.Name)
                                     </td>
                                     <td class="row-item">
-                                        <img src="@Url.Content(@Constants.PATH_IMAGE+"/"+item.Image)" alt="@item.Name" class="image_column" />
+                                        <img src="@Url.Content(@Constants.PATH_IMAGE+"/"+item.Image)" alt="@item.Name" class="image_column" width="50%" height="50%" />
                                     </td>
                                     <td class="row-item">
                                         @Html.DisplayFor(modelItem => item.Manufacturer.Name)
@@ -76,7 +76,7 @@
                                     <td class="row-item">
                                         @Html.DisplayFor(modelItem => item.Price)
                                     </td>
-                                    <td>
+                                    <td class="row-item">
                                         @Html.Raw(item.Description)
                                     </td>
                                     <td class="row-item">
@@ -92,6 +92,7 @@
                                     {
                                         <td class="row-item">
                                             @Html.ActionLink("Sửa đổi", "Edit", new { id = item.Id }) |
+                                            @Html.ActionLink("Xem thông số kỹ thuật", "TechnicalDetail", new { id = item.Id }) |
                                             @Html.ActionLink("Loại bỏ",
                                                          "Delete",
                                                          new { id = item.Id },
@@ -101,7 +102,12 @@
                                     else
                                     {
                                         <td class="row-item">
-                                            @Html.ActionLink("Sửa đổi", "Edit", new { id = item.Id })
+                                            @Html.ActionLink("Sửa đổi", "Edit", new { id = item.Id })|
+                                            @Html.ActionLink("Xem thông số kỹ thuật", "TechnicalDetail", new { id = item.Id }) |
+                                            @Html.ActionLink("Khôi phục",
+                                                         "Restore",
+                                                         new { id = item.Id },
+                                                         new { onclick = "return confirm('Bạn có thực sự muốn khôi phục sản phẩm này không?')" })
                                         </td>
                                     }
                                 </tr>
@@ -114,7 +120,6 @@
                         @Html.PagedListPager(Model, page => Url.Action("Index",
                    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
                     </div>
-
                 </div>
             </div>
             <!-- /.panel-body -->

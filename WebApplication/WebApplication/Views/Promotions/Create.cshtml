@@ -2,12 +2,12 @@
 
 @{
     Layout = WebApplication.Common.Constants.PATH_ADMIN_LAYOUT;
-    ViewBag.Title = "Thêm sản phẩm";
+    ViewBag.Title = "Khuyến mãi";
 }
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Thêm Sản Phẩm</h1>
+        <h1 class="page-header">Thêm Chương Trình Khuyến Mãi</h1>
     </div>
 </div>
 
@@ -15,24 +15,21 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <a href="@Url.Action("Index", "Promotions")" style="margin-right:5px;">
-                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                <a href="@Url.Action("Index", "Promotions")" style="margin-right:5px;float:left">
+                    <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
                 </a>
-                Điền thông tin sản phẩm
+                Điền thông tin chương trình
             </div>
             </br>
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
-
                 <div class="form-horizontal">
-                    <h4>Promotion</h4>
-                    <hr />
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                         </div>
@@ -40,7 +37,7 @@
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
                         </div>
@@ -48,7 +45,7 @@
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
                         </div>
@@ -56,7 +53,7 @@
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.SaleOff, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             @Html.EditorFor(model => model.SaleOff, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.SaleOff, "", new { @class = "text-danger" })
                         </div>

@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<WebApplication.Models.Order>
+﻿@model PagedList.IPagedList<WebApplication.Models.Manufacturer>
 @using PagedList.Mvc
 @using WebApplication.Common
 
@@ -9,12 +9,12 @@
 
 @{
     Layout = Constants.PATH_ADMIN_LAYOUT;
-    ViewBag.Title = "Đơn hàng";
+    ViewBag.Title = "Nhà sản xuất";
 }
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Đơn hàng</h1>
+        <h1 class="page-header">Nhà sản xuất</h1>
     </div>
 </div>
 
@@ -22,13 +22,16 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Danh sách đơn hàng
+                Danh sách nhà sản xuất
+                <a href="@Url.Action("Create", "Manufacturers")" style="margin-right:5px; float:right">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </a>
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <div class="dataTable_wrapper">
                     <div>
-                        @using (Html.BeginForm("Index", "Deliveries", FormMethod.Get))
+                        @using (Html.BeginForm("Index", "Manufacturers", FormMethod.Get))
                         {
                             <p style="float:right;">
                                 @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
@@ -41,45 +44,22 @@
                         <thead>
                             <tr>
                                 <th class="header-item">
-                                    @Html.DisplayNameFor(model => model.First().Date)
-                                </th>
-                                <th class="header-item">
-                                    @Html.DisplayNameFor(model => model.First().Customer.Name)
-                                </th>
-                                <th class="header-item">
-                                    @Html.DisplayNameFor(model => model.First().IsAssigned)
-                                </th>
-                                <th class="header-item">
-                                    @Html.DisplayNameFor(model => model.First().Deleted)
+                                    @Html.ActionLink("Tên nhà sản xuất", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
                                 </th>
                                 <th></th>
                             </tr>
-                        </thead>
 
-                        <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr class="gradeA">
                                     <td class="row-item">
-                                        @Html.DisplayFor(modelItem => item.Date)
+                                        @Html.DisplayFor(modelItem => item.Name)
                                     </td>
-                                    <td class="row-item">
-                                        @Html.DisplayFor(modelItem => item.Customer.Name)
-                                    </td>
-                                    <td class="row-item">
-                                        @Html.DisplayFor(modelItem => item.IsAssigned)
-                                    </td>
-                                    <td class="row-item">
-                                        @Html.DisplayFor(modelItem => item.Deleted)
-                                    </td>
-                                    <td class="row-item">
-                                        @Html.ActionLink("Giao Hàng", "ShowDeliverer", new { id = item.Id }) |
-                                        @Html.ActionLink("Chi tiết", "Details", new { orderId = item.Id }) |
-                                        @Html.ActionLink("Loại bỏ", "Delete", new { id = item.Id })
+                                    <td>
+                                        @Html.ActionLink("Sửa đổi", "Edit", new { id = item.Id })
                                     </td>
                                 </tr>
                             }
-                        </tbody>
                     </table>
 
                     <div class="page_area" style="text-align:center;">

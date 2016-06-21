@@ -120,7 +120,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Contents\AdminPage\Products.css" />
+    <Content Include="Contents\Admin\css\Products.css" />
     <Content Include="Contents\Admin\css\bootstrap.min.css" />
     <Content Include="Contents\Admin\css\metisMenu.min.css" />
     <Content Include="Contents\Admin\css\morris.css" />
@@ -283,10 +283,7 @@
     <Content Include="Contents\MainPage\js\script.js" />
     <Content Include="Contents\MainPage\js\slides.min.jquery.js" />
     <Content Include="Contents\MainPage\js\startstop-slider.js" />
-    <Content Include="Contents\AdminPage\bootstrap.css" />
-    <Content Include="Contents\AdminPage\bootstrap.min.css" />
-    <Content Include="Contents\AdminPage\Site.css" />
-    <Content Include="Contents\AdminPage\PagedList.css" />
+    <Content Include="Contents\Admin\css\PagedList.css" />
     <Content Include="Contents\MasterPage\css\bootstrap.css" />
     <Content Include="Contents\MasterPage\css\etalage.css" />
     <Content Include="Contents\MasterPage\css\megamenu.css" />
@@ -594,6 +591,10 @@
     <Content Include="Views\Statistics\Index.cshtml" />
     <Content Include="Views\Users\ChangeStaffPassword.cshtml" />
     <Content Include="Views\Products\Compare.cshtml" />
+    <Content Include="Views\Products\TechnicalDetail.cshtml" />
+    <Content Include="Views\Manufacturers\Index.cshtml" />
+    <Content Include="Views\Manufacturers\Create.cshtml" />
+    <Content Include="Views\Manufacturers\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

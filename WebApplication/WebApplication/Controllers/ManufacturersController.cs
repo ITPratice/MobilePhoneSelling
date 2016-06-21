@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication.Models;
+using PagedList;
+using WebApplication.Common;
+using System.Net;
 
 namespace WebApplication.Controllers
 {
@@ -104,6 +107,72 @@ namespace WebApplication.Controllers
                     Session["Filter"] = null;
                     break;
             }
+        }
+
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            if (searchString != null) page = 1;
+            else searchString = currentFilter;
+            ViewBag.CurrentFilter = currentFilter;
+            var manufacturers = from m in db.Manufacturers select m;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                manufacturers = manufacturers.Where(m => m.Name.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    manufacturers = manufacturers.OrderByDescending(m => m.Name);
+                    break;
+                default:
+                    manufacturers = manufacturers.OrderBy(m => m.Name);
+                    break;
+            }
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(manufacturers.ToPagedList(pageNumber, pageSize));
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Manufacturer manufacturer)
+        {
+            if (ModelState.IsValid)
+            {
+                List<Manufacturer> manufacturers = db.Manufacturers.OrderBy(m => m.Id).ToList();
+                string oldId = "";
+                if (manufacturers.Count > 0) oldId = manufacturers[manufacturers.Count - 1].Id;
+                manufacturer.Id = ParamHelper.Instance.GetNewId(oldId, Constants.PREFIX_MANUFACTURER);
+                db.Manufacturers.Add(manufacturer);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Manufacturer manufacturer = db.Manufacturers.Find(id);
+            if (manufacturer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(manufacturer);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Manufacturer manufacturer)
+        {
+            return RedirectToAction("Index");
         }
     }
 }

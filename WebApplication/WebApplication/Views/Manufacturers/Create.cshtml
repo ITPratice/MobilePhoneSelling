@@ -1,0 +1,51 @@
+﻿@model WebApplication.Models.Manufacturer
+
+@{
+    Layout = WebApplication.Common.Constants.PATH_ADMIN_LAYOUT;
+    ViewBag.Title = "Nhà sản xuất";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Thêm nhà sản xuất</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a href="@Url.Action("Index", "Manufacturers")" style="margin-right:5px;float:left">
+                    <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                </a>
+                Điền thông tin nhà sản xuất
+            </div>
+            </br>
+            @using (Html.BeginForm("Create", "Manufacturers", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

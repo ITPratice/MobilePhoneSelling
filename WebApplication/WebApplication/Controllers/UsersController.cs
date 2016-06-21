@@ -122,7 +122,7 @@ namespace WebApplication.Controllers
                     a.Password == _password && a.Deleted != true);
                 if (account != null)
                 {
-                    Customer customer = db.Customers.Single(c => c.AccountId == account.Id);
+                    Customer customer = db.Customers.SingleOrDefault(c => c.AccountId == account.Id);
                     if (customer != null)
                     {
                         Session[Constants.SESSION_ACCOUNT] = customer;
@@ -132,7 +132,7 @@ namespace WebApplication.Controllers
                     }
                     else
                     {
-                        Staff staff = db.Staffs.Single(s => s.AccountId == account.Id);
+                        Staff staff = db.Staffs.SingleOrDefault(s => s.AccountId == account.Id);
                         if (staff != null)
                         {
                             Session[Constants.SESSION_ACCOUNT] = staff;

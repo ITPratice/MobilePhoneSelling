@@ -58,7 +58,7 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                List<Promotion> promotions = db.Promotions.ToList();
+                List<Promotion> promotions = db.Promotions.OrderBy(pr=>pr.Id).ToList();
                 string oldId = "";
                 if (promotions.Count > 0) oldId = promotions[promotions.Count - 1].Id;
                 promotion.Id = ParamHelper.Instance.GetNewId(oldId, Constants.PREFIX_PROMOTION);

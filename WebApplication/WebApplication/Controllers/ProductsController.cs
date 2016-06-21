@@ -72,7 +72,7 @@ namespace WebApplication.Controllers
                     }
                     product.Image = fileName;
                 }
-                List<Product> products = db.Products.ToList();
+                List<Product> products = db.Products.OrderBy(p=>p.Id).ToList();
                 int numberOfProducts = products.Count;
                 string oldId = "";
                 if (numberOfProducts > 0) oldId = products[numberOfProducts - 1].Id;
@@ -110,11 +110,19 @@ namespace WebApplication.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    List<FileUploadModel> uploadFileModel = new List<FileUploadModel>();
-                    string fileName = Path.GetFileName(fileUpload.FileName);
-                    var path = Path.Combine(Server.MapPath(Constants.PATH_IMAGE), fileName);
-                    if (!System.IO.File.Exists(path)) fileUpload.SaveAs(path);
-                    product.Image = fileName;
+                    if (fileUpload != null && fileUpload.ContentLength > 0)
+                    {
+                        List<FileUploadModel> uploadFileModel = new List<FileUploadModel>();
+                        string fileName = Path.GetFileName(fileUpload.FileName);
+                        var path = Path.Combine(Server.MapPath(Constants.PATH_IMAGE), fileName);
+                        if (!System.IO.File.Exists(path))
+                        {
+                            Bitmap resizedImage = ParamHelper.Instance.ResizeImage(
+                                Bitmap.FromStream(fileUpload.InputStream), Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT);
+                            resizedImage.Save(path, System.Drawing.Imaging.ImageFormat.Png);
+                        }
+                        product.Image = fileName;
+                    }
                     product.ModifiedDate = DateTime.Now;
                     db.Entry(product).State = EntityState.Modified;
                     db.SaveChanges();
@@ -137,13 +145,36 @@ namespace WebApplication.Controllers
             {
                 return HttpNotFound();
             }
-            else
-            {
-                product.Deleted = true;
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
-            }
+            product.Deleted = true;
+            db.Entry(product).State = EntityState.Modified;
+            db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Restore(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            product.Deleted = false;
+            db.Entry(product).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult TechnicalDetail(string id)
+        {
+            Product product = db.Products.Find(id);
+            if (product == null) return HttpNotFound();
+            return View(product);
         }
         #endregion
 

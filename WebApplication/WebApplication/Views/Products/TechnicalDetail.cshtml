@@ -1,0 +1,117 @@
+﻿@using WebApplication.Common
+@model WebApplication.Models.Product
+
+@{
+    Layout = Constants.PATH_ADMIN_LAYOUT;
+    ViewBag.Title = "Thông số kỹ thuật";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">@Html.DisplayFor(model => model.Name)</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a href="@Url.Action("Index", "Products")" style="margin-right:5px;float:left">
+                    <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                </a>
+                Thông số kỹ thuật
+            </div>
+            </br>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Image)
+                </dt>
+
+                <dd>
+                    <img src="@Url.Content(@Constants.PATH_IMAGE+"/"+@Model.Image)" alt="@Model.Name" class="image_column" />
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ScreenSize)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ScreenSize)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.OS)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.OS)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Camera1)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Camera1)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Camera2)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Camera2)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CPU)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CPU)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.RAM)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.RAM)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.InterMemory)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.InterMemory)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Connection)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Connection)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Manufacturer.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Manufacturer.Name)
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+

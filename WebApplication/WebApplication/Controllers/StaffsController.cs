@@ -137,6 +137,42 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public ActionResult Restore(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Staff staff = db.Staffs.Find(id);
+            if (staff == null)
+            {
+                return HttpNotFound();
+            }
+            staff.Deleted = false;
+            staff.Account.Deleted = false;
+            db.Entry(staff.Account).State = EntityState.Modified;
+            db.Entry(staff).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult ViewProfile(string accountName)
+        {
+            Staff staff = db.Staffs.SingleOrDefault(s => s.Account.Name == accountName);
+            if (staff == null)
+            {
+                return HttpNotFound();
+            }
+            return View(staff);
+        }
+
+        public ActionResult EditProfile(Staff staff)
+        {
+            return null;
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
