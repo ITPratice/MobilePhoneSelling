@@ -193,9 +193,18 @@ namespace WebApplication.Controllers
         #endregion
 
         #region Get Relative Products
-        public PartialViewResult RelativeProducts()
+        public ActionResult RelativeProducts(string id)
         {
-            return PartialView();
+            Product pro = db.Products.Single(x => x.Id == id);
+            string name = pro.Name;
+            var products = (from p in db.Products
+                            where p.Name.Contains(name)
+                            select p);
+            if (products == null)
+            {
+                return HttpNotFound();
+            }
+            return View(products.Take(2).ToList());
         }
         #endregion
 

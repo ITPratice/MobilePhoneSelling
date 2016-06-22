@@ -594,6 +594,7 @@
     <Content Include="Views\Manufacturers\Index.cshtml" />
     <Content Include="Views\Manufacturers\Create.cshtml" />
     <Content Include="Views\Manufacturers\Edit.cshtml" />
+    <Content Include="Views\Products\RelativeProducts.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -29,8 +29,7 @@ namespace WebApplication.Controllers
             Product _products = db.Products.SingleOrDefault(x => x.Id == _idProducts);
             if (_products == null)
             {
-                Response.StatusCode = 404; //return 404 error
-                return null;
+                return HttpNotFound();
             }
 
             List<ShoppingCart> _lstGioHang = GetShoppingCart();
@@ -45,7 +44,7 @@ namespace WebApplication.Controllers
             else
             {
                 Product p = db.Products.Single(x => x.Id == _idProducts);
-                if(p.Quantity<=1)
+                if (p.Quantity <= 1)
                 {
                     _cart.Quantity = 1;
                 }
@@ -107,30 +106,6 @@ namespace WebApplication.Controllers
             return View(_lstGioHang);
         }
 
-        //Get Total Quantity
-        public int GetQuantity()
-        {
-            int _tong = 0;
-            List<ShoppingCart> _lstGioHang = Session["cart"] as List<ShoppingCart>;
-            if (_lstGioHang != null)
-            {
-                _tong = _lstGioHang.Sum(x => x.Quantity);
-            }
-            return _tong;
-        }
-
-        //Get Sum Price
-        public double GetSum()
-        {
-            double _sum = 0;
-            List<ShoppingCart> _lstGioHang = Session["cart"] as List<ShoppingCart>;
-            if (_lstGioHang != null)
-            {
-                _sum = _lstGioHang.Sum(x => x.ThanhTien);
-            }
-            return _sum;
-        }
-
         //Create Shopping Cart Partial
         public ActionResult ShoppingCartPartial()
         {
@@ -155,10 +130,6 @@ namespace WebApplication.Controllers
             return PartialView(_lstGioHang);
         }
 
-        /// <summary>
-        /// Edit Shopping Cart
-        /// </summary>
-        /// <returns></returns>
         public ActionResult EditShoppingCart()
         {
             if (Session["cart"] == null)
@@ -194,6 +165,10 @@ namespace WebApplication.Controllers
             }
         }
 
+
+        #endregion
+
+        #region Method
         /// <summary>
         /// Get Order Infomation
         /// </summary>
@@ -241,6 +216,29 @@ namespace WebApplication.Controllers
             }
             return _orderDetail;
         }
+
+        public double GetSum()
+        {
+            double _sum = 0;
+            List<ShoppingCart> _lstGioHang = Session["cart"] as List<ShoppingCart>;
+            if (_lstGioHang != null)
+            {
+                _sum = _lstGioHang.Sum(x => x.ThanhTien);
+            }
+            return _sum;
+        }
+
+        public int GetQuantity()
+        {
+            int _tong = 0;
+            List<ShoppingCart> _lstGioHang = Session["cart"] as List<ShoppingCart>;
+            if (_lstGioHang != null)
+            {
+                _tong = _lstGioHang.Sum(x => x.Quantity);
+            }
+            return _tong;
+        }
+
         #endregion
     }
 }

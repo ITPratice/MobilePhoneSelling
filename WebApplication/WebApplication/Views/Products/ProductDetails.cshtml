@@ -9,24 +9,23 @@
 <link href="~/Contents/MasterPage/css/etalage.css" rel="stylesheet" />
 <script src="~/Contents/MasterPage/js/jquery.etalage.min.js"></script>
 <script>
-			jQuery(document).ready(function($){
+    jQuery(document).ready(function ($) {
 
-				$('#etalage').etalage({
-					thumb_image_width: 300,
-					thumb_image_height: 400,
-					source_image_width: 900,
-					source_image_height: 1200,
-					show_hint: true,
-					click_callback: function(image_anchor, instance_id){
-						alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
-					}
-				});
+        $('#etalage').etalage({
+            thumb_image_width: 300,
+            thumb_image_height: 400,
+            source_image_width: 900,
+            source_image_height: 1200,
+            show_hint: true,
+            click_callback: function (image_anchor, instance_id) {
+                alert('Callback example:\nYou clicked on an image with the anchor: "' + image_anchor + '"\n(in Etalage instance: "' + instance_id + '")');
+            }
+        });
 
-			});
+    });
 </script>
 
-
-	<!-- start content -->
+<!-- start content -->
 <div class="row single">
     <div class="col-md-9 det">
         <div class="single_left">
@@ -39,9 +38,9 @@
                         </a>
                     </li>
                     @*<li>
-                        <img class="etalage_thumb_image" src="images/d2.jpg" class="img-responsive" />
-                        <img class="etalage_source_image" src="images/d2.jpg" class="img-responsive" title="" />
-                    </li>*@
+                            <img class="etalage_thumb_image" src="images/d2.jpg" class="img-responsive" />
+                            <img class="etalage_source_image" src="images/d2.jpg" class="img-responsive" title="" />
+                        </li>*@
                 </ul>
                 <div class="clearfix"></div>
             </div>
@@ -82,23 +81,7 @@
         </div>
         <div class="single-bottom2">
             <h6>Sản phẩm khác</h6>
-            <div class="product">
-                <div class="product-desc">
-                    <div class="product-img">
-                        <img src="images/w8.jpg" class="img-responsive " alt="" />
-                    </div>
-                    <div class="prod1-desc">
-                        <h5><a class="product_link" href="#">Excepteur sint</a></h5>
-                        <p class="product_descr"> Vivamus ante lorem, eleifend nec interdum non, ullamcorper et arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="product_price">
-                    <span class="price-access">$597.51</span>
-                    <button class="button1"><span>Add to cart</span></button>
-                </div>
-                <div class="clearfix"></div>
-            </div>
+            @Html.Action("RelativeProducts", "Products", new { @id = Model.Id })
         </div>
     </div>
     <div class="col-md-3">

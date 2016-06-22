@@ -65,7 +65,7 @@ namespace WebApplication.Controllers
         }
 
         // POST: Customers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -138,40 +138,33 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (Session[Constants.SESSION_ACCOUNT] != null)
+                    return HttpNotFound();
                 var _newUser = db.Customers.Create();
-                if (db.Accounts.Any(x => x.Name == accountName))
-                {
-                    ModelState.AddModelError("", "Tài khoản đã được sử dụng");
-                }
-                else
-                {
-                    _newUser.Id = GetId(_newUser);
-                    _newUser.Name = _customer.Name;
-                    _newUser.Birthday = _customer.Birthday;
-                    _newUser.PhoneNumber = _customer.PhoneNumber;
-                    _newUser.Address = _customer.Address;
-                    _newUser.Email = _customer.Email;
-                    _newUser.Deleted = false;
-                    Account account = new Account();
-                    List<Account> accounts = db.Accounts.OrderBy(a => a.Id).ToList();
-                    string oldAccountId = "";
-                    if (accounts.Count > 0) oldAccountId = accounts[accounts.Count - 1].Id;
-                    account.Id = ParamHelper.Instance.GetNewId(oldAccountId, Constants.PREFIX_ACCOUNT);
-                    account.Name = accountName;
-                    account.Password = ParamHelper.Instance.MD5Hash(password);
-                    db.Accounts.Add(account);
-                    db.SaveChanges();
-                    _newUser.AccountId = account.Id;
-                    //FormsAuthentication.SetAuthCookie(_newUser.Name, false);
-                    Session[Constants.SESSION_ACCOUNT] = _newUser;
-                    Session[Constants.SESSION_ACCOUNT_ID] = _newUser.Id;
-                    Session[Constants.SESSION_ROLE] = "Khách hàng";
-                    db.Customers.Add(_newUser);
-                    db.SaveChanges();
-                    SendEmail(_newUser, Constants.TEMPLATE_EMAIL_REGISTER, "ConfirmationMail", "Customers");
-                    return RedirectToAction("ConfirmationStepTwo");
-                }
-                return View(_customer);
+                _newUser.Id = GetId(_newUser);
+                _newUser.Name = _customer.Name;
+                _newUser.Birthday = _customer.Birthday;
+                _newUser.PhoneNumber = _customer.PhoneNumber;
+                _newUser.Address = _customer.Address;
+                _newUser.Email = _customer.Email;
+                _newUser.Deleted = false;
+                Account account = new Account();
+                List<Account> accounts = db.Accounts.OrderBy(a => a.Id).ToList();
+                string oldAccountId = "";
+                if (accounts.Count > 0) oldAccountId = accounts[accounts.Count - 1].Id;
+                account.Id = ParamHelper.Instance.GetNewId(oldAccountId, Constants.PREFIX_ACCOUNT);
+                account.Name = accountName;
+                account.Password = ParamHelper.Instance.MD5Hash(password);
+                db.Accounts.Add(account);
+                db.SaveChanges();
+                _newUser.AccountId = account.Id;
+                Session[Constants.SESSION_ACCOUNT] = _newUser;
+                Session[Constants.SESSION_ACCOUNT_ID] = _newUser.Id;
+                Session[Constants.SESSION_ROLE] = "Khách hàng";
+                db.Customers.Add(_newUser);
+                db.SaveChanges();
+                SendEmail(_newUser, Constants.TEMPLATE_EMAIL_REGISTER, "ConfirmationMail", "Customers");
+                return RedirectToAction("ConfirmationStepTwo");
             }
             else
             {
@@ -206,6 +199,7 @@ namespace WebApplication.Controllers
                 ModelState.AddModelError("", "Data is not correct");
             return View(_customer);
         }
+
         #endregion
 
         #region Reset Password
@@ -221,10 +215,12 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (Session[Constants.SESSION_ACCOUNT] != null)
+                    return HttpNotFound();
                 Customer _cus = db.Customers.SingleOrDefault(x => x.Email == _customer.Email);
                 if (_cus != null)
                 {
-                    Session["ForgetPass"] = _cus;
+                    Session[Constants.SESSION_RESET_PASSWORD] = _cus;
                     SendEmail(_cus, Constants.TEMPLATE_EMAIL_RESET_PASS, "ResetPassword", "Customers");
                     return RedirectToAction("ForgetPasswordStep2", "Customers");
                 }
@@ -240,6 +236,8 @@ namespace WebApplication.Controllers
 
         public ActionResult ForgetPasswordStep2()
         {
+            if (Session[Constants.SESSION_RESET_PASSWORD] == null || Session[Constants.SESSION_ACCOUNT] != null)
+                return HttpNotFound();
             return View();
         }
 
@@ -248,6 +246,8 @@ namespace WebApplication.Controllers
             Customer _customer = db.Customers.Find(token);
             if (ModelState.IsValid)
             {
+                if (Session[Constants.SESSION_ACCOUNT] != null || Session[Constants.SESSION_RESET_PASSWORD] == null)
+                    return HttpNotFound();
                 if (_customer != null)
                 {
                     string _newPass = ParamHelper.Instance.GeneratePassword(8, 10);
@@ -297,6 +297,36 @@ namespace WebApplication.Controllers
             email.UserName = _cus.Account.Name;
             email.ConfirmationToken = confirm;
             email.Send();
+        }
+
+        public string CheckUserName(string uname)
+        {
+            var userExist = "";
+            var user = db.Accounts.FirstOrDefault((n) => n.Name == uname);
+            if (user == null)
+            {
+                userExist = "No";
+            }
+            else
+            {
+                userExist = "Yes";
+            }
+            return userExist;
+        }
+
+        public string CheckEmail(string email)
+        {
+            var emailExist = "";
+            var user = db.Customers.FirstOrDefault((n) => n.Email == email);
+            if (user == null)
+            {
+                emailExist = "No";
+            }
+            else
+            {
+                emailExist = "Yes";
+            }
+            return emailExist;
         }
         #endregion
     }
