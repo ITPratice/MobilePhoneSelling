@@ -1,85 +1,52 @@
 ﻿@using WebApplication.Models
 @using WebApplication.Common
+@using System.Configuration
 @model List<ShoppingCart>
 @{
-    ViewBag.Title = "EditShoppingCart";
-    Layout = "~/Views/Layout/MainLayout.cshtml";
+    ViewBag.Title = "ShoppingCart";
+    Layout = Constants.PATH_MASTER_PAGE;
 }
-<h2>Giỏ hàng của bạn</h2>
-<table id="divGioHang">
-    <tr>
-        <td>Mã sản phẩm</td>
-
-        <td>Tên sản phẩm</td>
-
-        <td>Hình ảnh</td>
-
-        <td>Đơn giá</td>
-
-        <td>Số lượng</td>
-
-        <td>Thành tiền</td>
-    </tr>
-    @{
-        foreach (var _item in Model)
-        {
-            <tr>
-                <td>
-                    <span>@_item.IdProduct</span>
-                </td>
-                <td>
-                    <span>@_item.Name</span>
-                </td>
-                <td>
-                    <img src="@Url.Content(Constants.PATH_IMAGE+"/"+_item.Image)" width="50" height="50" />
-                </td>
-                <td>
-                    <span>@String.Format("{0:0,0 VNĐ}", @_item.Price)</span>
-                </td>
-                @using (Html.BeginForm("UpdateShoppingCart", "Cart", new { @_idProduct = _item.IdProduct }))
+<div class="container">
+    <div class="check">
+        <div class="col-md-3 cart-total">
+            <a class="continue" href="@Url.Action("Index", "Home")">Tiếp tục mua hàng</a>
+        </div>
+        <div class="col-md-9 cart-items">
+            <h1>Giỏ hàng</h1>
+            @{int i = 0;}
+            @{
+                foreach (var item in Model)
                 {
-                    <td>@Html.TextBox("txtSoLuong", _item.Quantity) </td>
-
-                    <td>@String.Format("{0:0,0}", _item.ThanhTien)</td>
-                    <td>
-                        <table>
-                            <tr>
-                                <td>
-                                    <input type="submit" value="Cập nhật" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                            </tr>
-                        </table>
-
-                        <br />
-                        @Html.ActionLink("Xóa", "DeleteShoppingCart", new { @_idProduct = _item.IdProduct })
-                    </td>
+                    <div class="cart-header">
+                        <div class="cart-sec simpleCart_shelfItem">
+                            <div class="cart-item cyc">
+                                <img src="@Url.Content(Constants.PATH_IMAGE + "/" + item.Image)" class="img-responsive" alt="" />
+                            </div>
+                            <div class="cart-item-info">
+                                <h3>
+                                    <a href="#">@item.Name</a><span>Model No: @item.IdProduct</span>
+                                </h3>
+                                <ul class="qty">
+                                    <li><p>Giá: @item.Price</p></li>
+                                    @using (Html.BeginForm("UpdateShoppingCart", "Cart", new { @_idProduct = item.IdProduct }))
+                                    {
+                                        <li><p>Số lượng : @Html.TextBox("txtSoLuong", item.Quantity, new { @class = "text" })</p></li>
+                                        <li><p>Thành tiền: @item.ThanhTien</p></li>
+                                        <input type="submit" value="Cap nhat" />
+                                        @Html.ActionLink("Xoa", "DeleteShoppingCart", new { @_idProduct = item.IdProduct })
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
                 }
-            </tr>
-        }
-    }
-</table>
-
-<style>
-    #divGioHang {
-        border: 1px solid #EEEEEE;
-        margin-left: 10%;
-    }
-
-        #divGioHang td {
-            padding: 10px;
-            width: 15%;
-            background: none;
-            border: 1px solid #CACACA;
-            outline: none;
-            color: #464646;
-            text-align: center;
-            font-size: 1em;
-            font-weight: bold;
-            font-family: Arial, Helvetica, sans-serif;
-            -webkit-appearance: none;
-        }
-</style>
-
+            }
+        </div>
+    </div>
+</div>
+<div class="clearfix"> </div>
+<script type="text/javascript">
+    $(".text").spinner();
+    $(".text").spinner({ min: 0 });
+</script>

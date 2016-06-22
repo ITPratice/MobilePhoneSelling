@@ -44,7 +44,15 @@ namespace WebApplication.Controllers
             }
             else
             {
-                _cart.Quantity++;
+                Product p = db.Products.Single(x => x.Id == _idProducts);
+                if(p.Quantity<=1)
+                {
+                    _cart.Quantity = 1;
+                }
+                else
+                {
+                    _cart.Quantity++;
+                }
                 return Redirect(_strUrl);
             }
         }
@@ -55,8 +63,7 @@ namespace WebApplication.Controllers
             Product _product = db.Products.SingleOrDefault(x => x.Id == _idProduct);
             if (_product == null)
             {
-                Response.StatusCode = 404;  //return 404 error
-                return null;
+                return HttpNotFound();
             }
             List<ShoppingCart> _lstGioHang = GetShoppingCart();
             ShoppingCart _cart = _lstGioHang.SingleOrDefault(x => x.IdProduct == _idProduct);
@@ -68,13 +75,12 @@ namespace WebApplication.Controllers
         }
 
         //Delete Shopping Cart
-        public ActionResult DeleteShoppingCart(string _idProduct, FormCollection _form)
+        public ActionResult DeleteShoppingCart(string _idProduct)
         {
             Product _product = db.Products.SingleOrDefault(x => x.Id == _idProduct);
             if (_product == null)
             {
-                Response.StatusCode = 404;  //return 404 error
-                return null;
+                return HttpNotFound();
             }
             List<ShoppingCart> _lstGioHang = GetShoppingCart();
             ShoppingCart _cart = _lstGioHang.SingleOrDefault(x => x.IdProduct == _idProduct);
@@ -235,9 +241,6 @@ namespace WebApplication.Controllers
             }
             return _orderDetail;
         }
-        #endregion
-
-        #region Paypal Payment
         #endregion
     }
 }

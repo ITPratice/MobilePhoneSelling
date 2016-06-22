@@ -587,7 +587,6 @@
     <Content Include="Views\Users\ChangePassword.cshtml" />
     <Content Include="Views\Home\AjaxSearch.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
-    <Content Include="Views\Cart\ReturnResult.cshtml" />
     <Content Include="Views\Statistics\Index.cshtml" />
     <Content Include="Views\Users\ChangeStaffPassword.cshtml" />
     <Content Include="Views\Products\Compare.cshtml" />
