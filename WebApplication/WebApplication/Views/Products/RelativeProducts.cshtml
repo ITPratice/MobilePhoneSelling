@@ -6,7 +6,7 @@
     <div class="product">
         <div class="product-desc">
             <div class="product-img">
-                <img src="@Url.Content(Constants.PATH_IMAGE + "/" + @item.Image)" class="img-responsive " alt="" />
+                <img src="@Url.Content(Constants.PATH_IMAGE + "/" + @item.Image)" class="img-responsive " alt="" width="200" height="200" />
             </div>
             <div class="prod1-desc">
                 <h5><a class="product_link" href="@Url.Action("ProductDetails", "Products", new { @id = item.Id })">@item.Name</a></h5>

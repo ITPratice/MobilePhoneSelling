@@ -16,13 +16,13 @@
                 data: { uname: getName },
                 success: function (data) {
                     if (data == "Yes") {
-                        $('#userError').html("Username Already Exist");
-                        $('#userError').addClass('uExist');
+                        $('#userError').html("Username đã tồn tại !");
+                        $('#userError').css('color', 'red');
                         $('#UserName').val('');
                         $('#UserName').focus();
                     } else {
-                        $('#userError').html("User Available");
-                        $('#userError').addClass('uAvail');
+                        $('#userError').html("Có thể sử dụng tên này");
+                        $('#userError').css('color', 'green');
                     }
                 },
                 error: function (response) {
@@ -45,7 +45,7 @@
                         $('#Email').val('');
                         $('#Email').focus();
                     } else {
-                        $('#emailError').html("Tên tài khoản đã được sử dụng");
+                        $('#emailError').html("Có thể sử dụng Email này");
                         $('#emailError').addClass('uAvail');
                     }
                 },
@@ -53,6 +53,14 @@
                     alert('no');
                 }
             });
+        });
+
+        $('#confirm_password').on('keyup', function () {
+            if ($(this).val() == $('#password').val()) {
+                $('#message').html('matching').css('color', 'green');
+            }
+            else
+                $('#message').html('not matching').css('color', 'red');
         });
     });
 </script>
@@ -92,19 +100,25 @@
                 <div>
                     <label>
                         @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = "Email", type = "email", id = "Email" } })
-                        <span id="emailError"></span>
-                     </label>
+                    </label>
+                    <span id="emailError"></span>
                 </div>
                 <div>
                     <label>
                         <input type="text" name="accountName" id="UserName" placeholder="Tên tài khoản" />
-                        <span id="userError"></span>
+                    </label>
+                    <span id="userError"></span>
+                </div>
+                <div>
+                    <label>
+                        <input type="password" name="password" placeholder="Mật khẩu" id="password" required />
                     </label>
                 </div>
                 <div>
                     <label>
-                        <input type="password" name="password" placeholder="Mật khẩu" />
+                        <input type="password" placeholder="Xác nhận mật khẩu" id="confirm_password" name="confirm_password" required>
                     </label>
+                    <span id ="message"></span>
                 </div>
                 <div>
                     <input type="submit" value="Đăng kí" id="register-submit">
@@ -113,18 +127,6 @@
         </div>
     </div>
 </div>
-<script>
-    (function () {
-        // Change text inside send button on submit
-        var send = document.getElementById('register-submit');
-        if (send) {
-            send.onclick = function () {
-                this.innerHTML = '...Đang xử lý';
-            }
-        }
-    })();
-</script>
-
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
