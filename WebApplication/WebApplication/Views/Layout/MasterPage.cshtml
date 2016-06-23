@@ -147,9 +147,12 @@
                             <div class="cart box_1">
                                 @Html.Action("ShoppingCartPartial", "Cart")
                             </div>
-                            <div class="create_btn">
-                                <a href="@Url.Action("ShoppingCart", "Cart")">KIỂM TRA</a>
-                            </div>
+                            @if (Session[Constants.SESSION_CART] != null)
+                            {
+                                <div class="create_btn">
+                                    <a href="@Url.Action("ShoppingCart", "Cart")">KIỂM TRA</a>
+                                </div>
+                            }
                             <div class="clearfix"> </div>
                         </div>
                         <div class="search">
@@ -179,7 +182,6 @@
         <div class="women_main">
             <!-- start content -->
             @RenderBody()
-            @Html.ActionLink("Compare", "Compare", "Products")
             <div class="clearfix"></div>
             <!-- end content -->
         </div>

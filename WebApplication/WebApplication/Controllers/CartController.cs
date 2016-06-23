@@ -14,11 +14,11 @@ namespace WebApplication.Controllers
         // GET: Cart
         public List<ShoppingCart> GetShoppingCart()
         {
-            List<ShoppingCart> _lstGioHang = Session["cart"] as List<ShoppingCart>;
+            List<ShoppingCart> _lstGioHang = Session[Constants.SESSION_CART] as List<ShoppingCart>;
             if (_lstGioHang == null)
             {
                 _lstGioHang = new List<ShoppingCart>();
-                Session["cart"] = _lstGioHang;
+                Session[Constants.SESSION_CART] = _lstGioHang;
             }
             return _lstGioHang;
         }
@@ -97,7 +97,7 @@ namespace WebApplication.Controllers
         //Trang giỏ hàng
         public ActionResult ShoppingCart()
         {
-            if (Session["cart"] == null)
+            if (Session[Constants.SESSION_CART] == null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -123,7 +123,7 @@ namespace WebApplication.Controllers
         public ActionResult CartPartial()
         {
             List<ShoppingCart> _lstGioHang = GetShoppingCart();
-            if (Session["cart"] == null)
+            if (Session[Constants.SESSION_CART] == null)
             {
                 return PartialView();
             }
@@ -132,7 +132,7 @@ namespace WebApplication.Controllers
 
         public ActionResult EditShoppingCart()
         {
-            if (Session["cart"] == null)
+            if (Session[Constants.SESSION_CART] == null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -144,7 +144,7 @@ namespace WebApplication.Controllers
         //Init Order
         public ActionResult Order(Order _order)
         {
-            if (Session["cart"] == null)
+            if (Session[Constants.SESSION_CART] == null)
             {
                 RedirectToAction("Index", "Home");
             }
@@ -160,7 +160,7 @@ namespace WebApplication.Controllers
                 _orderDetails = GetOrderDetails(_order);
                 db.Orders.Add(_order);
                 db.SaveChanges();
-                Session["cart"] = null;
+                Session[Constants.SESSION_CART] = null;
                 return View();
             }
         }
@@ -220,7 +220,7 @@ namespace WebApplication.Controllers
         public double GetSum()
         {
             double _sum = 0;
-            List<ShoppingCart> _lstGioHang = Session["cart"] as List<ShoppingCart>;
+            List<ShoppingCart> _lstGioHang = Session[Constants.SESSION_CART] as List<ShoppingCart>;
             if (_lstGioHang != null)
             {
                 _sum = _lstGioHang.Sum(x => x.ThanhTien);
@@ -231,7 +231,7 @@ namespace WebApplication.Controllers
         public int GetQuantity()
         {
             int _tong = 0;
-            List<ShoppingCart> _lstGioHang = Session["cart"] as List<ShoppingCart>;
+            List<ShoppingCart> _lstGioHang = Session[Constants.SESSION_CART] as List<ShoppingCart>;
             if (_lstGioHang != null)
             {
                 _tong = _lstGioHang.Sum(x => x.Quantity);

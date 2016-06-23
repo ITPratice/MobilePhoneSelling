@@ -30,8 +30,6 @@
                     <li class="last_price"><span>@ViewBag.TongTien</span></li>
                 </ul>
                 <div class="clearfix"> </div>
-
-                <div class="clearfix"></div>
                 @if (Session["Account"] == null || Session["Account"].ToString() == String.Empty)
                 {
                     <a class="order" href="@Url.Action("Login", "Users")">Thanh toán</a>
@@ -59,7 +57,7 @@
                                 </div>
                                 <div class="cart-item-info">
                                     <h3>
-                                        <a href="#">@item.Name</a><span>Model No: 3578</span>
+                                        <a href="#">@item.Name</a><span>Model No: @item.IdProduct</span>
                                     </h3>
                                     <ul class="qty">
                                         <li><p>Giá: @item.Price</p></li>
