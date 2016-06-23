@@ -141,6 +141,37 @@ namespace WebApplication.Controllers
             return View(customer);
         }
 
+        public ActionResult ChangePassword(string id)
+        {
+            Account account = db.Accounts.Find(id);
+            if (account == null)
+            {
+                return HttpNotFound();
+            }
+            return View(account);
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(Account account, string newPassword, string oldPassword)
+        {
+            if (account != null)
+            {
+                if (account.Password.Equals(ParamHelper.Instance.MD5Hash(oldPassword)))
+                {
+                    account.Password = ParamHelper.Instance.MD5Hash(newPassword);
+                    db.Entry(account).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewBag.Error = "Sai mật khẩu cũ";
+                    return View(account);
+                }
+            }
+            return View(account);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -18,6 +18,7 @@
     <link href="~/Contents/Admin/css/sb-admin-2.css" rel="stylesheet" />
     <link href="~/Contents/Admin/css/timeline.css" rel="stylesheet" />
     <link href="~/Contents/Admin/css/morris.css" rel="stylesheet" />
+    <script src="~/Contents/MasterPage/js/jquery-1.11.1.min.js"></script>
     <link href="~/Contents/Admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     @RenderSection("Styles", required: false)
     @RenderSection("Scripts", required: false)
@@ -37,41 +38,42 @@
             @if (Session[Constants.SESSION_ROLE] != null)
             {
                 <ul class="nav navbar-top-links navbar-left">
-                    @*@if (Session[Constants.SESSION_ROLE].Equals("Admin"))
-                        {*@
-                    <li>
-                        @Html.ActionLink("Sản phẩm", "Index", "Products")
-                    </li>
-                    <li>
-                        @Html.ActionLink("Nhà sản xuất", "Index", "Manufacturers")
-                    </li>
-                    <li>
-                        @Html.ActionLink("Nhân viên", "Index", "Staffs")
-                    </li>
-                    <li>
-                        @Html.ActionLink("Khách hàng", "Index", "Customers")
-                    </li>
-                    <li>
-                        @Html.ActionLink("Khuyến mãi", "Index", "Promotions")
-                    </li>
-                    @*}
-                        @if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch"))
-                        {*@
-                    <li>
-                        @Html.ActionLink("Đơn hàng", "Index", "Orders")
-                    </li>
-                    @*}
-                        @if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch") || Session[Constants.SESSION_ROLE].Equals("Nhân viên giao hàng"))
-                        {*@
-                    <li>
-                        @Html.ActionLink("Phiếu giao hàng", "Index", "Deliveries")
-                    </li>
-                    @*}
-                        @if (Session[Constants.SESSION_ROLE].Equals("Admin"))
-                        {*@
-                    <li>
-                        @Html.ActionLink("Thống kê", "Index", "Statistics")
-                    </li>
+                    @if (Session[Constants.SESSION_ROLE].Equals("Admin"))
+                    {
+                        <li>
+                            @Html.ActionLink("Sản phẩm", "Index", "Products")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Nhà sản xuất", "Index", "Manufacturers")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Nhân viên", "Index", "Staffs")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Khách hàng", "Index", "Customers")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Khuyến mãi", "Index", "Promotions")
+                        </li>
+                    }
+                    @if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch"))
+                    {
+                        <li>
+                            @Html.ActionLink("Đơn hàng", "Index", "Orders")
+                        </li>
+                    }
+                    @if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch") || Session[Constants.SESSION_ROLE].Equals("Nhân viên giao hàng"))
+                    {
+                        <li>
+                            @Html.ActionLink("Phiếu giao hàng", "Index", "Deliveries")
+                        </li>
+                    }
+                    @if (Session[Constants.SESSION_ROLE].Equals("Admin"))
+                    {
+                        <li>
+                            @Html.ActionLink("Thống kê", "Index", "Statistics")
+                        </li>
+                    }
                 </ul>
 
                 <ul class="nav navbar-top-links navbar-right">
@@ -83,12 +85,15 @@
                             <li>
                                 <a href="@Url.Action("EditProfile", "Staffs", new {@id=@Session[Constants.SESSION_ACCOUNT_ID].ToString() })"><i class="fa fa-user fa-fw"></i> Thông tin cá nhân</a>
                             </li>
-                            <li>
-                                @{
-                Staff staff = Session[Constants.SESSION_ACCOUNT] as Staff;
-                                }
-                                <a href="@Url.Action("ChangePassword", "Staffs", new { @id = staff.AccountId })">Đổi mật khẩu</a>
-                            </li>
+                            @if (Session[Constants.SESSION_ROLE] != null && !Session[Constants.SESSION_ROLE].Equals("Khách hàng"))
+                            {
+                                <li>
+                                    @{
+                                Staff staff = Session[Constants.SESSION_ACCOUNT] as Staff;
+                                    }
+                                    <a href="@Url.Action("ChangePassword", "Staffs", new { @id = staff.AccountId })">Đổi mật khẩu</a>
+                                </li>
+                            }
                             <li class="divider"></li>
                             <li>
                                 <a href="@Url.Action("Logout","Users")"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a>

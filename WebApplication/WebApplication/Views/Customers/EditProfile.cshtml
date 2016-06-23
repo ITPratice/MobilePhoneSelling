@@ -15,7 +15,7 @@ else
         <div class="registration_left">
             <h2>Thay đổi thông tin</h2>
             <div class="registration_form">
-                @Html.ActionLink("Đổi mật khẩu", "ChangePassword", "Users", new { @id = Model.AccountId })
+                <a href="@Url.Action("ChangePassword","Customers",new {@id=Model.AccountId})">Đổi mật khẩu</a>
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken()

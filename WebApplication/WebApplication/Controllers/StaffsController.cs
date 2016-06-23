@@ -186,19 +186,30 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangePassword(string id, string password)
+        public ActionResult ChangePassword(Account account, string newPassword, string oldPassword)
         {
-            Account account = db.Accounts.Find(id);
-            account.Password = ParamHelper.Instance.MD5Hash(password);
-            db.Entry(account).State = EntityState.Modified;
-            db.SaveChanges();
-            if (Session[Constants.SESSION_ROLE] == null || String.IsNullOrEmpty(Session[Constants.SESSION_ROLE].ToString()))
-                return RedirectToAction("Index", "Home");
-            if (Session[Constants.SESSION_ROLE].Equals("Admin"))
-                return RedirectToAction("Index", "Products");
-            if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch"))
-                return RedirectToAction("Index", "Orders");
-            return RedirectToAction("Index", "Deliverires");
+            if (account != null)
+            {
+                if (account.Password.Equals(ParamHelper.Instance.MD5Hash(oldPassword)))
+                {
+                    account.Password = ParamHelper.Instance.MD5Hash(newPassword);
+                    db.Entry(account).State = EntityState.Modified;
+                    db.SaveChanges();
+                    if (Session[Constants.SESSION_ROLE] == null || String.IsNullOrEmpty(Session[Constants.SESSION_ROLE].ToString()))
+                        return RedirectToAction("Index", "Home");
+                    if (Session[Constants.SESSION_ROLE].Equals("Admin"))
+                        return RedirectToAction("Index", "Products");
+                    if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch"))
+                        return RedirectToAction("Index", "Orders");
+                    return RedirectToAction("Index", "Deliveries");
+                }
+                else
+                {
+                    ViewBag.Error = "Sai mật khẩu cũ";
+                    return View(account);
+                }
+            }
+            return View(account);
         }
 
         protected override void Dispose(bool disposing)
