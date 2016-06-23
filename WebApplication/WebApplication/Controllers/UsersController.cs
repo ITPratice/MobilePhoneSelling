@@ -16,30 +16,6 @@ namespace WebApplication.Controllers
     {
         MobilePhoneSellingEntities db = new MobilePhoneSellingEntities();
 
-        [HttpGet]
-        public ActionResult ChangePassword(string id)
-        {
-            Account account = db.Accounts.Find(id);
-            return View(account);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ChangePassword(string id, string password)
-        {
-            if (ModelState.IsValid)
-            {
-                Account account = db.Accounts.Find(id);
-                account.Password = ParamHelper.Instance.MD5Hash(password);
-                db.Entry(account).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index", "Home");
-            }
-            else
-                ModelState.AddModelError("", "Error");
-            return RedirectToAction("Index", "Home");
-        }
-
         #region Login
         [HttpGet]
         public ActionResult Login()
