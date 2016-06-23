@@ -20,6 +20,7 @@
 </div>
 @{double safeOff = 100;}
 <div class="col-md-9 w_content">
+    <h5>Sản phẩm mới</h5>
     @foreach (var item in Model)
     {
         <div class="grid1_of_4">
@@ -31,7 +32,7 @@
                         {
                             if (i.StartDate <= DateTime.Now && i.EndDate >= DateTime.Now)
                             {
-                                <span>@i.SaleOff %</span>
+                                @*<span>@i.SaleOff %</span>*@
                                 safeOff = i.SaleOff;
                                 break;
                             }
@@ -56,4 +57,6 @@
         </div>
     }
     <div class="clearfix"></div>
+    <h5>Sản phẩm bán chạy</h5>
+    @Html.Action("GetProduct", "Home")
 </div>

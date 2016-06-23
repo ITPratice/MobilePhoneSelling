@@ -36,5 +36,18 @@ namespace WebApplication.Controllers
                               select new { n.Name });
             return Json(_prodQuery, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult GetProduct()
+        {
+            var topProductID = db.OrderDetails
+                .GroupBy(x => x.ProductId)
+                .OrderByDescending(g => g.Count())
+                .Take(5)
+                .Select(x => x.Key)
+                .ToList();
+            var topProducts = db.Products
+                .Where(x => topProductID.Contains(x.Id));
+            return PartialView(topProducts.ToList());
+        }
     }
 }
