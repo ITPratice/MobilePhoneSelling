@@ -31,7 +31,7 @@
             <div class="panel-body">
                 <div class="dataTable_wrapper">
                     <div>
-                        @using (Html.BeginForm("Index", "Deliveries", FormMethod.Get))
+                        @using (Html.BeginForm("Index", "Products", FormMethod.Get))
                         {
                             <p style="float:right;">
                                 @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
@@ -65,7 +65,7 @@
                                         @Html.DisplayFor(modelItem => item.Name)
                                     </td>
                                     <td class="row-item">
-                                        <img src="@Url.Content(@Constants.PATH_IMAGE+"/"+item.Image)" alt="@item.Name" class="image_column" width="50%" height="50%" />
+                                        <img src="@Url.Content(@Constants.PATH_IMAGE+"/"+item.Image)" alt="@item.Name" class="image_column" />
                                     </td>
                                     <td class="row-item">
                                         @Html.DisplayFor(modelItem => item.Manufacturer.Name)
@@ -102,7 +102,6 @@
                                     else
                                     {
                                         <td class="row-item">
-                                            @Html.ActionLink("Sửa đổi", "Edit", new { id = item.Id })|
                                             @Html.ActionLink("Xem thông số kỹ thuật", "TechnicalDetail", new { id = item.Id }) |
                                             @Html.ActionLink("Khôi phục",
                                                          "Restore",

@@ -7,6 +7,7 @@ using WebApplication.Models;
 using PagedList;
 using WebApplication.Common;
 using System.Net;
+using System.Data.Entity;
 
 namespace WebApplication.Controllers
 {
@@ -172,6 +173,8 @@ namespace WebApplication.Controllers
         [HttpPost]
         public ActionResult Edit(Manufacturer manufacturer)
         {
+            db.Entry(manufacturer).State = EntityState.Modified;
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
     }

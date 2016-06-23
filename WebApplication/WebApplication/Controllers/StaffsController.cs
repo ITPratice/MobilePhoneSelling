@@ -58,16 +58,16 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                List<Staff> staffs = db.Staffs.OrderBy(s=>s.Id).ToList();
+                List<Staff> staffs = db.Staffs.OrderBy(s => s.Id).ToList();
                 string oldStaffId = "";
                 if (staffs.Count > 0) oldStaffId = staffs[staffs.Count - 1].Id;
                 staff.Id = ParamHelper.Instance.GetNewId(oldStaffId, Constants.PREFIX_STAFF);
                 string oldAccountId = "";
-                List<Account> accounts = db.Accounts.OrderBy(a=>a.Id).ToList();
+                List<Account> accounts = db.Accounts.OrderBy(a => a.Id).ToList();
                 if (accounts.Count > 0) oldAccountId = accounts[accounts.Count - 1].Id;
                 Account account = new Account();
                 account.Id = ParamHelper.Instance.GetNewId(oldAccountId, Constants.PREFIX_ACCOUNT);
-                account.Name = Constants.PREFIX_STAFF_ACCOUNT_NAME + 
+                account.Name = Constants.PREFIX_STAFF_ACCOUNT_NAME +
                     account.Id.Substring(Constants.PREFIX_ACCOUNT.Length);
                 account.Password = ParamHelper.Instance.MD5Hash(account.Name);
                 db.Accounts.Add(account);
@@ -158,9 +158,9 @@ namespace WebApplication.Controllers
         }
 
         [HttpGet]
-        public ActionResult ViewProfile(string accountName)
+        public ActionResult ViewProfile()
         {
-            Staff staff = db.Staffs.SingleOrDefault(s => s.Account.Name == accountName);
+            Staff staff = (Staff)Session[Constants.SESSION_ACCOUNT];
             if (staff == null)
             {
                 return HttpNotFound();
@@ -168,9 +168,10 @@ namespace WebApplication.Controllers
             return View(staff);
         }
 
+        [HttpPost]
         public ActionResult EditProfile(Staff staff)
         {
-            return null;
+            return RedirectToAction("ViewProfile");
         }
 
         protected override void Dispose(bool disposing)

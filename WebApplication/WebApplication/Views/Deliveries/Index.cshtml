@@ -37,12 +37,14 @@
                                 <input type="submit" value="Search" class="btn btn-default" />
                             </p>
                         }
-
-                        @using (Html.BeginForm(Html.BeginForm("ChooseOrders", "Deliveries", FormMethod.Post, new { enctype = "multipart/form-data", id = "chooseOrders" })))
+                        @if (Session[Constants.SESSION_ROLE] != null && Session[Constants.SESSION_ROLE].Equals("Nhân viên giao hàng"))
                         {
-                            <p style="float:left">
-                                <input type="submit" value="Giao Hàng" name="ChooseOrders" class="btn btn-default" />
-                            </p>
+                            using (Html.BeginForm(Html.BeginForm("ChooseOrders", "Deliveries", FormMethod.Post, new { enctype = "multipart/form-data", id = "chooseOrders" })))
+                            {
+                                <p style="float:left">
+                                    <input type="submit" value="Giao Hàng" name="ChooseOrders" class="btn btn-default" />
+                                </p>
+                            }
                         }
                     </div>
 
@@ -61,10 +63,10 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.First().IsDelivered)
                                 </th>
-                                @*@if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch"))
-                                    {
-                                        <th></th>
-                                    }*@
+                                @if (Session[Constants.SESSION_ROLE] != null && Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch"))
+                                {
+                                    <th></th>
+                                }
                             </tr>
                         </thead>
 
@@ -76,35 +78,40 @@
                                         @Html.DisplayFor(modelItem => item.Date)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Order.CustomerId)
+                                        @Html.DisplayFor(modelItem => item.Order.Customer.Name)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Staff.Name)
                                     </td>
-                                    <td>
-                                        @*@if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao hàng"))
-                                            {*@
-                                        if (item.IsDelivered)
-                                        {
-                                        @Html.DisplayFor(modelItem => item.IsDelivered)
-                                        }
-                                        else
-                                        {
-                                        <input type="checkbox" name="ChooseOrders" value="@item.Id" form="chooseOrders" />
-                                        }
-                                        @*}
+                                    @if (Session[Constants.SESSION_ROLE] != null)
+                                    {
+                                        <td>
+                                            @if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao hàng"))
+                                            {
+                                                if (item.IsDelivered)
+                                                {
+                                                    @Html.DisplayFor(modelItem => item.IsDelivered)
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" name="ChooseOrders" value="@item.Id" form="chooseOrders" />
+                                                }
+                                            }
                                             else
                                             {
                                                 @Html.DisplayFor(modelItem => item.IsDelivered)
-                                            }*@
-                                    </td>
-                                    @*@if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch"))
+                                            }
+                                        </td>
+                                        if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch"))
                                         {
-                                            @Html.ActionLink("Loại bỏ",
+                                            <td>
+                                                @Html.ActionLink("Loại bỏ",
                                                              "Delete",
                                                              new { id = item.Id },
                                                              new { onclick = "return confirm('Bạn có thực sự muốn loại bỏ phiếu giao hàng này?')" })
-                                        }*@
+                                            </td>
+                                        }
+                                    }
                                 </tr>
                             }
                         </tbody>

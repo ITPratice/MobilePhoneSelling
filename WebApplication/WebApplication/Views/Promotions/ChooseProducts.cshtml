@@ -1,5 +1,4 @@
-﻿@model PagedList.IPagedList<WebApplication.Models.Product>
-@using PagedList.Mvc
+﻿@model IEnumerable<WebApplication.Models.Product>
 @using WebApplication.Common
 
 @section Styles{
@@ -52,13 +51,10 @@
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.First().Name)
+                                    @Html.DisplayNameFor(model => model.Name)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.First().Price)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.First().Deleted)
+                                    @Html.DisplayNameFor(model => model.Price)
                                 </th>
                                 <th>
                                     Chọn
@@ -68,6 +64,7 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
+                                if (!item.Deleted) { 
                                 <tr>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Name)
@@ -76,12 +73,10 @@
                                         @Html.DisplayFor(modelItem => item.Price)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Deleted)
-                                    </td>
-                                    <td>
                                         <input type="checkbox" name="ChooseProducts" value="@item.Id" form="chooseProducts" />
                                     </td>
                                 </tr>
+                                }
                             }
                         </tbody>
                     </table>
