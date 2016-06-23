@@ -41,12 +41,12 @@
                 success: function (data) {
                     if (data == "Yes") {
                         $('#emailError').html("Email đã được sử dụng");
-                        $('#emailError').addClass('uExist');
+                        $('#emailError').acss('color', 'red');
                         $('#Email').val('');
                         $('#Email').focus();
                     } else {
                         $('#emailError').html("Có thể sử dụng Email này");
-                        $('#emailError').addClass('uAvail');
+                        $('#emailError').css('color', 'blue');
                     }
                 },
                 error: function (response) {
@@ -83,26 +83,31 @@
                 <div>
                     <label>
                         @Html.EditorFor(model => model.Name, new { htmlAttributes = new { placeholder = "Họ và tên", type = "text" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                     </label>
                 </div>
                 <div>
                     <label>
                         @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { placeholder = "Ngày sinh", type = "date" } })
+                        @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
                     </label>
                 </div>
                 <div>
                     <label>
                         @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { placeholder = "Số điện thoại", type = "text" } })
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
                     </label>
                 </div>
                 <div>
                     <label>
                         @Html.EditorFor(model => model.Address, new { htmlAttributes = new { placeholder = "Địa chỉ", type = "text" } })
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                     </label>
                 </div>
                 <div>
                     <label>
                         @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = "Email", type = "email", id = "Email" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                     </label>
                     <span id="emailError"></span>
                 </div>
