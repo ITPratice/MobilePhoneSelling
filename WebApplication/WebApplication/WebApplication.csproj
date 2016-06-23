@@ -446,6 +446,7 @@
     <Compile Include="Models\ManufacturerStatistic.cs" />
     <Compile Include="Models\Metadata\Account.metadata.cs" />
     <Compile Include="Models\Metadata\Customer.metadata.cs" />
+    <Compile Include="Models\Metadata\Delivery.metadata.cs" />
     <Compile Include="Models\Metadata\Manufacturer.metadata.cs" />
     <Compile Include="Models\Metadata\Order.metadata.cs" />
     <Compile Include="Models\Metadata\OrderDetail.metadata.cs" />
@@ -484,6 +485,7 @@
     <Compile Include="Models\Promotion.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SaleStatistic.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\Staff.cs">
       <DependentUpon>MobileSellingModel.tt</DependentUpon>
@@ -552,11 +554,9 @@
     <Content Include="Views\Staffs\Index.cshtml" />
     <Content Include="Views\Customers\Edit.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
-    <Content Include="Views\Orders\Delete.cshtml" />
     <Content Include="Views\Orders\Details.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Orders\ShowDeliverer.cshtml" />
-    <Content Include="Views\Orders\EditDetail.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Customers\Register.cshtml" />

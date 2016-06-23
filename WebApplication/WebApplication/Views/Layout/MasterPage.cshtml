@@ -58,7 +58,26 @@
                 <div class="top_right">
                     <ul>
                         <li><a href="#">Trợ giúp</a></li>|
-                        <li><a href="contact.html">Liên hệ</a></li>
+                        <li><a href="contact.html">Liên hệ</a></li> |
+                        @if (Session[Constants.SESSION_ROLE] != null)
+                        {
+                            <li>
+                                @{
+                            if (Session[Constants.SESSION_ROLE].Equals("Admin"))
+                            {
+                                <a href="@Url.Action("Index","Products")">Quản lý</a>
+                            }
+                            else if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch"))
+                            {
+                                <a href="@Url.Action("Index","Orders")">Quản lý</a>
+                            }
+                            else if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao hàng"))
+                            {
+                                <a href="@Url.Action("Index","Deliveries")">Quản lý</a>
+                            }
+                                }
+                            </li>
+                        }
                     </ul>
                 </div>
                 <div class="top_left">
@@ -99,15 +118,27 @@
                                 <div class="reg">
                                     <a href="@Url.Action("Edit", "Users", new { @id = Session["AccId"].ToString() })">
                                         @{
-                                            Customer cus = (Customer)Session["Account"];
-                                            <span>@cus.Name</span>
-                                            if (cus.IsActivated == false)
-                                            {
-                                                <br />
-                                                <span>Tài khoản chưa kích hoạt</span>
-                                            }
+                                if (Session[Constants.SESSION_ROLE].Equals("Khách hàng"))
+                                {
+                                    Customer cus = (Customer)Session[Constants.SESSION_ACCOUNT];
+                                    <span>@cus.Name</span>
+                                }
+                                else
+                                {
+                                    Staff staff = (Staff)Session[Constants.SESSION_ACCOUNT];
+                                    <span>@staff.Name</span>
+                                }
                                         }
                                     </a>
+                                    @if (Session[Constants.SESSION_ROLE] != null && Session[Constants.SESSION_ROLE].Equals("Khách hàng"))
+                                    {
+                                        Customer customer = (Customer)Session[Constants.SESSION_ACCOUNT];
+                                        if (!customer.IsActivated)
+                                        {
+                                            <br />
+                                            <span>Tài khoản chưa kích hoạt</span>
+                                        }
+                                    }
                                 </div>
                                 <div class="reg">
                                     @Html.ActionLink("Logout", "Logout", "Users")
@@ -138,12 +169,6 @@
                     <li class="grid">
                         <a class="color2" href="#">Điện thoại</a>
                         @Html.Action("ManufacturersPartial", "Manufacturers")
-                    </li>
-                    <li>
-                        <a class="color4" href="#">Máy tinh</a>
-                    </li>
-                    <li>
-                        <a class="color5" href="#">Phụ kiện</a>
                     </li>
                 </ul>
             </div>
@@ -245,7 +270,5 @@
             <p>Copyrights © 2015 Gretong. All rights reserved | Template by <a href="http://w3layouts.com/">W3layouts</a></p>
         </div>
     </div>
-
 </body>
 </html>
-

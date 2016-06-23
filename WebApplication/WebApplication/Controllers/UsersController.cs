@@ -169,6 +169,7 @@ namespace WebApplication.Controllers
             Session[Constants.SESSION_ACCOUNT] = null;
             Session[Constants.SESSION_ACCOUNT_ID] = null;
             Session[Constants.SESSION_ROLE] = null;
+            Session["Cart"] = null;
             return RedirectToAction("Index", "Home");
         }
         #endregion

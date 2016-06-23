@@ -28,7 +28,7 @@
             <div class="panel-body">
                 <div class="dataTable_wrapper">
                     <div>
-                        @using (Html.BeginForm("Index", "Deliveries", FormMethod.Get))
+                        @using (Html.BeginForm("Index", "Orders", FormMethod.Get))
                         {
                             <p style="float:right;">
                                 @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
@@ -72,11 +72,33 @@
                                     <td class="row-item">
                                         @Html.DisplayFor(modelItem => item.Deleted)
                                     </td>
-                                    <td class="row-item">
-                                        @Html.ActionLink("Giao Hàng", "ShowDeliverer", new { id = item.Id }) |
-                                        @Html.ActionLink("Chi tiết", "Details", new { orderId = item.Id }) |
-                                        @Html.ActionLink("Loại bỏ", "Delete", new { id = item.Id })
-                                    </td>
+                                    @if (!item.IsAssigned)
+                                    {
+                                        if (!item.Deleted)
+                                        {
+                                            <td class="row-item">
+                                                @Html.ActionLink("Phân công", "ShowDeliverer", new { id = item.Id }) |
+                                                @Html.ActionLink("Chi tiết", "Details", new { orderId = item.Id }) |
+                                                @Html.ActionLink("Loại bỏ",
+                                                         "Delete",
+                                                         new { id = item.Id },
+                                                         new { onclick = "return confirm('Bạn có thực sự muốn loại bỏ đơn hàng này không?')" })
+                                            </td>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (!item.Deleted)
+                                        {
+                                            <td class="row-item">
+                                                @Html.ActionLink("Chi tiết", "Details", new { orderId = item.Id }) |
+                                                @Html.ActionLink("Loại bỏ",
+                                                         "Delete",
+                                                         new { id = item.Id },
+                                                         new { onclick = "return confirm('Bạn có thực sự muốn loại bỏ đơn hàng này không?')" })
+                                            </td>
+                                        }
+                                    }
                                 </tr>
                             }
                         </tbody>

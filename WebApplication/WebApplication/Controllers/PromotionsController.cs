@@ -170,14 +170,11 @@ namespace WebApplication.Controllers
             return View(products.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult ChooseProducts(string promotionId, string sortOrder, string currentFilter, string searchString, int? page)
+        public ActionResult ChooseProducts(string promotionId, string sortOrder, string searchString)
         {
             ViewBag.PromotionId = promotionId;
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            if (searchString != null) page = 1;
-            else searchString = currentFilter;
-            ViewBag.CurrentFilter = currentFilter;
             var products = from p in db.Products
                            where !(from pr in db.Products
                                    where pr.Promotions.Any(pro => pro.Id == promotionId)
@@ -196,9 +193,7 @@ namespace WebApplication.Controllers
                     products = products.OrderBy(p => p.Name);
                     break;
             }
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-            return View(products.ToPagedList(pageNumber, pageSize));
+            return View(products.ToList());
         }
 
         [HttpPost]

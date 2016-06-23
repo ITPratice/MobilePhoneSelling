@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 
 @using WebApplication.Common
+@using WebApplication.Models
 
 <html>
 <head>
@@ -33,63 +34,73 @@
                 <a class="navbar-brand" href="@Url.Action("Index","Home")">DC Mobile</a>
             </div>
             <!-- /.navbar-header -->
-            <ul class="nav navbar-top-links navbar-left">
-                @*@if (Session[Constants.SESSION_ROLE].Equals("Admin"))
-                    {*@
-                <li>
-                    @Html.ActionLink("Sản phẩm", "Index", "Products")
-                </li>
-                <li>
-                    @Html.ActionLink("Nhà sản xuất", "Index", "Manufacturers")
-                </li>
-                <li>
-                    @Html.ActionLink("Nhân viên", "Index", "Staffs")
-                </li>
-                <li>
-                    @Html.ActionLink("Khách hàng", "Index", "Customers")
-                </li>
-                <li>
-                    @Html.ActionLink("Khuyến mãi", "Index", "Promotions")
-                </li>
-                @*}
-                    @if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch"))
-                    {*@
-                <li>
-                    @Html.ActionLink("Đơn hàng", "Index", "Orders")
-                </li>
-                @*}
-                    @if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch") || Session[Constants.SESSION_ROLE].Equals("Nhân viên giao hàng"))
-                    {*@
-                <li>
-                    @Html.ActionLink("Phiếu giao hàng", "Index", "Deliveries")
-                </li>
-                @*}
-                    @if (Session[Constants.SESSION_ROLE].Equals("Admin"))
-                    {*@
-                <li>
-                    @Html.ActionLink("Thống kê", "Index", "Statistics")
-                </li>
+            @if (Session[Constants.SESSION_ROLE] != null)
+            {
+                <ul class="nav navbar-top-links navbar-left">
+                    @*@if (Session[Constants.SESSION_ROLE].Equals("Admin"))
+                        {*@
+                    <li>
+                        @Html.ActionLink("Sản phẩm", "Index", "Products")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Nhà sản xuất", "Index", "Manufacturers")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Nhân viên", "Index", "Staffs")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Khách hàng", "Index", "Customers")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Khuyến mãi", "Index", "Promotions")
+                    </li>
+                    @*}
+                        @if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch"))
+                        {*@
+                    <li>
+                        @Html.ActionLink("Đơn hàng", "Index", "Orders")
+                    </li>
+                    @*}
+                        @if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch") || Session[Constants.SESSION_ROLE].Equals("Nhân viên giao hàng"))
+                        {*@
+                    <li>
+                        @Html.ActionLink("Phiếu giao hàng", "Index", "Deliveries")
+                    </li>
+                    @*}
+                        @if (Session[Constants.SESSION_ROLE].Equals("Admin"))
+                        {*@
+                    <li>
+                        @Html.ActionLink("Thống kê", "Index", "Statistics")
+                    </li>
+                </ul>
 
-            </ul>
-
-            <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li>
-                            <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="@Url.Action("Logout","Users")"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a href="@Url.Action("Edit", "Staffs")" id="@Session[Constants.SESSION_ACCOUNT_ID].ToString()"><i class="fa fa-user fa-fw"></i> Thông tin cá nhân</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="@Url.Action("Logout","Users")"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
+            }
+            else
+            {
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown">
+                        <a href="@Url.Action("Login","Users")">Đăng nhập</a>
+                    </li>
+                </ul>
+            }
             <!-- /.navbar-top-links -->
         </nav>
 
