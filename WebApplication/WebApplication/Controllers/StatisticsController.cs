@@ -29,5 +29,23 @@ namespace WebApplication.Controllers
             }
             return Json(list, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult ProductStatistic()
+        {
+            List<ProductStatistic> productStatistic = new List<ProductStatistic>();
+            List<Product> products = db.Products.ToList();
+            foreach (Product product in products)
+            {
+                int count = 0;
+                var productId = product.Id;
+                var orderDetail = db.OrderDetails.Where(od => od.ProductId.Equals(productId));
+                if (orderDetail.Count() > 0)
+                {
+                    count = orderDetail.Sum(od => od.Quantity);
+                }
+                productStatistic.Add(new ProductStatistic(product.Name, count));
+            }
+            return PartialView(productStatistic);
+        }
     }
 }

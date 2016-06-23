@@ -55,8 +55,8 @@ namespace WebApplication.Controllers
                         delivery.IsDelivered = true;
                         db.Entry(delivery).State = EntityState.Modified;
                         db.SaveChanges();
+                        return new Rotativa.ViewAsPdf("Prints", delivery);
                     }
-                    return new Rotativa.ViewAsPdf("Prints", delivery);
                 }
             }
             return RedirectToAction("Index");
