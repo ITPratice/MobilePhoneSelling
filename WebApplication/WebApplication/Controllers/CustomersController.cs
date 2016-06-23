@@ -116,6 +116,31 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult EditProfile(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+        [HttpPost]
+        public ActionResult EditProfile(Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return View(customer);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

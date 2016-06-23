@@ -16,6 +16,7 @@ namespace WebApplication.Models
             [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
             [DataType(DataType.DateTime)]
             public System.DateTime Date { get; set; }
+            [Display(Name="Đã giao hàng")]
             public bool IsDelivered { get; set; }
         }
     }

@@ -129,6 +129,8 @@
     <Content Include="Contents\Admin\font-awesome\css\font-awesome.min.css" />
     <Content Include="Contents\Admin\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Contents\Admin\js\bootstrap.min.js" />
+    <Content Include="Contents\Admin\js\google_chart.js" />
+    <Content Include="Contents\Admin\js\jquery-1.12.2.min.js" />
     <Content Include="Contents\Admin\js\jquery.min.js" />
     <Content Include="Contents\Admin\js\metisMenu.min.js" />
     <Content Include="Contents\Admin\js\morris-data.js" />
@@ -411,6 +413,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\Constants.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\DeliveriesController.cs" />
@@ -500,7 +503,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="packages.config" />
-    <Content Include="Views\Layout\MainLayout.cshtml" />
     <Content Include="Contents\MainPage\font\Amble-Regular-webfont.ttf" />
     <Content Include="Contents\MainPage\images\Thumbs.db" />
     <Content Include="Contents\MainPage\font-awesome\fonts\fontawesome-webfont.eot" />
@@ -588,13 +590,20 @@
     <Content Include="Views\Home\AjaxSearch.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\Statistics\Index.cshtml" />
-    <Content Include="Views\Users\ChangeStaffPassword.cshtml" />
     <Content Include="Views\Products\Compare.cshtml" />
     <Content Include="Views\Products\TechnicalDetail.cshtml" />
     <Content Include="Views\Manufacturers\Index.cshtml" />
     <Content Include="Views\Manufacturers\Create.cshtml" />
     <Content Include="Views\Manufacturers\Edit.cshtml" />
     <Content Include="Views\Products\RelativeProducts.cshtml" />
+    <Content Include="Views\Staffs\ChangePassword.cshtml" />
+    <Content Include="Views\Staffs\EditProfile.cshtml" />
+    <Content Include="Views\Customers\EditProfile.cshtml" />
+    <Content Include="Views\Accounts\Create.cshtml" />
+    <Content Include="Views\Accounts\Delete.cshtml" />
+    <Content Include="Views\Accounts\Details.cshtml" />
+    <Content Include="Views\Accounts\Edit.cshtml" />
+    <Content Include="Views\Accounts\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

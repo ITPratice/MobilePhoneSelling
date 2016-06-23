@@ -142,6 +142,7 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Manufacturer manufacturer)
         {
             if (ModelState.IsValid)
@@ -152,8 +153,9 @@ namespace WebApplication.Controllers
                 manufacturer.Id = ParamHelper.Instance.GetNewId(oldId, Constants.PREFIX_MANUFACTURER);
                 db.Manufacturers.Add(manufacturer);
                 db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return View(manufacturer);
         }
 
         public ActionResult Edit(string id)
@@ -173,9 +175,13 @@ namespace WebApplication.Controllers
         [HttpPost]
         public ActionResult Edit(Manufacturer manufacturer)
         {
-            db.Entry(manufacturer).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                db.Entry(manufacturer).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(manufacturer);
         }
     }
 }

@@ -58,9 +58,12 @@
         $('#confirm_password').on('keyup', function () {
             if ($(this).val() == $('#password').val()) {
                 $('#message').html('matching').css('color', 'green');
+                document.getElementById("register-submit").disabled = false;
             }
-            else
+            else {
                 $('#message').html('not matching').css('color', 'red');
+                document.getElementById("register-submit").disabled = true;
+            }
         });
     });
 </script>
@@ -118,7 +121,7 @@
                     <label>
                         <input type="password" placeholder="Xác nhận mật khẩu" id="confirm_password" name="confirm_password" required>
                     </label>
-                    <span id ="message"></span>
+                    <span id="message"></span>
                 </div>
                 <div>
                     <input type="submit" value="Đăng kí" id="register-submit">

@@ -12,12 +12,19 @@ namespace WebApplication.Models
     {
         internal sealed class CustomerMetadata
         {
+            [Required(ErrorMessage = "Vui lòng nhập dữ liệu cho trường này")]
             [Display(Name="Tên khách hàng")]
             public string Name { get; set; }
-            [Display(Name = "Ngày sinh")]
+
+            [Required(ErrorMessage = "Vui lòng nhập dữ liệu cho trường này")]
+            [Display(Name = "Ngày Sinh")]
+            [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+            [DataType(DataType.Date)]
             public System.DateTime Birthday { get; set; }
+            [Required(ErrorMessage = "Vui lòng nhập dữ liệu cho trường này")]
             [Display(Name = "Địa chỉ")]
             public string Address { get; set; }
+            [Required(ErrorMessage = "Vui lòng nhập dữ liệu cho trường này")]
             [Display(Name = "Số điện thoại")]
             public string PhoneNumber { get; set; }
             [Display(Name = "Số tài khoản ngân hàng")]

@@ -81,7 +81,13 @@
                         </a>
                         <ul class="dropdown-menu dropdown-user">
                             <li>
-                                <a href="@Url.Action("Edit", "Staffs")" id="@Session[Constants.SESSION_ACCOUNT_ID].ToString()"><i class="fa fa-user fa-fw"></i> Thông tin cá nhân</a>
+                                <a href="@Url.Action("EditProfile", "Staffs", new {@id=@Session[Constants.SESSION_ACCOUNT_ID].ToString() })"><i class="fa fa-user fa-fw"></i> Thông tin cá nhân</a>
+                            </li>
+                            <li>
+                                @{
+                Staff staff = Session[Constants.SESSION_ACCOUNT] as Staff;
+                                }
+                                <a href="@Url.Action("ChangePassword", "Staffs", new { @id = staff.AccountId })">Đổi mật khẩu</a>
                             </li>
                             <li class="divider"></li>
                             <li>

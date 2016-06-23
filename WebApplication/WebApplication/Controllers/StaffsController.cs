@@ -158,9 +158,9 @@ namespace WebApplication.Controllers
         }
 
         [HttpGet]
-        public ActionResult ViewProfile()
+        public ActionResult EditProfile(string id)
         {
-            Staff staff = (Staff)Session[Constants.SESSION_ACCOUNT];
+            Staff staff = db.Staffs.Find(id);
             if (staff == null)
             {
                 return HttpNotFound();
@@ -171,7 +171,34 @@ namespace WebApplication.Controllers
         [HttpPost]
         public ActionResult EditProfile(Staff staff)
         {
-            return RedirectToAction("ViewProfile");
+            if (ModelState.IsValid)
+            {
+                db.Entry(staff).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return View(staff);
+        }
+
+        public ActionResult ChangePassword(string id)
+        {
+            Account account = db.Accounts.Find(id);
+            return View(account);
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(string id, string password)
+        {
+            Account account = db.Accounts.Find(id);
+            account.Password = ParamHelper.Instance.MD5Hash(password);
+            db.Entry(account).State = EntityState.Modified;
+            db.SaveChanges();
+            if (Session[Constants.SESSION_ROLE] == null || String.IsNullOrEmpty(Session[Constants.SESSION_ROLE].ToString()))
+                return RedirectToAction("Index", "Home");
+            if (Session[Constants.SESSION_ROLE].Equals("Admin"))
+                return RedirectToAction("Index", "Products");
+            if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch"))
+                return RedirectToAction("Index", "Orders");
+            return RedirectToAction("Index", "Deliverires");
         }
 
         protected override void Dispose(bool disposing)

@@ -36,18 +36,27 @@ namespace WebApplication.Models
             [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy H:mm:ss}", ApplyFormatInEditMode = true)]
             public Nullable<System.DateTime> ModifiedDate { get; set; }
             [Display(Name = "Màn hình")]
+            [Required(ErrorMessage = "Vui lòng nhập dữ liệu cho trường này")]
             public string ScreenSize { get; set; }
             [Display(Name = "Hệ điều hành")]
+            [Required(ErrorMessage = "Vui lòng nhập dữ liệu cho trường này")]
             public string OS { get; set; }
             [Display(Name = "Camera trước")]
+            [Required(ErrorMessage = "Vui lòng nhập dữ liệu cho trường này")]
             public string Camera1 { get; set; }
             [Display(Name = "Camera sau")]
+            [Required(ErrorMessage = "Vui lòng nhập dữ liệu cho trường này")]
             public string Camera2 { get; set; }
             [Display(Name = "Bộ nhớ trong")]
+            [Required(ErrorMessage = "Vui lòng nhập dữ liệu cho trường này")]
             public string InterMemory { get; set; }
             [Display(Name = "Kết nối")]
+            [Required(ErrorMessage = "Vui lòng nhập dữ liệu cho trường này")]
             public string Connection { get; set; }
-
+            [Required(ErrorMessage = "Vui lòng nhập dữ liệu cho trường này")]
+            public string CPU { get; set; }
+            [Required(ErrorMessage = "Vui lòng nhập dữ liệu cho trường này")]
+            public string RAM { get; set; }
         }
     }
 }

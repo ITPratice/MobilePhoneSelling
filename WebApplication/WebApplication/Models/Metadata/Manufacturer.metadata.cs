@@ -13,6 +13,7 @@ namespace WebApplication.Models
         internal sealed class ManufacturerMetadata
         {
             [Display(Name = "Nhà sản xuất")]
+            [Required(ErrorMessage = "Vui lòng nhập dữ liệu cho trường này")]
             public string Name { get; set; }
         }
     }

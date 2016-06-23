@@ -100,7 +100,7 @@
                     <!-- start header_right -->
                     <div class="header_right">
                         <div class="rgt-bottom">
-                            @if (Session["Account"] == null || Session["Account"].ToString() == "")
+                            @if (Session[Constants.SESSION_ACCOUNT] == null || Session[Constants.SESSION_ACCOUNT].ToString() == "")
                             {
                                 <div class="log">
                                     <div id="loginContainer">
@@ -116,7 +116,7 @@
                             else
                             {
                                 <div class="reg">
-                                    <a href="@Url.Action("Edit", "Users", new { @id = Session["AccId"].ToString() })">
+                                    <a href="@Url.Action("EditProfile", "Customers", new { @id = Session[Constants.SESSION_ACCOUNT_ID].ToString() })">
                                         @{
                                 if (Session[Constants.SESSION_ROLE].Equals("Khách hàng"))
                                 {
