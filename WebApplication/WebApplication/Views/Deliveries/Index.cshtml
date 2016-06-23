@@ -63,7 +63,7 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.First().IsDelivered)
                                 </th>
-                                @if (Session[Constants.SESSION_ROLE] != null && Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch"))
+                                @if (Session[Constants.SESSION_ROLE] != null && !Session[Constants.SESSION_ROLE].Equals("Khách hàng"))
                                 {
                                     <th></th>
                                 }
@@ -102,13 +102,17 @@
                                                 @Html.DisplayFor(modelItem => item.IsDelivered)
                                             }
                                         </td>
-                                        if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch"))
+                                        if (!Session[Constants.SESSION_ROLE].Equals("Khách hàng"))
                                         {
                                             <td>
-                                                @Html.ActionLink("Loại bỏ",
+                                                @Html.ActionLink("Chi tiết", "Details", new { @id = item.Id })
+                                                @if (Session[Constants.SESSION_ROLE].Equals("Nhân viên giao dịch"))
+                                                {
+                                                    @Html.ActionLink("Loại bỏ",
                                                              "Delete",
                                                              new { id = item.Id },
                                                              new { onclick = "return confirm('Bạn có thực sự muốn loại bỏ phiếu giao hàng này?')" })
+                                                }
                                             </td>
                                         }
                                     }
