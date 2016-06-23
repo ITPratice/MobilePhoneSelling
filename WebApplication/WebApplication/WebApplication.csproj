@@ -577,12 +577,7 @@
     <Content Include="Views\Emails\_ViewStart.cshtml" />
     <Content Include="Views\Deliveries\Details.cshtml" />
     <Content Include="Views\Deliveries\Index.cshtml" />
-    <Content Include="Views\Products\Promotions\Create.cshtml" />
-    <Content Include="Views\Products\Promotions\Details.cshtml" />
-    <Content Include="Views\Products\Promotions\Edit.cshtml" />
-    <Content Include="Views\Products\Promotions\Index.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
-    <Content Include="Views\Products\Promotions\ChooseProducts.cshtml" />
     <Content Include="Views\Cart\Order.cshtml" />
     <Content Include="Views\Manufacturers\ManufacturersPartial.cshtml" />
     <Content Include="Views\Manufacturers\ProductsByManufacturerId.cshtml" />

@@ -1,0 +1,27 @@
+﻿@using WebApplication.Models;
+@using WebApplication.Common;
+@model List<Product>
+@foreach (var item in Model)
+{
+    <div class="grid1_of_4">
+        <div class="content_box">
+            <a href="@Url.Action("ProductDetails", "Products", new { @id = item.Id })">
+                <center><img src="@Url.Content(Constants.PATH_IMAGE + "/" + @item.Image)" class="img-responsive" alt="" width="80%" height="80%" /></center>
+            </a>
+            <h4><a href="details.html">@item.Name</a></h4>
+            <div class="grid_1 simpleCart_shelfItem">
+                <div class="item_add">
+                    <span class="item_price">
+                        <h6>@String.Format("{0:$ 0,0}", @item.Price)</h6>
+                    </span>
+                </div>
+                <div class="item_add">
+                    <span class="item_price">
+                        <a href="@Url.Action("AddShoppongCart", "Cart", new { @_idProducts = item.Id, @_strUrl = Request.Url.ToString() })">Thêm vào giỏ hàng</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
