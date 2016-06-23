@@ -5,14 +5,18 @@
     ViewBag.Title = "Index";
     Layout = Constants.PATH_MASTER_PAGE;
 }
-@Html.ActionLink("Compare", "Compare", "Products")
 <div class="col-md-3 s-d">
     <div class="w_sidebar">
         <section class="sky-form">
-            <h4>Thong ke</h4>
+            <h4>Lượt truy cập</h4>
             <div class="row1 scroll-pane">
                 <div class="col col-4">
-                    <p>Khách ghé thăm: @ApplicationInstance.Application["Totaluser"]</p>
+                    <span>Đang truy cập: @ApplicationInstance.Application["Totaluser"]</span>
+                    <br />
+                    <span>Lượt truy cập: </span>
+                    <!-- Start of SimpleHitCounter Code -->
+                    <a href="http://www.simplehitcounter.com" target="_blank"><img src="http://simplehitcounter.com/hit.php?uid=2125899&f=16711680&b=16777215" border="0" height="18" width="83" alt="web counter"></a><br><a href="http://www.simplehitcounter.com" target="_blank" style="text-decoration:none;"></a>
+                    <!-- End of SimpleHitCounter Code -->
                 </div>
             </div>
         </section>
@@ -40,7 +44,7 @@
             }
         }
                     }
-                    <center><img src="@Url.Content(Constants.PATH_IMAGE + "/" + @item.Image)" class="img-responsive" alt="" width="80%" height="80%"/></center>
+                    <center><img src="@Url.Content(Constants.PATH_IMAGE + "/" + @item.Image)" class="img-responsive" alt="" width="80%" height="80%" /></center>
                 </a>
                 <h4><a href="details.html">@item.Name</a></h4>
                 <div class="grid_1 simpleCart_shelfItem">

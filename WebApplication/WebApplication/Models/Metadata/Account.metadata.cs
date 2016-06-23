@@ -14,7 +14,6 @@ namespace WebApplication.Models
         {
             [Display(Name = "Tên đăng nhập")]
             [Required(ErrorMessage = "Vui lòng nhập dữ liệu cho trường này")]
-            public string Connection { get; set; }
             public string Name { get; set; }
             [Display(Name = "Mật khẩu")]
             [Required(ErrorMessage = "Vui lòng nhập dữ liệu cho trường này")]

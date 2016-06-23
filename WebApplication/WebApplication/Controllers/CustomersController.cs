@@ -238,24 +238,20 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ForgetPassword(Customer _customer)
         {
-            if (ModelState.IsValid)
+
+            if (Session[Constants.SESSION_ACCOUNT] != null)
+                return HttpNotFound();
+            Customer _cus = db.Customers.SingleOrDefault(x => x.Email == _customer.Email);
+            if (_cus != null)
             {
-                if (Session[Constants.SESSION_ACCOUNT] != null)
-                    return HttpNotFound();
-                Customer _cus = db.Customers.SingleOrDefault(x => x.Email == _customer.Email);
-                if (_cus != null)
-                {
-                    Session[Constants.SESSION_RESET_PASSWORD] = _cus;
-                    SendEmail(_cus, Constants.TEMPLATE_EMAIL_RESET_PASS, "ResetPassword", "Customers");
-                    return RedirectToAction("ForgetPasswordStep2", "Customers");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Khong tim thay Email !");
-                }
+                Session[Constants.SESSION_RESET_PASSWORD] = _cus;
+                SendEmail(_cus, Constants.TEMPLATE_EMAIL_RESET_PASS, "ResetPassword", "Customers");
+                return RedirectToAction("ForgetPasswordStep2", "Customers");
             }
             else
-                ModelState.AddModelError("", "Error");
+            {
+                ModelState.AddModelError("", "Khong tim thay Email !");
+            }
             return View(_customer);
         }
 
@@ -271,7 +267,7 @@ namespace WebApplication.Controllers
             Customer _customer = db.Customers.Find(token);
             if (ModelState.IsValid)
             {
-                if (Session[Constants.SESSION_ACCOUNT] != null || Session[Constants.SESSION_RESET_PASSWORD] == null)
+                if (Session[Constants.SESSION_ACCOUNT] != null)
                     return HttpNotFound();
                 if (_customer != null)
                 {
