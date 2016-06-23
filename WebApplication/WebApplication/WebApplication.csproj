@@ -70,6 +70,9 @@
     <Reference Include="RazorEngine">
       <HintPath>..\packages\RazorEngine.3.4.1\lib\net45\RazorEngine.dll</HintPath>
     </Reference>
+    <Reference Include="Rotativa">
+      <HintPath>..\packages\Rotativa.1.6.4\lib\net40\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -392,7 +395,9 @@
       <DependentUpon>MobileSellingModel.edmx</DependentUpon>
       <LastGenOutput>MobileSellingModel.cs</LastGenOutput>
     </Content>
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-2.2.3.intellisense.js" />
@@ -592,6 +597,7 @@
     <Content Include="Views\Customers\EditProfile.cshtml" />
     <Content Include="Views\Home\GetProduct.cshtml" />
     <Content Include="Views\Customers\ChangePassword.cshtml" />
+    <Content Include="Views\Deliveries\Prints.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
