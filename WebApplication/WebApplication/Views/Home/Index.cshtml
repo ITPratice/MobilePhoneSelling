@@ -5,8 +5,7 @@
     ViewBag.Title = "Index";
     Layout = Constants.PATH_MASTER_PAGE;
 }
-@{int count = 0;}
-@*@Html.ActionLink("Compare", "Compare", "Products")*@
+@Html.ActionLink("Compare", "Compare", "Products")
 <div class="col-md-3 s-d">
     <div class="w_sidebar">
         <section class="sky-form">
@@ -17,22 +16,34 @@
                 </div>
             </div>
         </section>
-
     </div>
 </div>
+@{double safeOff = 100;}
 <div class="col-md-9 w_content">
     @foreach (var item in Model)
     {
         <div class="grid1_of_4">
             <div class="content_box">
                 <a href="@Url.Action("ProductDetails", "Products", new { @id = item.Id })">
-                    <img src="@Url.Content(Constants.PATH_IMAGE + "/" + @item.Image)" class="img-responsive" alt="" align="middle" />
+                    @{
+                        var _lst = item.Promotions.ToList();
+                        foreach (var i in _lst)
+                        {
+                            if (i.StartDate <= DateTime.Now && i.EndDate >= DateTime.Now)
+                            {
+                                <span>@i.SaleOff %</span>
+                                safeOff = i.SaleOff;
+                                break;
+                            }
+                        }
+                    }
+                    <center><img src="@Url.Content(Constants.PATH_IMAGE + "/" + @item.Image)" class="img-responsive" alt="" /></center>
                 </a>
                 <h4><a href="details.html">@item.Name</a></h4>
                 <div class="grid_1 simpleCart_shelfItem">
                     <div class="item_add">
                         <span class="item_price">
-                            <h6>@String.Format("{0:$ 0,0}", @item.Price)</h6>
+                            <h6>@String.Format("{0:$ 0,0}", (@item.Price * safeOff / 100))</h6>
                         </span>
                     </div>
                     <div class="item_add">

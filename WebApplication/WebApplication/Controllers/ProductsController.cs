@@ -196,7 +196,7 @@ namespace WebApplication.Controllers
         public ActionResult RelativeProducts(string id)
         {
             Product pro = db.Products.Single(x => x.Id == id);
-            string name = pro.Name;
+            string name = pro.Name.Split(' ')[0];
             var products = (from p in db.Products
                             where p.Name.Contains(name)
                             select p);
@@ -204,7 +204,7 @@ namespace WebApplication.Controllers
             {
                 return HttpNotFound();
             }
-            return View(products.Take(2).ToList());
+            return PartialView(products.Take(2).ToList());
         }
         #endregion
 

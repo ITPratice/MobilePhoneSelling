@@ -6,7 +6,7 @@
     <div class="product">
         <div class="product-desc">
             <div class="product-img">
-                <img src="@Url.Content(Constants.PATH_IMAGE + "/" + @item.Image)" class="img-responsive " alt="" width="200" height="200" />
+                <center><img src="@Url.Content(Constants.PATH_IMAGE + "/" + @item.Image)" class="img-responsive " alt="" width="80" height="80" /></center>
             </div>
             <div class="prod1-desc">
                 <h5><a class="product_link" href="@Url.Action("ProductDetails", "Products", new { @id = item.Id })">@item.Name</a></h5>
@@ -16,10 +16,8 @@
         </div>
         <div class="product_price">
             <span class="price-access">@String.Format("{0:$ 0,0}", @item.Price)</span>
-            <button class="button1">
-                <span>
-                    <a href="@Url.Action("AddProducts", "Products", new { @ProductID = item.Id, @_strUrl = Request.Url.ToString() })">So sánh</a>
-                </span>
+            <button class="button1" onclick="location.href = '@Url.Action("AddProducts", "Products", new { @ProductID = item.Id, @_strUrl = Request.Url.ToString() })'" >
+                <span>So sánh</span>
             </button>
         </div>
         <div class="clearfix"></div>

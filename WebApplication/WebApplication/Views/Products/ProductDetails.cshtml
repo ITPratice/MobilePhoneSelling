@@ -75,6 +75,9 @@
                 <div class="btn_form">
                     <a href="@Url.Action("AddShoppongCart", "Cart", new { @_idProducts = Model.Id, @_strUrl = Request.Url.ToString() })">Mua hàng</a>
                 </div>
+                @*<div class="btn_form">
+                    <a href="@Url.Action("AddProducts", "Products", new { @ProductID = Model.Id, @_strUrl = Request.Url.ToString() })">So sánh</a>
+                </div>*@
             </div>
             <div class="clearfix"></div>
         </div>
@@ -84,13 +87,21 @@
         </div>
         <div class="single-bottom2">
             <h6>Sản phẩm khác</h6>
-            @*@Html.Action("RelativeProducts", "Products", new { @id = Model.Id }*@)
+            @Html.Action("RelativeProducts", "Products", new { @id = Model.Id })
+            <br />
         </div>
         <div class="single-bottom2">
             <h6>Bình luận</h6>
             <div class="fb-like" data-href="http://localhost:1775/Products/ProductDetails/@Model.Id" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
             <div class="fb-comments" data-href="http://localhost:1775/Products/ProductDetails/@Model.Id" data-width="100%" data-numposts="5" data-colorscheme="light"></div>
         </div>
-    <div class="clearfix"></div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="col-md-3">
+        <div class="w_sidebar">
+            <div class="w_nav1">
+            </div>
+        </div>
+    </div>
 </div>
 <!-- end content -->

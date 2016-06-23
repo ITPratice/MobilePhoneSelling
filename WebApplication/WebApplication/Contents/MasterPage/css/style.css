@@ -1753,13 +1753,14 @@ list-style: none;
 	display:block;
 	margin: 2% 0;
 }
-.grid1_of_4{
-	float: left;
-	width: 23.22222%;
-	margin-left: 2.33333%;
-	text-align:center;
-    display:block;
-	margin: 2% 0;
+.grid1_of_4 {
+    float: left;
+    width: 23.22222%;
+    margin-left: 2.33333%;
+    text-align: center;
+    display: block;
+    margin: 2% 0;
+    position: relative;
 }
 /*.grid1_of_4:first-child{
 	margin-left: 0;
@@ -1821,7 +1822,7 @@ list-style: none;
 }
 
 .content_box-grid {
-	margin-top: 1em;
+    margin-top: 1em;
 }
 .view {
    overflow: hidden;
@@ -3126,7 +3127,7 @@ i.ars {
   font-size: 0.8125em;
 }
 .content_box {
-  margin-bottom: 1em;
+    margin-bottom: 1em;
 }
 .box_1 {
   width: 43%;

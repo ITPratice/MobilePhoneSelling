@@ -31,10 +31,11 @@ body, html {
     float: left;
     margin-top: 35px;
     margin-left: 60px;
-    width: 50px;
+    width: 40%;
     -webkit-border-radius: 0 4px 0 4px;
     -moz-border-radius: 0 4px 0 4px;
     border-radius: 0 4px 4px 0;
+    z-index:2;
 }
 
     .discount-label:after {
