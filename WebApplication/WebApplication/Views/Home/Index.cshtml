@@ -32,18 +32,18 @@
         <div class="grid1_of_4">
             <div class="content_box">
                 <a href="@Url.Action("ProductDetails", "Products", new { @id = item.Id })">
-                    @{
-        var _lst = item.Promotions.ToList();
-        foreach (var i in _lst)
-        {
-            if (i.StartDate <= DateTime.Now && i.EndDate >= DateTime.Now)
-            {
-                @*<span>@i.SaleOff %</span>*@
-                safeOff = i.SaleOff;
-                break;
-            }
-        }
-                    }
+                    @*{
+                        var _lst = item.Promotions.ToList();
+                        foreach (var i in _lst)
+                        {
+                            if (i.StartDate <= DateTime.Now && i.EndDate >= DateTime.Now)
+                            {
+                                <span>@i.SaleOff %</span>
+                                safeOff = i.SaleOff;
+                                break;
+                            }
+                        }
+                    }*@
                     <center><img src="@Url.Content(Constants.PATH_IMAGE + "/" + @item.Image)" class="img-responsive" alt="" width="80%" height="80%" /></center>
                 </a>
                 <h4><a href="details.html">@item.Name</a></h4>

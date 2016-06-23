@@ -32,8 +32,10 @@
                                     {
                                         <li><p>Số lượng : @Html.TextBox("txtSoLuong", item.Quantity, new { @class = "text" })</p></li>
                                         <li><p>Thành tiền: @item.ThanhTien</p></li>
-                                        <input type="submit" value="Cap nhat" />
-                                        @Html.ActionLink("Xoa", "DeleteShoppingCart", new { @_idProduct = item.IdProduct })
+                                        <input type="submit" value="Cap nhat" class="button1" />
+                                        <button class="button1">
+                                            <a href="@Url.Action("DeleteShoppingCart", "Cart", new { @_idProduct = item.IdProduct })">Xóa giỏ hàng</a>
+                                        </button>
                                     }
                                 </ul>
                             </div>
@@ -48,5 +50,5 @@
 <div class="clearfix"> </div>
 <script type="text/javascript">
     $(".text").spinner();
-    $(".text").spinner({ min: 0 });
+    $(".text").spinner({ min: 1 });
 </script>

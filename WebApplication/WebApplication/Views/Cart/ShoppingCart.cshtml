@@ -55,7 +55,7 @@
                         <div class="cart-header">
                             <div class="cart-sec simpleCart_shelfItem">
                                 <div class="cart-item cyc">
-                                    <img src="@Url.Content(Constants.PATH_IMAGE + "/" + item.Image)" class="img-responsive" alt="" />
+                                    <img src="@Url.Content(Constants.PATH_IMAGE + "/" + item.Image)" class="img-responsive" alt="" width="80%" height="80%" />
                                 </div>
                                 <div class="cart-item-info">
                                     <h3>
@@ -67,7 +67,9 @@
                                         <li><p>Thành tiền: @item.ThanhTien</p></li>
                                     </ul>
                                 </div>
-                                @Html.ActionLink("Edit", "EditShoppingCart", "Cart")
+                                <button class="button1">
+                                    <a href="@Url.Action("EditShoppingCart", "Cart")">Sửa giỏ hàng</a>
+                                </button>
                             </div>
                         </div>
                         <div class="clearfix"></div>

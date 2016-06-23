@@ -42,7 +42,7 @@ namespace WebApplication.Controllers
             var topProductID = db.OrderDetails
                 .GroupBy(x => x.ProductId)
                 .OrderByDescending(g => g.Count())
-                .Take(5)
+                .Take(8)
                 .Select(x => x.Key)
                 .ToList();
             var topProducts = db.Products
