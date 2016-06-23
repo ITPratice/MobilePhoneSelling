@@ -211,6 +211,7 @@ namespace WebApplication.Controllers
                 if (_customer != null)
                 {
                     _customer.IsActivated = true;
+                    Session[Constants.SESSION_ACCOUNT] = _customer;
                     db.Entry(_customer).State = EntityState.Modified;
                     db.SaveChanges();
                     return View();
@@ -238,7 +239,6 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ForgetPassword(Customer _customer)
         {
-
             if (Session[Constants.SESSION_ACCOUNT] != null)
                 return HttpNotFound();
             Customer _cus = db.Customers.SingleOrDefault(x => x.Email == _customer.Email);
