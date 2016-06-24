@@ -41,7 +41,7 @@
                 success: function (data) {
                     if (data == "Yes") {
                         $('#emailError').html("Email đã được sử dụng");
-                        $('#emailError').acss('color', 'red');
+                        $('#emailError').css('color', 'red');
                         $('#Email').val('');
                         $('#Email').focus();
                     } else {
@@ -57,12 +57,22 @@
 
         $('#confirm_password').on('keyup', function () {
             if ($(this).val() == $('#password').val()) {
-                $('#message').html('matching').css('color', 'green');
+                $('#message').html('Khớp').css('color', 'green');
                 document.getElementById("register-submit").disabled = false;
             }
             else {
-                $('#message').html('not matching').css('color', 'red');
+                $('#message').html('Không khớp').css('color', 'red');
                 document.getElementById("register-submit").disabled = true;
+            }
+        });
+
+        $('#UserName').on('keyup', function () {
+            if ($(this).val() == '') {
+                $('#userError').html('Không được để trống').css('color', 'green');
+                document.getElementById("register-submit").disabled = true;
+            }
+            else {
+                document.getElementById("register-submit").disabled = false;
             }
         });
     });

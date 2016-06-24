@@ -258,6 +258,12 @@ namespace WebApplication.Controllers
             List<Product> _lstProducts = GetProducts();
             return View(_lstProducts);
         }
+
+        public ActionResult Clear()
+        {
+            Session["compare"] = null;
+            return RedirectToAction("Index", "Home");
+        }
         #endregion
 
         protected override void Dispose(bool disposing)

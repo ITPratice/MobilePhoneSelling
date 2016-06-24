@@ -2121,6 +2121,8 @@ p.product_descr {
     .button1 a {
         text-decoration: none !important;
         color: #FFF;
+            display:table;
+            margin:auto;
     }
 
         .button1 a:hover {

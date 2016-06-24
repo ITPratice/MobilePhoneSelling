@@ -36,6 +36,9 @@
                                         <button class="button1" type="button" onclick="location.href = '@Url.Action("DeleteShoppingCart", "Cart", new { @_idProduct = item.IdProduct })'">
                                             <span>Xóa giỏ hàng</span>
                                         </button>
+                                        @*<div class="button1">
+                                            <a href="@Url.Action("DeleteShoppingCart", "Cart", new { @_idProduct = item.IdProduct })">Delete</a>
+                                        </div>*@
                                     }
                                 </ul>
                             </div>
